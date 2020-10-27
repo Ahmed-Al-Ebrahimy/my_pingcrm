@@ -1,5 +1,10 @@
 <template>
-    <div class="max-w-sm sm:max-w-md  md:max-w-3xl lg:max-w-5xl xl:max-w-6xl bg-banafsagy-600  mx-auto my-auto mt-6 p-4 pb-2  rounded shadow-md ">
+    <!-- <div class="max-w-sm sm:max-w-2xl md:bg-purple-800  md:max-w-xl lg:bg-pink-500 lg:max-w-6xl bg-banafsagy-600  mx-auto my-auto mt-6 p-3 pb-2  rounded shadow-md "> -->
+
+    <app-layout>
+        <div class="py-6">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <div class="bg-banafsagy-600 overflow-hidden shadow-xl p-3  rounded sm:rounded-lg">
         <!-- <p v-if="$page.flash.message" class="text-sm">{{ $page.flash.message }}</p> -->
          <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md my-3" role="alert" v-if="$page.flash.message">
             <div class="flex">
@@ -14,10 +19,10 @@
                 <div class="flex w-full bg-white shadow rounded  ml-1">
                 <input autofocus class="relative w-full border border-pink-500  focus:outline-none focus:shadow-outline focus:border-pink-400 px-1 py-1 rounded" v-model="term" autocomplete="off" type="text" id="search" placeholder="Search…">
                 </div>
-                <button class="ml-1 bg-purple-800  w-1/4 border border-pink-500 outline-none px-1 py-1 shadow-md  text-white hover:bg-purple-900 rounded-md "  @click="reset">Reset</button>
+                <button class="ml-1 bg-indigo-800  w-1/4 border border-pink-500 outline-none px-1 py-1 shadow-md  text-gray-300 hover:bg-indigo-900 rounded-md "  @click="reset">Reset</button>
             </div>
             <div class="flex items-center  mr-1">
-                <inertia-link class="border border-pink-500 bg-purple-800 px-3 py-1 shadow-md  text-white hover:bg-purple-900 rounded-md" :href="route('addresses.create')">
+                <inertia-link class="border border-pink-500 bg-indigo-800  text-gray-300 px-3 py-1 shadow-md  hover:bg-indigo-900 rounded-md" :href="route('addresses.create')">
                     <span>Create Address</span>
                 </inertia-link>
             </div>
@@ -73,7 +78,8 @@
 
 
 
-    </div>
+    </div></div></div>
+    </app-layout>
 </template>
 
 <script>
@@ -85,8 +91,8 @@
     import _ from 'lodash'
 
     export default {
-         layout: AppLayout,
         components: {
+            AppLayout,
             Welcome,
             Pagination,
             Icon,

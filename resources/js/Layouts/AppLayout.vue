@@ -19,18 +19,18 @@
                             </jet-nav-link>
 
                             <jet-nav-link :href="route('patients')"  :active="$page.currentRouteName == 'patients'">
-                                <icon name="id_card" class="block w-5 h-5 mr-1 fill-gray-100" /> Data-Entry
+                                <icon name="id_card" class="block w-5 h-5 mr-1 fill-gray-100" /> Data_Entry
                             </jet-nav-link>
 
                             <jet-nav-link :href="route('addresses')"  :active="$page.currentRouteName == 'addresses'">
                                 <icon name="address" class="block w-5 h-5 mr-1 fill-gray-100" /> Address
                             </jet-nav-link>
 
-                            <jet-nav-link :href="route('addresses')"  :active="$page.currentRouteName == 'addresses'">
+                            <jet-nav-link :href="route('patients')"  :active="$page.currentRouteName == 'patients'">
                                 <icon name="physician" class="block w-5 h-5 mr-1 fill-gray-100" /> Physician
                             </jet-nav-link>
 
-                            <jet-nav-link :href="route('addresses')"  :active="$page.currentRouteName == 'addresses'">
+                            <jet-nav-link :href="route('patients')"  :active="$page.currentRouteName == 'patients'">
                                 <icon name="laboratory" class="block w-5 h-5 mr-1 fill-gray-100" /> Laboratory
                             </jet-nav-link>
 

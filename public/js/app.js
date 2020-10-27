@@ -3855,14 +3855,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  layout: _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__["default"],
   components: {
+    AppLayout: _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__["default"],
     Welcome: _Jetstream_Welcome__WEBPACK_IMPORTED_MODULE_1__["default"],
     Pagination: _Shared_Pagination__WEBPACK_IMPORTED_MODULE_3__["default"],
     Icon: _Shared_Icon__WEBPACK_IMPORTED_MODULE_2__["default"]
@@ -26097,7 +26103,7 @@ var render = function() {
                         staticClass: "block w-5 h-5 mr-1 fill-gray-100",
                         attrs: { name: "id_card" }
                       }),
-                      _vm._v(" Data-Entry\n                            ")
+                      _vm._v(" Data_Entry\n                            ")
                     ],
                     1
                   ),
@@ -26124,8 +26130,8 @@ var render = function() {
                     "jet-nav-link",
                     {
                       attrs: {
-                        href: _vm.route("addresses"),
-                        active: _vm.$page.currentRouteName == "addresses"
+                        href: _vm.route("patients"),
+                        active: _vm.$page.currentRouteName == "patients"
                       }
                     },
                     [
@@ -26142,8 +26148,8 @@ var render = function() {
                     "jet-nav-link",
                     {
                       attrs: {
-                        href: _vm.route("addresses"),
-                        active: _vm.$page.currentRouteName == "addresses"
+                        href: _vm.route("patients"),
+                        active: _vm.$page.currentRouteName == "patients"
                       }
                     },
                     [
@@ -27548,278 +27554,320 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    {
-      staticClass:
-        "max-w-sm sm:max-w-md  md:max-w-3xl lg:max-w-5xl xl:max-w-6xl bg-banafsagy-600  mx-auto my-auto mt-6 p-4 pb-2  rounded shadow-md "
-    },
-    [
-      _vm.$page.flash.message
-        ? _c(
-            "div",
-            {
-              staticClass:
-                "bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md my-3",
-              attrs: { role: "alert" }
-            },
-            [
-              _c("div", { staticClass: "flex" }, [
-                _c("div", [
-                  _c("p", { staticClass: "text-sm" }, [
-                    _vm._v(_vm._s(_vm.$page.flash.message))
-                  ])
-                ])
-              ])
-            ]
-          )
-        : _vm._e(),
-      _vm._v(" "),
-      _c("div", { staticClass: "mb-2 flex justify-between" }, [
-        _c("div", { staticClass: "flex items-center " }, [
-          _c(
-            "div",
-            { staticClass: "flex w-full bg-white shadow rounded  ml-1" },
-            [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.term,
-                    expression: "term"
-                  }
-                ],
-                staticClass:
-                  "relative w-full border border-pink-500  focus:outline-none focus:shadow-outline focus:border-pink-400 px-1 py-1 rounded",
-                attrs: {
-                  autofocus: "",
-                  autocomplete: "off",
-                  type: "text",
-                  id: "search",
-                  placeholder: "Search…"
-                },
-                domProps: { value: _vm.term },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.term = $event.target.value
-                  }
-                }
-              })
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass:
-                "ml-1 bg-purple-800  w-1/4 border border-pink-500 outline-none px-1 py-1 shadow-md  text-white hover:bg-purple-900 rounded-md ",
-              on: { click: _vm.reset }
-            },
-            [_vm._v("Reset")]
-          )
-        ]),
-        _vm._v(" "),
+  return _c("app-layout", [
+    _c("div", { staticClass: "py-6" }, [
+      _c("div", { staticClass: "max-w-7xl mx-auto sm:px-6 lg:px-8" }, [
         _c(
           "div",
-          { staticClass: "flex items-center  mr-1" },
+          {
+            staticClass:
+              "bg-banafsagy-600 overflow-hidden shadow-xl p-3  rounded sm:rounded-lg"
+          },
           [
-            _c(
-              "inertia-link",
-              {
-                staticClass:
-                  "border border-pink-500 bg-purple-800 px-3 py-1 shadow-md  text-white hover:bg-purple-900 rounded-md",
-                attrs: { href: _vm.route("addresses.create") }
-              },
-              [_c("span", [_vm._v("Create Address")])]
-            )
-          ],
-          1
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "bg-white rounded shadow overflow-x-auto" }, [
-        _c(
-          "table",
-          { staticClass: "w-full whitespace-no-wrap" },
-          [
-            _vm._m(0),
-            _vm._v(" "),
-            _c("tfoot", [
-              _c("tr", { staticClass: "bg-banafsagy-800 text-samaee-900" }, [
-                _c(
-                  "th",
-                  { staticClass: "p-2" },
+            _vm.$page.flash.message
+              ? _c(
+                  "div",
+                  {
+                    staticClass:
+                      "bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md my-3",
+                    attrs: { role: "alert" }
+                  },
                   [
-                    _vm.addresses.prev_page_url
-                      ? _c(
-                          "inertia-link",
-                          {
-                            staticClass:
-                              "border border-pink-500 bg-banafsagy-900 hover:bg-indigo-900 text-samaee-800 shadow-2xl px-2 py-1 text-sm font-bold text-left rounded-full rounded-r-none",
-                            attrs: { href: _vm.addresses.prev_page_url }
-                          },
-                          [_vm._v("Previous Page")]
-                        )
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _vm.addresses.next_page_url
-                      ? _c(
-                          "inertia-link",
-                          {
-                            staticClass:
-                              "border border-pink-500 bg-banafsagy-900 hover:bg-indigo-900 text-samaee-800 shadow-2xl  px-2 py-1 text-sm font-bold text-left rounded-full rounded-l-none",
-                            attrs: { href: _vm.addresses.next_page_url }
-                          },
-                          [_vm._v(" Next Page ")]
-                        )
-                      : _vm._e()
-                  ],
-                  1
+                    _c("div", { staticClass: "flex" }, [
+                      _c("div", [
+                        _c("p", { staticClass: "text-sm" }, [
+                          _vm._v(_vm._s(_vm.$page.flash.message))
+                        ])
+                      ])
+                    ])
+                  ]
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _c("div", { staticClass: "mb-2 flex justify-between" }, [
+              _c("div", { staticClass: "flex items-center " }, [
+                _c(
+                  "div",
+                  { staticClass: "flex w-full bg-white shadow rounded  ml-1" },
+                  [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.term,
+                          expression: "term"
+                        }
+                      ],
+                      staticClass:
+                        "relative w-full border border-pink-500  focus:outline-none focus:shadow-outline focus:border-pink-400 px-1 py-1 rounded",
+                      attrs: {
+                        autofocus: "",
+                        autocomplete: "off",
+                        type: "text",
+                        id: "search",
+                        placeholder: "Search…"
+                      },
+                      domProps: { value: _vm.term },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.term = $event.target.value
+                        }
+                      }
+                    })
+                  ]
                 ),
                 _vm._v(" "),
-                _c("th", { staticClass: "text-center" }, [
-                  _vm._v("Total Rows:-  " + _vm._s(_vm.addresses.total))
-                ]),
-                _vm._v(" "),
-                _c("th", { staticClass: "text-center" })
-              ])
-            ]),
-            _vm._v(" "),
-            _vm._l(_vm.addresses.data, function(address, index) {
-              return _c(
-                "tr",
-                {
-                  key: index,
-                  staticClass:
-                    "font-medium text-gray-800 hover:bg-purple-400 focus-within:bg-gray-100 ",
-                  class: { "bg-purple-300": index % 2 === 0 }
-                },
+                _c(
+                  "button",
+                  {
+                    staticClass:
+                      "ml-1 bg-indigo-800  w-1/4 border border-pink-500 outline-none px-1 py-1 shadow-md  text-gray-300 hover:bg-indigo-900 rounded-md ",
+                    on: { click: _vm.reset }
+                  },
+                  [_vm._v("Reset")]
+                )
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "flex items-center  mr-1" },
                 [
                   _c(
-                    "td",
-                    { staticClass: "border-t w-px " },
-                    [
-                      _c(
-                        "inertia-link",
-                        {
-                          staticClass: "px-4 flex outline-none  items-center",
-                          attrs: {
-                            href: _vm.route("addresses.edit", address.id),
-                            tabindex: "-1"
-                          }
-                        },
-                        [
-                          _c("icon", {
-                            staticClass: "block w-6 h-6 ",
-                            attrs: { name: "edit3" }
-                          })
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    { staticClass: "border-t" },
-                    [
-                      _c(
-                        "inertia-link",
-                        {
-                          staticClass:
-                            "px-2 py-1 outline-none text-sm flex items-center",
-                          attrs: {
-                            href: _vm.route("addresses.edit", address.id),
-                            tabindex: "-1"
-                          }
-                        },
-                        [
-                          _vm._v(
-                            "\n                " +
-                              _vm._s(address.id) +
-                              "\n                "
-                          )
-                        ]
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    { staticClass: "border-t" },
-                    [
-                      _c(
-                        "inertia-link",
-                        {
-                          staticClass:
-                            "px-2 py-1 outline-none  text-sm flex items-center",
-                          attrs: {
-                            href: _vm.route("addresses.edit", address.id),
-                            tabindex: "-1"
-                          }
-                        },
-                        [
-                          _vm._v(
-                            "\n                " +
-                              _vm._s(address.name) +
-                              "\n                "
-                          )
-                        ]
-                      )
-                    ],
-                    1
-                  )
-                ]
-              )
-            }),
-            _vm._v(" "),
-            _vm.addresses.data.length === 0
-              ? _c("tr", [
-                  _c(
-                    "td",
+                    "inertia-link",
                     {
-                      staticClass: "border-t px-6 py-4",
-                      attrs: { colspan: "4" }
+                      staticClass:
+                        "border border-pink-500 bg-indigo-800  text-gray-300 px-3 py-1 shadow-md  hover:bg-indigo-900 rounded-md",
+                      attrs: { href: _vm.route("addresses.create") }
                     },
-                    [_vm._v("No addresses found.")]
+                    [_c("span", [_vm._v("Create Address")])]
                   )
-                ])
-              : _vm._e()
-          ],
-          2
+                ],
+                1
+              )
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "bg-white rounded shadow overflow-x-auto" },
+              [
+                _c(
+                  "table",
+                  { staticClass: "w-full whitespace-no-wrap" },
+                  [
+                    _c("thead", [
+                      _c(
+                        "tr",
+                        { staticClass: "bg-banafsagy-900 text-samaee-900" },
+                        [
+                          _c(
+                            "th",
+                            {
+                              staticClass:
+                                "px-2 py-1 text-sm font-bold text-left"
+                            },
+                            [_vm._v("Edit")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "th",
+                            {
+                              staticClass:
+                                "px-2 py-1 text-sm font-bold text-left"
+                            },
+                            [_vm._v("ID")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "th",
+                            {
+                              staticClass:
+                                "px-2 py-1 text-sm font-bold text-left"
+                            },
+                            [_vm._v("name")]
+                          )
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("tfoot", [
+                      _c(
+                        "tr",
+                        { staticClass: "bg-banafsagy-800 text-samaee-900" },
+                        [
+                          _c(
+                            "th",
+                            { staticClass: "p-2" },
+                            [
+                              _vm.addresses.prev_page_url
+                                ? _c(
+                                    "inertia-link",
+                                    {
+                                      staticClass:
+                                        "border border-pink-500 bg-banafsagy-900 hover:bg-indigo-900 text-samaee-800 shadow-2xl px-2 py-1 text-sm font-bold text-left rounded-full rounded-r-none",
+                                      attrs: {
+                                        href: _vm.addresses.prev_page_url
+                                      }
+                                    },
+                                    [_vm._v("Previous Page")]
+                                  )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _vm.addresses.next_page_url
+                                ? _c(
+                                    "inertia-link",
+                                    {
+                                      staticClass:
+                                        "border border-pink-500 bg-banafsagy-900 hover:bg-indigo-900 text-samaee-800 shadow-2xl  px-2 py-1 text-sm font-bold text-left rounded-full rounded-l-none",
+                                      attrs: {
+                                        href: _vm.addresses.next_page_url
+                                      }
+                                    },
+                                    [_vm._v(" Next Page ")]
+                                  )
+                                : _vm._e()
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("th", { staticClass: "text-center" }, [
+                            _vm._v(
+                              "Total Rows:-  " + _vm._s(_vm.addresses.total)
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("th", { staticClass: "text-center" })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _vm._l(_vm.addresses.data, function(address, index) {
+                      return _c(
+                        "tr",
+                        {
+                          key: index,
+                          staticClass:
+                            "font-medium text-gray-800 hover:bg-purple-400 focus-within:bg-gray-100 ",
+                          class: { "bg-purple-300": index % 2 === 0 }
+                        },
+                        [
+                          _c(
+                            "td",
+                            { staticClass: "border-t w-px " },
+                            [
+                              _c(
+                                "inertia-link",
+                                {
+                                  staticClass:
+                                    "px-4 flex outline-none  items-center",
+                                  attrs: {
+                                    href: _vm.route(
+                                      "addresses.edit",
+                                      address.id
+                                    ),
+                                    tabindex: "-1"
+                                  }
+                                },
+                                [
+                                  _c("icon", {
+                                    staticClass: "block w-6 h-6 ",
+                                    attrs: { name: "edit3" }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            { staticClass: "border-t" },
+                            [
+                              _c(
+                                "inertia-link",
+                                {
+                                  staticClass:
+                                    "px-2 py-1 outline-none text-sm flex items-center",
+                                  attrs: {
+                                    href: _vm.route(
+                                      "addresses.edit",
+                                      address.id
+                                    ),
+                                    tabindex: "-1"
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                " +
+                                      _vm._s(address.id) +
+                                      "\n                "
+                                  )
+                                ]
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            { staticClass: "border-t" },
+                            [
+                              _c(
+                                "inertia-link",
+                                {
+                                  staticClass:
+                                    "px-2 py-1 outline-none  text-sm flex items-center",
+                                  attrs: {
+                                    href: _vm.route(
+                                      "addresses.edit",
+                                      address.id
+                                    ),
+                                    tabindex: "-1"
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                " +
+                                      _vm._s(address.name) +
+                                      "\n                "
+                                  )
+                                ]
+                              )
+                            ],
+                            1
+                          )
+                        ]
+                      )
+                    }),
+                    _vm._v(" "),
+                    _vm.addresses.data.length === 0
+                      ? _c("tr", [
+                          _c(
+                            "td",
+                            {
+                              staticClass: "border-t px-6 py-4",
+                              attrs: { colspan: "4" }
+                            },
+                            [_vm._v("No addresses found.")]
+                          )
+                        ])
+                      : _vm._e()
+                  ],
+                  2
+                )
+              ]
+            )
+          ]
         )
       ])
-    ]
-  )
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", { staticClass: "bg-banafsagy-900 text-samaee-900" }, [
-        _c("th", { staticClass: "px-2 py-1 text-sm font-bold text-left" }, [
-          _vm._v("Edit")
-        ]),
-        _vm._v(" "),
-        _c("th", { staticClass: "px-2 py-1 text-sm font-bold text-left" }, [
-          _vm._v("ID")
-        ]),
-        _vm._v(" "),
-        _c("th", { staticClass: "px-2 py-1 text-sm font-bold text-left" }, [
-          _vm._v("name")
-        ])
-      ])
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
