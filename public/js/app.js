@@ -25949,7 +25949,7 @@ var render = function() {
     "div",
     { staticClass: "min-h-screen bg-gray-200  font-maven capitalize " },
     [
-      _c("nav", { staticClass: "border-b border-purple-600 bg-gray-900" }, [
+      _c("nav", { staticClass: "border-b border-purple-600 bg-indigo-900" }, [
         _c("div", { staticClass: "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" }, [
           _c("div", { staticClass: "flex justify-between h-16" }, [
             _c("div", { staticClass: "flex" }, [
