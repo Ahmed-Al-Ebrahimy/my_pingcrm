@@ -12,12 +12,14 @@ module.exports = {
         extend: {
             fontFamily: {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],
+                "maven": ['Maven Pro', 'sans-serif'],
             },
         },
     },
 
     variants: {
         opacity: ['responsive', 'hover', 'focus', 'disabled'],
+        borderWidth: ['responsive', 'first', 'hover', 'focus'],
     },
 
     plugins: [require('@tailwindcss/ui')],

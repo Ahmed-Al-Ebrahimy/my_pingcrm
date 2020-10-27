@@ -15,7 +15,7 @@
                 </div>
                 <button class="ml-3 text-sm text-gray-500 hover:text-gray-700 focus:text-indigo-500" type="button" @click="reset">Reset</button>
             </div>
-            <div class="flex items-center">
+            <div class="flex items-center border-t first:border-t-0 ">
                 <inertia-link class="bg-gray-700 px-3 py-2   text-white hover:bg-cool-gray-700 rounded-md" :href="route('addresses.create')">
                     <span>Create Address</span>
                 </inertia-link>
@@ -33,7 +33,7 @@
                     {{ address.id }}
                     </inertia-link>
                 </td>
-                <td class="focus-within:border-red-500">
+                <td class="border-t">
                     <inertia-link class="px-2 py-1 text-sm flex items-center" :href="route('addresses.edit', address.id)" tabindex="-1">
                     {{ address.name }}
                     </inertia-link>

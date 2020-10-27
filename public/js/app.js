@@ -27478,7 +27478,7 @@ var render = function() {
         _vm._v(" "),
         _c(
           "div",
-          { staticClass: "flex items-center" },
+          { staticClass: "flex items-center border-t first:border-t-0 " },
           [
             _c(
               "inertia-link",
@@ -27537,7 +27537,7 @@ var render = function() {
                   _vm._v(" "),
                   _c(
                     "td",
-                    { staticClass: "focus-within:border-red-500" },
+                    { staticClass: "border-t" },
                     [
                       _c(
                         "inertia-link",
@@ -44882,7 +44882,17 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
 
-_inertiajs_progress_src__WEBPACK_IMPORTED_MODULE_4__["InertiaProgress"].init();
+_inertiajs_progress_src__WEBPACK_IMPORTED_MODULE_4__["InertiaProgress"].init({
+  // The delay after which the progress bar will
+  // appear during navigation, in milliseconds.
+  delay: 250,
+  // The color of the progress bar.
+  color: '#29d',
+  // Whether to include the default NProgress styles.
+  includeCSS: true,
+  // Whether the NProgress spinner will be shown.
+  showSpinner: true
+});
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.mixin({
   methods: {
     route: route
