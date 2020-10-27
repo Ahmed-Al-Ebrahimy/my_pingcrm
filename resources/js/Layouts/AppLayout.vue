@@ -1,6 +1,6 @@
 <template>
-    <div class="min-h-screen bg-gray-200  font-maven capitalize ">
-        <nav class="border-b border-purple-600 bg-indigo-900">
+    <div class="min-h-screen bg-gray-200  font-sans capitalize ">
+        <nav class="border-b border-purple-600 bg-indigo-800 ">
             <!-- Primary Navigation Menu -->
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex justify-between h-16">
@@ -8,23 +8,32 @@
                         <!-- Logo -->
                         <div class="flex-shrink-0 flex items-center">
                             <inertia-link :href="route('dashboard')">
-                                <jet-application-mark class="block h-9 w-auto" />
+                                <jet-application-mark class="block h-14 w-auto" />
                             </inertia-link>
                         </div>
 
                         <!-- Navigation Links -->
                         <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                             <jet-nav-link :href="route('dashboard')" :active="$page.currentRouteName == 'dashboard'">
-                                <i class="fa fa-home"> Home</i>
+                                 <icon name="dashboard2" class="block w-5 h-5 mr-1 fill-gray-100" /> Dashboard
                             </jet-nav-link>
 
                             <jet-nav-link :href="route('patients')"  :active="$page.currentRouteName == 'patients'">
-                                <i class="fa fa-calendar-check">  Data-Entry</i>
+                                <icon name="id_card" class="block w-5 h-5 mr-1 fill-gray-100" /> Data-Entry
                             </jet-nav-link>
 
                             <jet-nav-link :href="route('addresses')"  :active="$page.currentRouteName == 'addresses'">
-                                <i class="fas fa-map-marked-alt"> Address</i>
+                                <icon name="address" class="block w-5 h-5 mr-1 fill-gray-100" /> Address
                             </jet-nav-link>
+
+                            <jet-nav-link :href="route('addresses')"  :active="$page.currentRouteName == 'addresses'">
+                                <icon name="physician" class="block w-5 h-5 mr-1 fill-gray-100" /> Physician
+                            </jet-nav-link>
+
+                            <jet-nav-link :href="route('addresses')"  :active="$page.currentRouteName == 'addresses'">
+                                <icon name="laboratory" class="block w-5 h-5 mr-1 fill-gray-100" /> Laboratory
+                            </jet-nav-link>
+
 
                         </div>
                     </div>
@@ -227,6 +236,8 @@
     import JetNavLink from './../Jetstream/NavLink'
     import JetResponsiveNavLink from './../Jetstream/ResponsiveNavLink'
 
+     import Icon from '@/Shared/Icon'
+
     export default {
         components: {
             JetApplicationLogo,
@@ -235,6 +246,8 @@
             JetDropdownLink,
             JetNavLink,
             JetResponsiveNavLink,
+
+            Icon,
         },
 
         data() {

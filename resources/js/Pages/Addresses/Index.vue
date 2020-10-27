@@ -1,5 +1,5 @@
 <template>
-    <div class="lg:max-w-4xl bg-gray-100 shadow mx-auto p-4 mt-6">
+    <div class="max-w-sm sm:max-w-md  md:max-w-3xl lg:max-w-5xl xl:max-w-6xl bg-banafsagy-600  mx-auto my-auto mt-6 p-4 pb-2  rounded shadow-md ">
         <!-- <p v-if="$page.flash.message" class="text-sm">{{ $page.flash.message }}</p> -->
          <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md my-3" role="alert" v-if="$page.flash.message">
             <div class="flex">
@@ -8,40 +8,51 @@
             </div>
             </div>
         </div>
-        <div class="mb-3 flex justify-between ">
-            <div class="flex items-center">
-                <div class="flex w-full bg-white shadow rounded">
-                <input class="relative w-full px-3 py-2 rounded focus:shadow-outline focus:border-blue-600" v-model="term" autocomplete="off" type="text" id="search" placeholder="Search…">
+        <div class="mb-2 flex justify-between">
+            <!-- <button @click="focusInput()">focus</button> -->
+            <div class="flex items-center ">
+                <div class="flex w-full bg-white shadow rounded  ml-1">
+                <input autofocus class="relative w-full border border-pink-500  focus:outline-none focus:shadow-outline focus:border-pink-400 px-1 py-1 rounded" v-model="term" autocomplete="off" type="text" id="search" placeholder="Search…">
                 </div>
-                <button class="ml-3 text-sm text-gray-500 hover:text-gray-700 focus:text-indigo-500" type="button" @click="reset">Reset</button>
+                <button class="ml-1 bg-purple-800  w-1/4 border border-pink-500 outline-none px-1 py-1 shadow-md  text-white hover:bg-purple-900 rounded-md "  @click="reset">Reset</button>
             </div>
-            <div class="flex items-center border-t first:border-t-0 ">
-                <inertia-link class="bg-gray-700 px-3 py-2   text-white hover:bg-cool-gray-700 rounded-md" :href="route('addresses.create')">
+            <div class="flex items-center  mr-1">
+                <inertia-link class="border border-pink-500 bg-purple-800 px-3 py-1 shadow-md  text-white hover:bg-purple-900 rounded-md" :href="route('addresses.create')">
                     <span>Create Address</span>
                 </inertia-link>
             </div>
         </div>
         <div class="bg-white rounded shadow overflow-x-auto">
       <table class="w-full whitespace-no-wrap">
-            <tr class="bg-gray-900 text-white">
-                <th class="px-2 py-1 text-sm font-bold text-left">No.</th>
-                <th class="px-2 py-1 text-sm font-bold text-left" colspan="2">name</th>
+          <thead>
+            <tr class="bg-banafsagy-900 text-samaee-900">
+                <th class="px-2 py-1 text-sm font-bold text-left">Edit</th>
+                <th class="px-2 py-1 text-sm font-bold text-left">ID</th>
+                <th class="px-2 py-1 text-sm font-bold text-left">name</th>
             </tr>
-            <tr v-for="(address, index) in addresses.data" :key="index"  class="hover:bg-gray-100 focus-within:bg-gray-100 " :class="{'bg-gray-300': index % 2 === 0}">
+          </thead>
+          <tfoot>
+            <tr class="bg-banafsagy-800 text-samaee-900">
+                <th class="p-2"><inertia-link v-if="addresses.prev_page_url" class="border border-pink-500 bg-banafsagy-900 hover:bg-indigo-900 text-samaee-800 shadow-2xl px-2 py-1 text-sm font-bold text-left rounded-full rounded-r-none" :href="addresses.prev_page_url">Previous Page</inertia-link>
+                <inertia-link v-if="addresses.next_page_url" class="border border-pink-500 bg-banafsagy-900 hover:bg-indigo-900 text-samaee-800 shadow-2xl  px-2 py-1 text-sm font-bold text-left rounded-full rounded-l-none" :href="addresses.next_page_url"> Next Page </inertia-link></th>
+                <th class="text-center">Total Rows:-  {{addresses.total}}</th>
+                <th class="text-center" ></th>
+            </tr>
+          </tfoot>
+            <tr v-for="(address, index) in addresses.data" :key="index"  class="font-medium text-gray-800 hover:bg-purple-400 focus-within:bg-gray-100 " :class="{'bg-purple-300': index % 2 === 0}">
+                <td class="border-t w-px ">
+                    <inertia-link class="px-4 flex outline-none  items-center" :href="route('addresses.edit', address.id)" tabindex="-1">
+                    <icon name="edit3" class="block w-6 h-6 "/>
+                    </inertia-link>
+                </td>
                 <td class="border-t">
-                    <inertia-link class="px-2 py-1 text-sm flex items-center" :href="route('addresses.edit', address.id)" tabindex="-1">
+                    <inertia-link class="px-2 py-1 outline-none text-sm flex items-center" :href="route('addresses.edit', address.id)" tabindex="-1">
                     {{ address.id }}
                     </inertia-link>
                 </td>
                 <td class="border-t">
-                    <inertia-link class="px-2 py-1 text-sm flex items-center" :href="route('addresses.edit', address.id)" tabindex="-1">
+                    <inertia-link class="px-2 py-1 outline-none  text-sm flex items-center" :href="route('addresses.edit', address.id)" tabindex="-1">
                     {{ address.name }}
-                    </inertia-link>
-                </td>
-
-                <td class="border-t w-px">
-                    <inertia-link class="px-4 flex items-center" :href="route('addresses.edit', address.id)" tabindex="-1">
-                    <icon name="cheveron-right" class="block w-6 h-6 fill-gray-400" />
                     </inertia-link>
                 </td>
             </tr>
@@ -50,7 +61,18 @@
             </tr>
         </table>
         </div>
-        <pagination :links="addresses.links"/>
+        <!-- <pagination :links="addresses.links"/> -->
+        <!-- <div class="mt-2">
+            <inertia-link v-if="addresses.prev_page_url" class="bg-banafsagy-800 hover:bg-banafsagy-900 text-samaee-900 shadow-xl px-2 py-1 text-sm font-bold text-left rounded-full rounded-r-none"
+           :href="addresses.prev_page_url">Previous Page</inertia-link>
+
+
+            <inertia-link v-if="addresses.next_page_url" class="bg-banafsagy-800 hover:bg-banafsagy-900 text-samaee-900 shadow-md  px-2 py-1 text-sm font-bold text-left rounded-full rounded-l-none"
+            :href="addresses.next_page_url"> Next Page </inertia-link>
+        </div> -->
+
+
+
     </div>
 </template>
 
