@@ -2,7 +2,7 @@
     <div class="min-h-screen bg-gray-200  font-sans capitalize ">
         <nav class="border-b border-purple-600 bg-indigo-800 ">
             <!-- Primary Navigation Menu -->
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-4">
                 <div class="flex justify-between h-16">
                     <div class="flex">
                         <!-- Logo -->
@@ -13,7 +13,7 @@
                         </div>
 
                         <!-- Navigation Links -->
-                        <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <div class="hidden space-x-2 sm:-my-px sm:ml-10 sm:flex">
                             <jet-nav-link :href="route('dashboard')" :active="$page.currentRouteName == 'dashboard'">
                                  <icon name="dashboard2" class="block w-5 h-5 mr-1 fill-gray-100" /> Dashboard
                             </jet-nav-link>
@@ -30,9 +30,9 @@
                                 <icon name="physician" class="block w-5 h-5 mr-1 fill-gray-100" /> Physician
                             </jet-nav-link>
 
-                            <jet-nav-link :href="route('patients')"  :active="$page.currentRouteName == 'patients'">
+                            <!-- <jet-nav-link :href="route('patients')"  :active="$page.currentRouteName == 'patients'">
                                 <icon name="laboratory" class="block w-5 h-5 mr-1 fill-gray-100" /> Laboratory
-                            </jet-nav-link>
+                            </jet-nav-link> -->
 
 
                         </div>
@@ -135,9 +135,25 @@
 
             <!-- Responsive Navigation Menu -->
             <div :class="{'block': showingNavigationDropdown, 'hidden': ! showingNavigationDropdown}" class="sm:hidden">
-                <div class="pt-2 pb-3 space-y-1">
+                <div class="pt-2 pb-3 space-y-2 space-x-2 ">
                     <jet-responsive-nav-link :href="route('dashboard')" :active="$page.currentRouteName == 'dashboard'">
                         Dashboard
+                    </jet-responsive-nav-link>
+
+                    <jet-responsive-nav-link :href="route('patients')"  :active="$page.currentRouteName == 'patients'">
+                        <icon name="id_card" class="block w-5 h-5 mr-1 fill-gray-100"/> Data_Entry
+                    </jet-responsive-nav-link>
+
+                    <jet-responsive-nav-link :href="route('addresses')"  :active="$page.currentRouteName == 'addresses'">
+                        <icon name="address" class="block w-5 h-5 mr-1 fill-gray-100" /> Address
+                    </jet-responsive-nav-link>
+
+                    <jet-responsive-nav-link :href="route('patients')"  :active="$page.currentRouteName == 'patients'">
+                        <icon name="physician" class="block w-5 h-5 mr-1 fill-gray-100" /> Physician
+                    </jet-responsive-nav-link>
+
+                    <jet-responsive-nav-link :href="route('patients')"  :active="$page.currentRouteName == 'patients'">
+                        <icon name="laboratory" class="block w-5 h-5 mr-1 fill-gray-100" /> Laboratory
                     </jet-responsive-nav-link>
                 </div>
 

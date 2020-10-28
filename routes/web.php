@@ -24,19 +24,19 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 
 // Patients
-Route::get('patients', [PatientController::class, 'index'])->name('patients');
+Route::middleware(['auth:sanctum', 'verified'])->get('patients', [PatientController::class, 'index'])->name('patients');
 
-Route::get('patients/create', [PatientController::class, 'create'])->name('patients.create');
+Route::middleware(['auth:sanctum', 'verified'])->get('patients/create', [PatientController::class, 'create'])->name('patients.create');
 
-Route::post('patients', [PatientController::class, 'store'])->name('patients.store');
+Route::middleware(['auth:sanctum', 'verified'])->post('patients', [PatientController::class, 'store'])->name('patients.store');
 
-Route::get('patients/{patient}/edit', [PatientController::class, 'edit'])->name('patients.edit');
+Route::middleware(['auth:sanctum', 'verified'])->get('patients/{patient}/edit', [PatientController::class, 'edit'])->name('patients.edit');
 
-Route::put('patients/{patient}', [PatientController::class, 'update'])->name('patients.update');
+Route::middleware(['auth:sanctum', 'verified'])->put('patients/{patient}', [PatientController::class, 'update'])->name('patients.update');
 
-Route::post('patients/{patient}', [PatientController::class, 'destroy'])->name('patients.destroy');
+Route::middleware(['auth:sanctum', 'verified'])->post('patients/{patient}', [PatientController::class, 'destroy'])->name('patients.destroy');
 
-Route::put('patients/{patient}/restore', [PatientController::class, 'restore'])->name('patients.restore');
+Route::middleware(['auth:sanctum', 'verified'])->put('patients/{patient}/restore', [PatientController::class, 'restore'])->name('patients.restore');
 
 
 // Addresses

@@ -3231,6 +3231,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -3689,6 +3705,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Layouts/AppLayout */ "./resources/js/Layouts/AppLayout.vue");
 /* harmony import */ var _Jetstream_Welcome__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Jetstream/Welcome */ "./resources/js/Jetstream/Welcome.vue");
 /* harmony import */ var _Shared_LoadingButton__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Shared/LoadingButton */ "./resources/js/Shared/LoadingButton.vue");
+//
+//
+//
 //
 //
 //
@@ -26047,7 +26066,7 @@ var render = function() {
     { staticClass: "min-h-screen bg-gray-200  font-sans capitalize " },
     [
       _c("nav", { staticClass: "border-b border-purple-600 bg-indigo-800 " }, [
-        _c("div", { staticClass: "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" }, [
+        _c("div", { staticClass: "max-w-7xl mx-auto px-4 sm:px-6 lg:px-4" }, [
           _c("div", { staticClass: "flex justify-between h-16" }, [
             _c("div", { staticClass: "flex" }, [
               _c(
@@ -26070,7 +26089,7 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "div",
-                { staticClass: "hidden space-x-8 sm:-my-px sm:ml-10 sm:flex" },
+                { staticClass: "hidden space-x-2 sm:-my-px sm:ml-10 sm:flex" },
                 [
                   _c(
                     "jet-nav-link",
@@ -26140,24 +26159,6 @@ var render = function() {
                         attrs: { name: "physician" }
                       }),
                       _vm._v(" Physician\n                            ")
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "jet-nav-link",
-                    {
-                      attrs: {
-                        href: _vm.route("patients"),
-                        active: _vm.$page.currentRouteName == "patients"
-                      }
-                    },
-                    [
-                      _c("icon", {
-                        staticClass: "block w-5 h-5 mr-1 fill-gray-100",
-                        attrs: { name: "laboratory" }
-                      }),
-                      _vm._v(" Laboratory\n                            ")
                     ],
                     1
                   )
@@ -26374,7 +26375,7 @@ var render = function() {
           [
             _c(
               "div",
-              { staticClass: "pt-2 pb-3 space-y-1" },
+              { staticClass: "pt-2 pb-3 space-y-2 space-x-2 " },
               [
                 _c(
                   "jet-responsive-nav-link",
@@ -26389,6 +26390,78 @@ var render = function() {
                       "\n                        Dashboard\n                    "
                     )
                   ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "jet-responsive-nav-link",
+                  {
+                    attrs: {
+                      href: _vm.route("patients"),
+                      active: _vm.$page.currentRouteName == "patients"
+                    }
+                  },
+                  [
+                    _c("icon", {
+                      staticClass: "block w-5 h-5 mr-1 fill-gray-100",
+                      attrs: { name: "id_card" }
+                    }),
+                    _vm._v(" Data_Entry\n                    ")
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "jet-responsive-nav-link",
+                  {
+                    attrs: {
+                      href: _vm.route("addresses"),
+                      active: _vm.$page.currentRouteName == "addresses"
+                    }
+                  },
+                  [
+                    _c("icon", {
+                      staticClass: "block w-5 h-5 mr-1 fill-gray-100",
+                      attrs: { name: "address" }
+                    }),
+                    _vm._v(" Address\n                    ")
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "jet-responsive-nav-link",
+                  {
+                    attrs: {
+                      href: _vm.route("patients"),
+                      active: _vm.$page.currentRouteName == "patients"
+                    }
+                  },
+                  [
+                    _c("icon", {
+                      staticClass: "block w-5 h-5 mr-1 fill-gray-100",
+                      attrs: { name: "physician" }
+                    }),
+                    _vm._v(" Physician\n                    ")
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "jet-responsive-nav-link",
+                  {
+                    attrs: {
+                      href: _vm.route("patients"),
+                      active: _vm.$page.currentRouteName == "patients"
+                    }
+                  },
+                  [
+                    _c("icon", {
+                      staticClass: "block w-5 h-5 mr-1 fill-gray-100",
+                      attrs: { name: "laboratory" }
+                    }),
+                    _vm._v(" Laboratory\n                    ")
+                  ],
+                  1
                 )
               ],
               1
@@ -27518,11 +27591,18 @@ var render = function() {
                   _c(
                     "button",
                     {
-                      staticClass: "btn-indigo",
+                      staticClass:
+                        "ml-1 bg-indigo-800  w-1/4 border border-pink-500 outline-none px-1 py-1 shadow-md  text-gray-300 hover:bg-indigo-900 rounded-md",
                       attrs: { loading: _vm.sending, type: "submit" }
                     },
-                    [_vm._v("Update address")]
-                  )
+                    [_vm._v("Reset")]
+                  ),
+                  _vm._v(" "),
+                  _vm.sending
+                    ? _c("p", { staticClass: "text-sm text-black" }, [
+                        _vm._v("hi test v is " + _vm._s(_vm.testv))
+                      ])
+                    : _vm._e()
                 ]
               )
             ]
