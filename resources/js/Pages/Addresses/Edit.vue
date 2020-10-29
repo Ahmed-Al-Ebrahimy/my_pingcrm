@@ -14,9 +14,7 @@
     <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center">
         <button v-if="!address.deleted_at" class="text-red-600 hover:underline" tabindex="-1" type="button" @click="destroy">Delete address</button>
         <!-- <button  class="btn-indigo" :loading="sending"  type="submit">Update address</button> -->
-        <button :loading="sending"  type="submit" class="ml-1 bg-indigo-800  w-1/4 border border-pink-500 outline-none px-1 py-1 shadow-md  text-gray-300 hover:bg-indigo-900 rounded-md">Reset</button>
-
-        <p v-if="sending"  class="text-sm text-black">hi test v is {{testv }}</p>
+<loading-button :loading="sending" class="btn-indigo ml-auto" type="submit">Update Contact</loading-button>
     </div>
 
     </form>
