@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\PatientController;
+use App\Http\Controllers\EducationlevelController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,19 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia\Inertia::render('Dashboard');
 })->name('dashboard');
 
+Route::get('/design_test', function () {
+    return Inertia\Inertia::render('design_test');
+})->name('design_test');
+
+// Educationlevels
+Route::get('educationlevels', [EducationlevelController::class, 'index'])->name('educationlevels')->middleware('auth');
+Route::get('educationlevels/create', [EducationlevelController::class, 'create'])->name('educationlevels.create')->middleware('auth');
+Route::post('educationlevels', [EducationlevelController::class, 'store'])->name('educationlevels.store')->middleware('auth');
+Route::get('educationlevels/{educationlevel}/edit', [EducationlevelController::class, 'edit'])->name('educationlevels.edit')->middleware('auth');
+Route::put('educationlevels/{educationlevel}', [EducationlevelController::class, 'update'])->name('educationlevels.update')->middleware('auth');
+Route::post('educationlevels/{educationlevel}', [EducationlevelController::class, 'destroy'])->name('educationlevels.destroy')->middleware('auth');
+Route::put('educationlevels/{educationlevel}/restore', [EducationlevelController::class, 'restore'])->name('educationlevels.restore')->middleware('auth');
+
 // Patients
 Route::middleware(['auth:sanctum', 'verified'])->get('patients', [PatientController::class, 'index'])->name('patients');
 
@@ -41,15 +55,9 @@ Route::middleware(['auth:sanctum', 'verified'])->put('patients/{patient}/restore
 
 // Addresses
 Route::get('addresses', [addressController::class, 'index'])->name('addresses')->middleware('auth');
-
 Route::get('addresses/create', [addressController::class, 'create'])->name('addresses.create')->middleware('auth');
-
 Route::post('addresses', [addressController::class, 'store'])->name('addresses.store')->middleware('auth');
-
 Route::get('addresses/{address}/edit', [addressController::class, 'edit'])->name('addresses.edit')->middleware('auth');
-
 Route::put('addresses/{address}', [addressController::class, 'update'])->name('addresses.update')->middleware('auth');
-
 Route::post('addresses/{address}', [addressController::class, 'destroy'])->name('addresses.destroy')->middleware('auth');
-
-// Route::put('addresses/{address}/restore', [addressController::class, 'restore'])->name('addresses.restore')->middleware('auth');
+Route::put('addresses/{address}/restore', [addressController::class, 'restore'])->name('addresses.restore')->middleware('auth');

@@ -49,7 +49,12 @@ class AddressController extends Controller
     public function edit(Address $address)
     {
         return Inertia::render('Addresses/Edit', [
-            'address' => $address
+            'address' => [
+                'id' => $address->id,
+                'name' => $address->name,
+                'patients' => $address->patients()->orderByName()->get()->map->only('id', 'name', 'created_at'),
+            ],
+            // 'address' => $address
         ]);
     }
 

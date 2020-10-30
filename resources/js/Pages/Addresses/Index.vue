@@ -17,9 +17,9 @@
             <!-- <button @click="focusInput()">focus</button> -->
             <div class="flex items-center ">
                 <div class="flex w-full bg-white shadow rounded  ml-1">
-                <input autofocus class="relative w-full border border-pink-500  focus:outline-none focus:shadow-outline focus:border-pink-400 px-1 py-1 rounded" v-model="term" autocomplete="off" type="text" id="search" placeholder="Search…">
+                <input :autofocus="'autofocus'" class="relative w-full border border-pink-500  focus:shadow-outline  px-1 py-1 rounded" v-model="term" autocomplete="off" type="text" id="search" placeholder="Search…">
                 </div>
-                <button class="ml-1 bg-indigo-800  w-1/4 border border-pink-500 outline-none px-1 py-1 shadow-md  text-gray-300 hover:bg-indigo-900 rounded-md "  @click="reset">Reset</button>
+                <button class="ml-1 bg-indigo-800  w-1/4 border border-pink-500  px-1 py-1 shadow-md  text-gray-300 hover:bg-indigo-900 rounded-md "  @click="reset">Reset</button>
             </div>
             <div class="flex items-center  mr-1">
                 <inertia-link class="border border-pink-500 bg-indigo-800  text-gray-300 px-3 py-1 shadow-md  hover:bg-indigo-900 rounded-md" :href="route('addresses.create')">
@@ -37,10 +37,19 @@
             </tr>
           </thead>
           <tfoot>
-            <tr class="bg-banafsagy-800 text-samaee-900">
-                <th class="p-2"><inertia-link v-if="addresses.prev_page_url" class="border border-pink-500 bg-banafsagy-900 hover:bg-indigo-900 text-samaee-800 shadow-2xl px-2 py-1 text-sm font-bold text-left rounded-full rounded-r-none" :href="addresses.prev_page_url">Previous Page</inertia-link>
-                <inertia-link v-if="addresses.next_page_url" class="border border-pink-500 bg-banafsagy-900 hover:bg-indigo-900 text-samaee-800 shadow-2xl  px-2 py-1 text-sm font-bold text-left rounded-full rounded-l-none" :href="addresses.next_page_url"> Next Page </inertia-link></th>
-                <th class="text-center">Total Rows:-  {{addresses.total}}</th>
+            <tr class="bg-banafsagy-800">
+                <th class="p-2">
+                    <inertia-link v-if="addresses.prev_page_url" :href="addresses.prev_page_url"
+                     class="border border-pink-500 bg-banafsagy-900 hover:bg-indigo-900 text-gray-300 shadow-2xl px-2 py-1 text-left rounded-full rounded-r-none"
+                     ><span>Previous Page</span>
+                    </inertia-link>
+
+                    <inertia-link v-if="addresses.next_page_url" :href="addresses.next_page_url"
+                     class="border border-pink-500 bg-banafsagy-900 hover:bg-indigo-900 text-gray-300 shadow-2xl  px-2 py-1  text-left rounded-full rounded-l-none">
+                         <span>Next Page</span>
+                    </inertia-link>
+                </th>
+                <th class="text-center  text-samaee-900">Total Rows:-  {{addresses.total}}</th>
                 <th class="text-center" ></th>
             </tr>
           </tfoot>
@@ -66,19 +75,9 @@
             </tr>
         </table>
         </div>
-        <!-- <pagination :links="addresses.links"/> -->
-        <!-- <div class="mt-2">
-            <inertia-link v-if="addresses.prev_page_url" class="bg-banafsagy-800 hover:bg-banafsagy-900 text-samaee-900 shadow-xl px-2 py-1 text-sm font-bold text-left rounded-full rounded-r-none"
-           :href="addresses.prev_page_url">Previous Page</inertia-link>
-
-
-            <inertia-link v-if="addresses.next_page_url" class="bg-banafsagy-800 hover:bg-banafsagy-900 text-samaee-900 shadow-md  px-2 py-1 text-sm font-bold text-left rounded-full rounded-l-none"
-            :href="addresses.next_page_url"> Next Page </inertia-link>
-        </div> -->
-
-
-
-    </div></div></div>
+    </div>
+    </div>
+    </div>
     </app-layout>
 </template>
 

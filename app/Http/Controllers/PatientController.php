@@ -3,10 +3,15 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use App\Models\Patient;
+use App\Models\Address;
+use App\Models\Educationlevel;
+use App\Models\Occupation;
+use App\Models\Type;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
@@ -26,6 +31,10 @@ class PatientController extends Controller
     public function create()
     {
         return Inertia::render('Patients/Create', [
+            'addresses'         => Address::orderBy('name')->get()->map->only('id', 'name'),
+            'educationlevels'   => Educationlevel::orderBy('name')->get()->map->only('id', 'name'),
+            'occupations'       => Occupation::orderBy('name')->get()->map->only('id', 'name'),
+            'types'      => Type::orderBy('name')->get()->map->only('id', 'name'),
         ]);
     }
 
@@ -36,15 +45,31 @@ class PatientController extends Controller
             'name'       => ['required', 'unique:patients'],
             'birth_date' => ['required'],
             'gender'     => ['required'],
-            // 'photo'      => [ 'image'],
+
+            'marital' => ['required'],
+            'smoking'     => ['required'],
+
+            'occupation_id' => ['required'],
+            'educationlevel_id'     => ['required'],
+
+            'address_id' => ['required'],
+            'type_id'     => ['required'],
+            'fh_of_dm'     => ['required'],
         ]);
 
 
         Patient::create([
-            'name'       => $request->input('name'),
-            'birth_date' => $request->input('birth_date'),
-            'gender'     => $request->input('gender'),
-            // 'photo'      => $request->file('photo') ? $request->file('photo')->store('photos', 'public') : null
+            'name'              => $request->input('name'),
+            'birth_date'        => $request->input('birth_date'),
+            'gender'            => $request->input('gender'),
+            'marital'           => $request->input('marital'),
+            'smoking'           => $request->input('smoking'),
+            'fh_of_dm'          => $request->input('fh_of_dm'),
+            'occupation_id'     => $request->input('occupation_id'),
+            'educationlevel_id' => $request->input('educationlevel_id'),
+            'address_id'        => $request->input('address_id'),
+            'type_id'           => $request->input('type_id'),
+            'user_id'           => Auth::user()->id,
         ]);
 
         return Redirect::route('patients')->with('message', 'Patient created.');

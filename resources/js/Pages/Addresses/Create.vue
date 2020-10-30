@@ -9,7 +9,7 @@
 
     <div class="p-8 -mr-6 -mb-8 flex flex-wrap">
         <input type="text" v-model="form.name" class="pr-6 pb-8 w-full lg:w-1/2 border-b" placeholder="name"/>
-        <div class="text-sm text-red-600 mt-1" required="required" v-if="errors.name">{{errors.name[0]}}</div>
+        <div class="text-sm text-red-600 mt-1" v-if="errors.name">{{errors.name[0]}}</div>
     </div>
 
     <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex justify-end items-center">

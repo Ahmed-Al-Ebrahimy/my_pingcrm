@@ -1,5 +1,10 @@
 <template>
-    <div class="lg:max-w-4xl bg-gray-100 shadow mx-auto p-4 mt-6">
+    <!-- <div class="max-w-sm sm:max-w-2xl md:bg-purple-800  md:max-w-xl lg:bg-pink-500 lg:max-w-6xl bg-banafsagy-600  mx-auto my-auto mt-6 p-3 pb-2  rounded shadow-md "> -->
+
+    <app-layout>
+        <div class="py-6">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <div class="bg-banafsagy-600 overflow-hidden shadow-xl p-3  rounded sm:rounded-lg">
         <!-- <p v-if="$page.flash.message" class="text-sm">{{ $page.flash.message }}</p> -->
          <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md my-3" role="alert" v-if="$page.flash.message">
             <div class="flex">
@@ -8,44 +13,90 @@
             </div>
             </div>
         </div>
-        <div class="mb-3 flex justify-between ">
-            <div class="flex items-center">
-                <div class="flex w-full bg-white shadow rounded">
-                <input class="relative w-full px-3 py-2 rounded focus:shadow-outline" v-model="term" autocomplete="off" type="text" id="search" placeholder="Search…">
+        <div class="mb-2 flex justify-between">
+            <!-- <button @click="focusInput()">focus</button> -->
+            <div class="flex items-center ">
+                <div class="flex w-full bg-white shadow rounded  ml-1">
+                <input :autofocus="'autofocus'" class="relative w-full border border-pink-500  focus:shadow-outline  px-1 py-1 rounded" v-model="term" autocomplete="off" type="text" id="search" placeholder="Search…">
                 </div>
-                <button class="ml-3 text-sm text-gray-500 hover:text-gray-700 focus:text-indigo-500" type="button" @click="reset">Reset</button>
+                <button class="ml-1 bg-indigo-800  w-1/4 border border-pink-500  px-1 py-1 shadow-md  text-gray-300 hover:bg-indigo-900 rounded-md "  @click="reset">Reset</button>
             </div>
-            <div class="flex items-center">
-                <inertia-link class="bg-gray-700 px-3 py-2   text-white hover:bg-cool-gray-700 rounded-md" :href="route('patients.create')">
+            <div class="flex items-center  mr-1">
+                <inertia-link class="border border-pink-500 bg-indigo-800  text-gray-300 px-3 py-1 shadow-md  hover:bg-indigo-900 rounded-md" :href="route('patients.create')">
                     <span>Create patient</span>
                 </inertia-link>
             </div>
         </div>
-        <table class="w-full">
-            <tr class="bg-gray-900 text-white">
-                <th class="px-2 py-1 text-sm font-bold text-left">No.</th>
-                <th class="px-2 py-1 text-sm font-bold text-left" colspan="2">name</th>
+        <div class="bg-white rounded shadow overflow-x-auto">
+      <table class="w-full whitespace-no-wrap">
+          <thead>
+            <tr class="bg-banafsagy-900 text-samaee-900">
+                <th class="px-2 py-1 text-sm font-bold text-left">Edit</th>
+                <th class="px-2 py-1 text-sm font-bold text-left">ID</th>
+                <th class="px-2 py-1 text-sm font-bold text-left">Name</th>
+                <th class="px-2 py-1 text-sm font-bold text-left">Gender</th>
+                <th class="px-2 py-1 text-sm font-bold text-left">Birth_Date</th>
+                <th class="px-2 py-1 text-sm font-bold text-left">Updated_at</th>
             </tr>
-            <tr v-for="(patient, index) in patients.data" :key="index" :class="{'bg-gray-300': index % 2 === 0}">
-                <td class="border px-2 py-1 text-sm text-left">
-                    <inertia-link class="flex items-center" :href="route('patients.edit', patient.id)" tabindex="-1">
-                        {{ patient.id }}
+          </thead>
+          <tfoot>
+            <tr class="bg-banafsagy-800">
+                <th class="p-2" colspan="2">
+                    <inertia-link v-if="patients.prev_page_url" :href="patients.prev_page_url"
+                     class="border border-pink-500 bg-banafsagy-900 hover:bg-indigo-900 text-gray-300 shadow-2xl p-2 py-1 text-left rounded-full rounded-r-none"
+                     ><span>Previous Page</span>
+                    </inertia-link>
+
+                    <inertia-link v-if="patients.next_page_url" :href="patients.next_page_url"
+                     class="border border-pink-500 bg-banafsagy-900 hover:bg-indigo-900 text-gray-300 shadow-2xl px-2  py-1  text-left rounded-full rounded-l-none">
+                         <span>Next Page</span>
+                    </inertia-link>
+                </th>
+                <th class="text-center text-samaee-900" colspan="4" >Total Rows:-  {{patients.total}}</th>
+            </tr>
+          </tfoot>
+            <tr v-for="(patient, index) in patients.data" :key="index"  class="font-medium text-gray-800 hover:bg-purple-400 focus-within:bg-gray-100 " :class="{'bg-purple-300': index % 2 === 0}">
+                <td class="border-t w-px ">
+                    <inertia-link class="px-4 flex outline-none  items-center" :href="route('patients.edit', patient.id)" tabindex="-1">
+                    <icon name="edit3" class="block w-6 h-6 "/>
                     </inertia-link>
                 </td>
-                <td class="border px-2 py-1 text-sm text-left">
-                    <inertia-link class="flex items-center" :href="route('patients.edit', patient.id)" tabindex="-1">
-                        {{ patient.name }}
+                <td class="border-t">
+                    <inertia-link class="px-2 py-1 outline-none text-sm flex items-center" :href="route('patients.edit', patient.id)" tabindex="-1">
+                    {{ patient.id }}
                     </inertia-link>
                 </td>
-                <td class="border-t w-px">
-                    <inertia-link class="px-4 flex items-center" :href="route('patients.edit', patient.id)" tabindex="-1">
-                    <icon name="cheveron-right" class="block w-6 h-6 fill-gray-400" />
+                <td class="border-t">
+                    <inertia-link class="px-2 py-1 outline-none  text-sm flex items-center" :href="route('patients.edit', patient.id)" tabindex="-1">
+                    {{ patient.name }}
                     </inertia-link>
                 </td>
+
+                <td class="border-t">
+                    <inertia-link class="px-2 py-1 outline-none  text-sm flex items-center" :href="route('patients.edit', patient.id)" tabindex="-1">
+                    {{ patient.gender == 1 ? 'Male' : 'Female' }}
+                    </inertia-link>
+                </td>
+                <td class="border-t">
+                    <inertia-link class="px-2 py-1 outline-none  text-sm flex items-center" :href="route('patients.edit', patient.id)" tabindex="-1">
+                    {{ patient.birth_date }}
+                    </inertia-link>
+                </td>
+                <td class="border-t">
+                    <inertia-link class="px-2 py-1 outline-none  text-sm flex items-center" :href="route('patients.edit', patient.id)" tabindex="-1">
+                    {{ patient.updated_at }}
+                    </inertia-link>
+                </td>
+            </tr>
+            <tr v-if="patients.data.length === 0">
+                <td class="border-t px-6 py-4" colspan="6">No patients found.</td>
             </tr>
         </table>
-        <pagination :links="patients.links"/>
+        </div>
     </div>
+    </div>
+    </div>
+    </app-layout>
 </template>
 
 <script>
@@ -57,8 +108,8 @@
     import _ from 'lodash'
 
     export default {
-         layout: AppLayout,
         components: {
+            AppLayout,
             Welcome,
             Pagination,
             Icon,

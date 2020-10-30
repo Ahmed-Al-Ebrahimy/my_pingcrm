@@ -30,6 +30,10 @@
                                 <icon name="physician" class="block w-5 h-5 mr-1 fill-gray-100" /> Physician
                             </jet-nav-link>
 
+                            <jet-nav-link :href="route('educationlevels')"  :active="$page.currentRouteName == 'educationlevels'">
+                                Education
+                            </jet-nav-link>
+
                             <!-- <jet-nav-link :href="route('patients')"  :active="$page.currentRouteName == 'patients'">
                                 <icon name="laboratory" class="block w-5 h-5 mr-1 fill-gray-100" /> Laboratory
                             </jet-nav-link> -->
