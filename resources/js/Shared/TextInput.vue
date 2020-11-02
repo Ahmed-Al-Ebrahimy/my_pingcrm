@@ -2,7 +2,7 @@
   <div>
     <label v-if="label" class="form-label" :for="id">{{ label }}:</label>
     <input :id="id" ref="input" v-bind="$attrs" class="form-input" :class="{ error: error }" :type="type" :value="value" @input="$emit('input', $event.target.value)">
-    <div v-if="error" class="form-error">{{ error }}</div>
+    <div v-if="error" class="form-error">{{ error[0] }}</div>
   </div>
 </template>
 
@@ -22,7 +22,7 @@ export default {
     },
     value: String,
     label: String,
-    error: String,
+    error: Array ,
   },
   methods: {
     focus() {

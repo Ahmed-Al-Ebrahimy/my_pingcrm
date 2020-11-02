@@ -3,28 +3,26 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Request;
 use Inertia\Inertia;
 use App\Models\Address;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rule;
 
 class AddressController extends Controller
 {
-    public function index(Request $request)
+
+
+    public function index()
     {
         return Inertia::render('Addresses/Index', [
-            'addresses' =>  Address::when( $request->term, function($query, $term){
-
-                $query->where('name', 'like', '%' . $term . '%');
-
-            }) ->paginate(10)
+            'filters' => Request::all('search'),
+            'addresses' => Address::orderBy('name')
+                ->filter(Request::only('search'))
+                ->paginate(10)
+                ->only('id', 'name', 'deleted_at', 'created_at'),
         ]);
     }
-
-
-
     public function create()
     {
         return Inertia::render('Addresses/Create', [
@@ -34,16 +32,25 @@ class AddressController extends Controller
     public function store(Request $request)
     {
 
-        $request->validate([
-            'name'       => ['required', 'unique:addresses'],
-        ]);
+        Auth::user()->addresses()->create(
+            Request::validate([
+                'name' => ['required', 'max:100'],
+            ])
+        );
 
 
-        Address::create([
-            'name' => $request->input('name'),
-        ]);
+        // $request->validate([
+        //     'name'       => ['required', 'unique:addresses'],
+        // ]);
 
-        return Redirect::route('addresses')->with('message', 'Address created.');
+
+        // Address::create([
+        //     'name' => $request->input('name'),
+        // ]);
+
+        return Redirect::route('addresses')->with('success', 'Address created.');
+
+        // return Redirect::route('contacts')->with('success', 'Contact created.');
     }
 
     public function edit(Address $address)

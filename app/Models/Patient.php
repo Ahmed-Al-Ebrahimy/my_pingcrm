@@ -10,7 +10,7 @@ class Patient extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    protected $fillable = ['id', 'name', 'diagnosis', 'birth_date',  'gender', 'marital_status_id', 'address_id', 'smoking_id', 'user_id'];
+    protected $fillable = ['id', 'name',  'birth_date',  'gender', 'marital_status_id', 'address_id', 'smoking_id', 'user_id'];
 
 
 
@@ -26,7 +26,6 @@ class Patient extends Model
                 $query->where(function ($query) use ($search) {
                     $query->where('id', '=', $search)
                     ->orWhere('name', 'like', '%'.$search)
-                    ->orWhere('diagnosis', 'like', '%'.$search.'%')
                     ->orWhereHas('address', function ($query) use ($search) {
                         $query->where('name', 'like', '%'.$search.'%');
                     });
@@ -39,6 +38,26 @@ class Patient extends Model
                 }
             });
     }
+
+    // public function scopeFilter($query, array $filters)
+    // {
+    //     $query->when($filters['search'] ?? null, function ($query, $search) {
+    //         $query->where(function ($query) use ($search) {
+    //             $query->where('first_name', 'like', '%'.$search.'%')
+    //                 ->orWhere('last_name', 'like', '%'.$search.'%')
+    //                 ->orWhere('email', 'like', '%'.$search.'%')
+    //                 ->orWhereHas('organization', function ($query) use ($search) {
+    //                     $query->where('name', 'like', '%'.$search.'%');
+    //                 });
+    //         });
+    //     })->when($filters['trashed'] ?? null, function ($query, $trashed) {
+    //         if ($trashed === 'with') {
+    //             $query->withTrashed();
+    //         } elseif ($trashed === 'only') {
+    //             $query->onlyTrashed();
+    //         }
+    //     });
+    // }
 
 
 

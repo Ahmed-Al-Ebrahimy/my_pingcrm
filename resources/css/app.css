@@ -14,7 +14,9 @@
 /* Utilities */
 @import "tailwindcss/utilities";
 
-
+.rtl{
+    direction: rtl;
+}
 .overlay {
     position: fixed; /* Sit on top of the page content */
     width: 100%; /* Full width (cover the whole page) */

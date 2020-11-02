@@ -17,6 +17,8 @@ class CreateOccupationsTable extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->timestamps();
+            $table->foreignId('user_id')->constrained()->onDelete('restrict')->onUpdate('cascade');
+
             $table->softDeletes();
         });
     }

@@ -19,6 +19,7 @@ class CreateMedicineVisitTable extends Migration
 
             $table->foreignId('medicine_id')->constrained()->onDelete('restrict')->onUpdate('cascade');
             $table->foreignId('visit_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('user_id')->constrained()->onDelete('restrict')->onUpdate('cascade');
 
             $table->timestamps();
         });

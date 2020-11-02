@@ -1,31 +1,38 @@
 <?php
 
-
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
-use Inertia\Inertia;
 use App\Models\Patient;
 use App\Models\Address;
 use App\Models\Educationlevel;
 use App\Models\Occupation;
 use App\Models\Type;
-use Illuminate\Support\Facades\Validator;
+use App\Models\Visit;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Request;
+// use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Inertia\Inertia;
 
 class PatientController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
-
         return Inertia::render('Patients/Index', [
-            'patients' =>  Patient::when( $request->term, function($query, $term){
-
-                $query->where('name', 'like', '%' . $term . '%');
-
-            }) ->paginate(10)
+            'filters' => Request::all('search', 'trashed'),
+            'patients' => Patient::with('address')
+                ->orderByName()
+                ->filter(Request::only('search', 'trashed'))
+                ->paginate(4)
+                ->transform(function ($patient) {
+                    return [
+                        'id' => $patient->id,
+                        'name' => $patient->name,
+                        'deleted_at' => $patient->deleted_at,
+                        'address' => $patient->address ? $patient->address->only('name') : null,
+                    ];
+                }),
         ]);
     }
     public function create()
@@ -34,43 +41,43 @@ class PatientController extends Controller
             'addresses'         => Address::orderBy('name')->get()->map->only('id', 'name'),
             'educationlevels'   => Educationlevel::orderBy('name')->get()->map->only('id', 'name'),
             'occupations'       => Occupation::orderBy('name')->get()->map->only('id', 'name'),
-            'types'      => Type::orderBy('name')->get()->map->only('id', 'name'),
+            'types'             => Type::orderBy('name')->get()->map->only('id', 'name'),
         ]);
     }
 
-    public function store(Request $request)
+    public function store()
     {
 
-        $request->validate([
-            'name'       => ['required', 'unique:patients'],
-            'birth_date' => ['required'],
-            'gender'     => ['required'],
 
-            'marital' => ['required'],
-            'smoking'     => ['required'],
+    $patient = Auth::user()->patients()->create(
+            Request::validate([
+                'name'                  => ['required', 'unique:patients', 'max:22', 'min:10'],
+                'birth_date'            => ['required'],
+                'gender'                => ['required'],
+                'marital'               => ['required'],
+                'smoking'               => ['required'],
+                'occupation_id'         => ['required'],
+                'educationlevel_id'     => ['required'],
+                'address_id'            => ['required'],
+                'type_id'               => ['required'],
+                'fh_of_dm'              => ['required'],
 
-            'occupation_id' => ['required'],
-            'educationlevel_id'     => ['required'],
+                'systolic_bp'           => ['required'],
+                'diastolic_bp'          => ['required'],
+                'height'                => ['required'],
+                'weight'                => ['required'],
+            ])
+        );
 
-            'address_id' => ['required'],
-            'type_id'     => ['required'],
-            'fh_of_dm'     => ['required'],
-        ]);
-
-
-        Patient::create([
-            'name'              => $request->input('name'),
-            'birth_date'        => $request->input('birth_date'),
-            'gender'            => $request->input('gender'),
-            'marital'           => $request->input('marital'),
-            'smoking'           => $request->input('smoking'),
-            'fh_of_dm'          => $request->input('fh_of_dm'),
-            'occupation_id'     => $request->input('occupation_id'),
-            'educationlevel_id' => $request->input('educationlevel_id'),
-            'address_id'        => $request->input('address_id'),
-            'type_id'           => $request->input('type_id'),
+        Visit::create([
+            'systolic_bp'       => Request::only('systolic_bp'),
+            'diastolic_bp'       => Request::only('diastolic_bp'),
+            'height'       => Request::only('height'),
+            'weight'       => Request::only('weight'),
+            'patient_id'        => $patient->id,
             'user_id'           => Auth::user()->id,
         ]);
+
 
         return Redirect::route('patients')->with('message', 'Patient created.');
     }

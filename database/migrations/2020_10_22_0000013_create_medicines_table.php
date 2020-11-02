@@ -16,6 +16,8 @@ class CreateMedicinesTable extends Migration
         Schema::create('medicines', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
+            $table->foreignId('user_id')->constrained()->onDelete('restrict')->onUpdate('cascade');
+
             $table->timestamps();
             $table->softDeletes();
         });

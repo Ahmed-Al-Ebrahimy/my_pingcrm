@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\EducationlevelController;
+use App\Http\Controllers\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,9 +25,16 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia\Inertia::render('Dashboard');
 })->name('dashboard');
 
-Route::get('/design_test', function () {
-    return Inertia\Inertia::render('design_test');
-})->name('design_test');
+// Route::get('/design_test', function () {
+//     return Inertia\Inertia::render('design_test');
+// })->name('design_test');
+
+// // Resource Route for posts.
+// Route::resource('posts', PostController::class);
+// // Route for get posts for yajra post request.
+// Route::get('get-posts', [PostController::class, 'getPosts'])->name('get-posts');
+
+
 
 // Educationlevels
 Route::get('educationlevels', [EducationlevelController::class, 'index'])->name('educationlevels')->middleware('auth');
@@ -39,17 +47,11 @@ Route::put('educationlevels/{educationlevel}/restore', [EducationlevelController
 
 // Patients
 Route::middleware(['auth:sanctum', 'verified'])->get('patients', [PatientController::class, 'index'])->name('patients');
-
 Route::middleware(['auth:sanctum', 'verified'])->get('patients/create', [PatientController::class, 'create'])->name('patients.create');
-
 Route::middleware(['auth:sanctum', 'verified'])->post('patients', [PatientController::class, 'store'])->name('patients.store');
-
 Route::middleware(['auth:sanctum', 'verified'])->get('patients/{patient}/edit', [PatientController::class, 'edit'])->name('patients.edit');
-
 Route::middleware(['auth:sanctum', 'verified'])->put('patients/{patient}', [PatientController::class, 'update'])->name('patients.update');
-
 Route::middleware(['auth:sanctum', 'verified'])->post('patients/{patient}', [PatientController::class, 'destroy'])->name('patients.destroy');
-
 Route::middleware(['auth:sanctum', 'verified'])->put('patients/{patient}/restore', [PatientController::class, 'restore'])->name('patients.restore');
 
 

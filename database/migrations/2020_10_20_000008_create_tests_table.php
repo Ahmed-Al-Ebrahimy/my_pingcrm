@@ -18,6 +18,7 @@ class CreateTestsTable extends Migration
             $table->string('name')->unique();
             $table->string('testFullName')->unique();
             $table->string('testNormalValue');
+            $table->foreignId('user_id')->constrained()->onDelete('restrict')->onUpdate('cascade');
             $table->timestamps();
             $table->softDeletes();
         });

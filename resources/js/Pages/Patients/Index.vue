@@ -14,13 +14,15 @@
             </div>
         </div>
         <div class="mb-2 flex justify-between">
-            <!-- <button @click="focusInput()">focus</button> -->
-            <div class="flex items-center ">
-                <div class="flex w-full bg-white shadow rounded  ml-1">
-                <input :autofocus="'autofocus'" class="relative w-full border border-pink-500  focus:shadow-outline  px-1 py-1 rounded" v-model="term" autocomplete="off" type="text" id="search" placeholder="Search…">
-                </div>
-                <button class="ml-1 bg-indigo-800  w-1/4 border border-pink-500  px-1 py-1 shadow-md  text-gray-300 hover:bg-indigo-900 rounded-md "  @click="reset">Reset</button>
-            </div>
+            <search-filter v-model="form.search" class="w-full max-w-md mr-4" @reset="reset">
+                <label class="block text-gray-700">Trashed:</label>
+                <select v-model="form.trashed" class="mt-1 w-full form-select">
+                <option :value="null" />
+                <option value="with">With Trashed</option>
+                <option value="only">Only Trashed</option>
+                </select>
+            </search-filter>
+            Total Rows:-  {{patients.total}}
             <div class="flex items-center  mr-1">
                 <inertia-link class="border border-pink-500 bg-indigo-800  text-gray-300 px-3 py-1 shadow-md  hover:bg-indigo-900 rounded-md" :href="route('patients.create')">
                     <span>Create patient</span>
@@ -34,26 +36,11 @@
                 <th class="px-2 py-1 text-sm font-bold text-left">Edit</th>
                 <th class="px-2 py-1 text-sm font-bold text-left">ID</th>
                 <th class="px-2 py-1 text-sm font-bold text-left">Name</th>
-                <th class="px-2 py-1 text-sm font-bold text-left">Gender</th>
-                <th class="px-2 py-1 text-sm font-bold text-left">Birth_Date</th>
-                <th class="px-2 py-1 text-sm font-bold text-left">Updated_at</th>
+                <th class="px-2 py-1 text-sm font-bold text-left">AddressName</th>
             </tr>
           </thead>
           <tfoot>
-            <tr class="bg-banafsagy-800">
-                <th class="p-2" colspan="2">
-                    <inertia-link v-if="patients.prev_page_url" :href="patients.prev_page_url"
-                     class="border border-pink-500 bg-banafsagy-900 hover:bg-indigo-900 text-gray-300 shadow-2xl p-2 py-1 text-left rounded-full rounded-r-none"
-                     ><span>Previous Page</span>
-                    </inertia-link>
 
-                    <inertia-link v-if="patients.next_page_url" :href="patients.next_page_url"
-                     class="border border-pink-500 bg-banafsagy-900 hover:bg-indigo-900 text-gray-300 shadow-2xl px-2  py-1  text-left rounded-full rounded-l-none">
-                         <span>Next Page</span>
-                    </inertia-link>
-                </th>
-                <th class="text-center text-samaee-900" colspan="4" >Total Rows:-  {{patients.total}}</th>
-            </tr>
           </tfoot>
             <tr v-for="(patient, index) in patients.data" :key="index"  class="font-medium text-gray-800 hover:bg-purple-400 focus-within:bg-gray-100 " :class="{'bg-purple-300': index % 2 === 0}">
                 <td class="border-t w-px ">
@@ -74,25 +61,17 @@
 
                 <td class="border-t">
                     <inertia-link class="px-2 py-1 outline-none  text-sm flex items-center" :href="route('patients.edit', patient.id)" tabindex="-1">
-                    {{ patient.gender == 1 ? 'Male' : 'Female' }}
+                    {{ patient.address.name }}
                     </inertia-link>
                 </td>
-                <td class="border-t">
-                    <inertia-link class="px-2 py-1 outline-none  text-sm flex items-center" :href="route('patients.edit', patient.id)" tabindex="-1">
-                    {{ patient.birth_date }}
-                    </inertia-link>
-                </td>
-                <td class="border-t">
-                    <inertia-link class="px-2 py-1 outline-none  text-sm flex items-center" :href="route('patients.edit', patient.id)" tabindex="-1">
-                    {{ patient.updated_at }}
-                    </inertia-link>
-                </td>
+
             </tr>
             <tr v-if="patients.data.length === 0">
                 <td class="border-t px-6 py-4" colspan="6">No patients found.</td>
             </tr>
         </table>
         </div>
+        <pagination :links="patients.links" />
     </div>
     </div>
     </div>
@@ -103,37 +82,45 @@
     import AppLayout from '@/Layouts/AppLayout'
     import Welcome from '@/Jetstream/Welcome'
     import Icon from '@/Shared/Icon'
+    import mapValues from 'lodash/mapValues'
     import Pagination from '@/Shared/Pagination'
-
-    import _ from 'lodash'
-
+    import pickBy from 'lodash/pickBy'
+    import SearchFilter from '@/Shared/SearchFilter'
+    import throttle from 'lodash/throttle'
     export default {
         components: {
             AppLayout,
             Welcome,
             Pagination,
             Icon,
+            SearchFilter,
         },
-        props: ['patients', 'errors'],
-
-        data() {
-            return {
-                term: '',
-            }
-        },
-        watch: {
-          term: {
-            handler: _.throttle(function() {
-                this.$inertia.replace(this.route('patients', {term: this.term}))
-            }, 200),
-            deep: true,
-            },
-        },
-        methods: {
-            reset() {
-                this.term =  null;
-            },
-        },
+  props: {
+    patients: Object,
+    filters: Object,
+  },
+  data() {
+    return {
+      form: {
+        search: this.filters.search,
+        trashed: this.filters.trashed,
+      },
+    }
+  },
+  watch: {
+    form: {
+      handler: throttle(function() {
+        let query = pickBy(this.form)
+        this.$inertia.replace(this.route('patients', Object.keys(query).length ? query : { remember: 'forget' }))
+      }, 150),
+      deep: true,
+    },
+  },
+  methods: {
+    reset() {
+      this.form = mapValues(this.form, () => null)
+    },
+  },
 
     }
 </script>

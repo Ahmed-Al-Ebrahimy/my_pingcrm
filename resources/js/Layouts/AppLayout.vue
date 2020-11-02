@@ -238,8 +238,16 @@
         </header> -->
 
         <!-- Page Content -->
+         <div class="md:flex-1 px-4 py-8 md:p-12 md:overflow-y-auto" scroll-region>
+            <flash-messages />
+          </div>
+
         <main>
-            <slot></slot>
+
+            <slot>
+
+
+            </slot>
         </main>
 
         <!-- Modal Portal -->
@@ -256,6 +264,8 @@
     import JetNavLink from './../Jetstream/NavLink'
     import JetResponsiveNavLink from './../Jetstream/ResponsiveNavLink'
 
+    import FlashMessages from '@/Shared/FlashMessages'
+
      import Icon from '@/Shared/Icon'
 
     export default {
@@ -266,6 +276,8 @@
             JetDropdownLink,
             JetNavLink,
             JetResponsiveNavLink,
+
+            FlashMessages,
 
             Icon,
         },

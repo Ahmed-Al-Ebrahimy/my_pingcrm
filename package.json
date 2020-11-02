@@ -27,6 +27,7 @@
     },
     "dependencies": {
         "@inertiajs/progress": "^0.1.2",
+        "moment": "^2.29.1",
         "popper.js": "^1.16.1"
     }
 }

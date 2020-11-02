@@ -22,6 +22,9 @@ InertiaProgress.init({
     showSpinner: true,
   })
 
+  import moment from 'moment'
+  Vue.prototype.moment = moment
+
 Vue.mixin({ methods: { route } });
 Vue.use(InertiaApp);
 Vue.use(InertiaForm);
