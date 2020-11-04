@@ -34,23 +34,11 @@ class AddressController extends Controller
 
         Auth::user()->addresses()->create(
             Request::validate([
-                'name' => ['required', 'max:100'],
+                'name' => ['required', 'max:100', 'unique:addresses',],
             ])
         );
 
-
-        // $request->validate([
-        //     'name'       => ['required', 'unique:addresses'],
-        // ]);
-
-
-        // Address::create([
-        //     'name' => $request->input('name'),
-        // ]);
-
-        return Redirect::route('addresses')->with('success', 'Address created.');
-
-        // return Redirect::route('contacts')->with('success', 'Contact created.');
+        return Redirect::back()->with('success', 'Contact created.');
     }
 
     public function edit(Address $address)

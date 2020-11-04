@@ -37,14 +37,14 @@ class CreatePatientsTable extends Migration
             $table->tinyInteger('race')->nullable();
             $table->tinyInteger('alcoholic')->nullable();
 
-            $table->decimal('father_ht', 3, 1)->nullable();
-            $table->decimal('mother_ht', 3, 1)->nullable();
-            $table->decimal('mph', 3, 1)->nullable();
-            $table->decimal('height', 3, 1)->nullable();
-            $table->decimal('weight', 3, 1)->nullable();
-            $table->decimal('bmi', 3, 1)->nullable();
-            $table->decimal('systolic_bp', 3, 1)->nullable();
-            $table->decimal('diastolic_bp', 3, 1)->nullable();
+            $table->integer('father_ht')->nullable();
+            $table->integer('mother_ht')->nullable();
+            $table->integer('mph')->nullable();
+            $table->integer('height')->nullable();
+            $table->integer('weight')->nullable();
+            $table->integer('bmi')->nullable();
+            $table->integer('systolic_bp')->nullable();
+            $table->integer('diastolic_bp')->nullable();
 
             $table->foreignId('address_id')->nullable()->constrained()->onDelete('set null')->onUpdate('cascade');
             $table->foreignId('educationlevel_id')->nullable()->constrained()->onDelete('set null')->onUpdate('cascade');
@@ -55,9 +55,8 @@ class CreatePatientsTable extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('restrict')->onUpdate('cascade');
 
             $table->boolean('queue')->default(0);
-
-            $table->softDeletes();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

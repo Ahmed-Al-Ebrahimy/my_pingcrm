@@ -22,12 +22,12 @@ class CreateVisitsTable extends Migration
 
 
 
-            $table->decimal('mph', 3, 1)->nullable();
-            $table->decimal('height', 3, 1)->nullable();
-            $table->decimal('weight', 3, 1)->nullable();
-            $table->decimal('bmi', 3, 1)->nullable();
-            $table->decimal('systolic_bp', 3, 1)->nullable();
-            $table->decimal('diastolic_bp', 3, 1)->nullable();
+            $table->integer('mph')->nullable();
+            $table->integer('height')->nullable();
+            $table->integer('weight')->nullable();
+            $table->integer('bmi')->nullable();
+            $table->integer('systolic_bp')->nullable();
+            $table->integer('diastolic_bp')->nullable();
 
             $table->string('notes')->nullable();
 

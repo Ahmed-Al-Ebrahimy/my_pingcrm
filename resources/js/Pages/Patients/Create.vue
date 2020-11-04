@@ -83,7 +83,6 @@
                                         <option value="1">Smoker</option>
                                         <option value="2">Non-Smoker</option>
                                         <option value="3">Ex-Smoker</option>
-                                        <option value="4">Negative Smoker</option>
                                     </select>
                                     <span class="text-sm ml-2 text-red-600 mt-1" v-if="errors.smoking">{{errors.smoking[0]}}</span>
                                 </div>
@@ -203,7 +202,6 @@ import AppLayout from '@/Layouts/AppLayout'
 import Welcome from '@/Jetstream/Welcome'
 
 import mapValues from 'lodash/mapValues'
-
 import LoadingButton from '@/Shared/LoadingButton'
 
 export default {

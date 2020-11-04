@@ -23,7 +23,7 @@ class AddressFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->name,
+            'name' => $this->faker->unique()->city                                ,
             'user_id' => User::factory(),
         ];
     }

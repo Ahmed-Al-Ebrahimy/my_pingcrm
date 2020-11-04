@@ -1,5 +1,9 @@
 <template>
-    <div class="min-h-screen bg-gray-200  font-sans capitalize ">
+<div class="min-h-screen bg-gray-200  font-sans capitalize ">
+
+
+
+
         <nav class="border-b border-purple-600 bg-indigo-800 ">
             <!-- Primary Navigation Menu -->
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-4">
@@ -231,22 +235,16 @@
         </nav>
 
         <!-- Page Heading -->
-        <!-- <header class="bg-white shadow">
-            <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                <slot name="header"></slot>
+        <header class="">
+            <div class="max-w-2xl mx-auto py-1 px-2 sm:px-2 lg:px-4">
+                <!-- <slot name="header"></slot> -->
+                <flash-messages />
             </div>
-        </header> -->
+        </header>
 
         <!-- Page Content -->
-         <div class="md:flex-1 px-4 py-8 md:p-12 md:overflow-y-auto" scroll-region>
-            <flash-messages />
-          </div>
-
         <main>
-
             <slot>
-
-
             </slot>
         </main>
 
@@ -265,8 +263,9 @@
     import JetResponsiveNavLink from './../Jetstream/ResponsiveNavLink'
 
     import FlashMessages from '@/Shared/FlashMessages'
+    import Icon from '@/Shared/Icon'
 
-     import Icon from '@/Shared/Icon'
+    import toast from '@/components/toast'
 
     export default {
         components: {
@@ -278,8 +277,9 @@
             JetResponsiveNavLink,
 
             FlashMessages,
-
             Icon,
+
+            toast,
         },
 
         data() {

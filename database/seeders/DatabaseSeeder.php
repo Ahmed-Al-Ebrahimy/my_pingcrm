@@ -27,7 +27,6 @@ class DatabaseSeeder extends Seeder
 
 
 
-        // Patient::factory(100)->create();
     public function run()
     {
         User::factory()->create([
@@ -50,6 +49,7 @@ class DatabaseSeeder extends Seeder
         Educationlevel::factory(100)->create();
         Occupation::factory(100)->create();
         Type::factory(100)->create();
+        Patient::factory(100)->create();
 
     }
 }

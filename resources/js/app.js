@@ -5,25 +5,12 @@ import Vue from 'vue';
 import { InertiaApp } from '@inertiajs/inertia-vue';
 import { InertiaForm } from 'laravel-jetstream';
 import PortalVue from 'portal-vue';
-
 import { InertiaProgress } from '@inertiajs/progress/src'
-InertiaProgress.init({
-    // The delay after which the progress bar will
-    // appear during navigation, in milliseconds.
-    delay: 250,
+import moment from 'moment'
 
-    // The color of the progress bar.
-    color: '#29d',
+InertiaProgress.init()
 
-    // Whether to include the default NProgress styles.
-    includeCSS: true,
-
-    // Whether the NProgress spinner will be shown.
-    showSpinner: true,
-  })
-
-  import moment from 'moment'
-  Vue.prototype.moment = moment
+Vue.prototype.moment = moment
 
 Vue.mixin({ methods: { route } });
 Vue.use(InertiaApp);
