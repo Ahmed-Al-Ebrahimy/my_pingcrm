@@ -11,7 +11,9 @@ use App\Models\Visit;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\StorePatientData;
+use App\Http\Requests\UpdatePatientData;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 use Inertia\Inertia;
@@ -90,26 +92,25 @@ class PatientController extends Controller
         return Redirect::route('patients')->with('success', 'Patient created.');
     }
 
-    // public function edit(Patient $patient)
-    // {
-    //     return Inertia::render('Patients/Edit', [
-    //         'patient' => $patient
-    //     ]);
-    // }
-
     public function edit(Patient $patient)
     {
 
         $today = (date('Y-m-d').' 00:00:00');
+        $get_todays_visit = Visit::where('patient_id', '=', $patient->id)->where( 'created_at', '>=', $today)->first();
+        $todays_visit = (object) array(
+                                        'systolic_bp'   => $get_todays_visit->systolic_bp ?? null,
+                                        'diastolic_bp'  => $get_todays_visit->diastolic_bp ?? null,
+                                        'height'        => $get_todays_visit->height ?? null,
+                                        'weight'        => $get_todays_visit->weight ?? null,
+                                        );
+
+
         return Inertia::render('Patients/Edit', [
-            $today = (date('Y-m-d').' 00:00:00'),
             'addresses'         => Address::orderBy('name')->get()->map->only('id', 'name'),
             'educationlevels'   => Educationlevel::orderBy('name')->get()->map->only('id', 'name'),
             'occupations'       => Occupation::orderBy('name')->get()->map->only('id', 'name'),
             'types'             => Type::orderBy('name')->get()->map->only('id', 'name'),
-            'todaysVisit'       => Visit::where('patient_id', '=', $patient->id)->where( 'created_at', '>=', $today)
-            ->get()->map->only('id', 'systolic_bp', 'diastolic_bp', 'height', 'weight', 'created_at'),
-
+            'todays_visit'      => $todays_visit,
             'patient' => [
                 'id'                => $patient->id,
                 'name'              => $patient->name,
@@ -122,26 +123,59 @@ class PatientController extends Controller
                 'address_id'        => $patient->address_id,
                 'type_id'           => $patient->type_id,
                 'fh_of_dm'          => $patient->fh_of_dm,
-                'visits' => $patient->visits()->orderBy('created_at', 'desc')->get()->map->only('id', 'systolic_bp', 'diastolic_bp', 'height', 'weight', 'created_at'),
+                'visits'            => $patient->visits() ? $patient->visits()->orderBy('created_at', 'desc')->get()->map
+                ->only('id', 'systolic_bp', 'diastolic_bp', 'height', 'weight', 'created_at') : null,
             ],
         ]);
     }
 
-    public function update(Patient $patient, StorePatientData $request)
+    public function update(Patient $patient)
     {
-            $request->validate([
-                'name'       => ['required', Rule::unique('patients')->ignore($patient->id)],
-                'birth_date' => ['required'],
-                'gender'     => ['required'],
-            ]);
 
-            Patient::where('id', $patient->id)->update([
-                'name'       => $request->input('name'),
-                'birth_date' => $request->input('birth_date'),
-                'gender'     => $request->input('gender'),
-            ]);
+        \DB::transaction(function () use ($patient) {
+            $patient->update(
+                Request::validate([
+                    'name'                 => ['required', Rule::unique('patients')->ignore($patient->id)],
+                    'birth_date'            => ['required'],
+                    'gender'                => ['required'],
+                    'marital'               => ['required'],
+                    'smoking'               => ['required'],
+                    'occupation_id'         => ['required'],
+                    'educationlevel_id'     => ['required'],
+                    'address_id'            => ['required'],
+                    'type_id'               => ['required'],
+                    'fh_of_dm'              => ['required'],
 
-            return Redirect::route('patients')->with('message', 'Patient updated.');
+                    'systolic_bp'           => ['required',  'digits_between:2,3'],
+                    'diastolic_bp'          => ['required',  'digits_between:2,3'],
+                    'height'                => ['required',  'digits_between:2,3'],
+                    'weight'                => ['required',  'digits_between:2,3'],
+                ])
+            );
+
+            $today = (date('Y-m-d').' 00:00:00');
+            $visit = Visit::where('patient_id', '=', $patient->id)->where( 'created_at', '>=', $today)->first();
+            if ($visit === null) {
+                Visit::create([
+                    'patient_id'    => $patient->id,
+                    'systolic_bp'   => $patient->systolic_bp,
+                    'diastolic_bp'  => $patient->diastolic_bp,
+                    'height'        => $patient->height,
+                    'weight'        => $patient->weight,
+                    'user_id' => Auth::user()->id,
+                ]);
+            }else{
+                Visit::where('id', $visit->id)->update([
+                    'patient_id'    => $patient->id,
+                    'systolic_bp'   => $patient->systolic_bp,
+                    'diastolic_bp'  => $patient->diastolic_bp,
+                    'height'        => $patient->height,
+                    'weight'        => $patient->weight,
+                    'user_id' => Auth::user()->id,
+                ]);
+            }
+        });
+        return Redirect::route('patients')->with('success', 'Patient updated.');
     }
 
     public function destroy(Patient $patient)

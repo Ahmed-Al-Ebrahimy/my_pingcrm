@@ -20,7 +20,7 @@
                                     <div class="w-1/3 flex -mr-px ">
                                         <span class="w-full flex items-center leading-normal bg-gray-400 rounded rounded-r-none border border-gray-500 px-3 whitespace-no-wrap text-grey-dark text-sm">Name  </span>
                                     </div>
-                                    <input  placeholder="Patient name"  required  v-model="form.name"  type="text" class="rtl text-center placeholder-pink-400 p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative ">
+                                    <input  placeholder="Patient name"    v-model="form.name"  type="text" class="rtl text-center placeholder-pink-400 p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative ">
 
                                     <span class="text-sm ml-2 text-red-600 mt-1" v-if="errors.name">{{errors.name[0]}}</span>
                                 </div>
@@ -29,7 +29,7 @@
                                     <div class="w-1/3 flex">
                                         <span class="w-full flex items-center leading-normal ml-2 bg-gray-400 rounded rounded-r-none border border-gray-500 px-3 whitespace-no-wrap text-grey-dark text-sm">BirthDate </span>
                                     </div>
-                                    <input  required  v-model="form.birth_date"  type="date" class=" p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative ">
+                                    <input    v-model="form.birth_date"  type="date" class=" p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative ">
 
                                     <span class="text-sm text-red-600 mt-1 ml-2" v-if="errors.birth_date">{{errors.birth_date[0]}}</span>
                                 </div>
@@ -42,7 +42,7 @@
                                     <div class="w-1/3 flex -mr-px">
                                         <span class="w-full flex items-center leading-normal bg-gray-400 rounded rounded-r-none border border-gray-500 px-3 whitespace-no-wrap text-grey-dark text-sm">Gender</span>
                                     </div>
-                                     <select  required  v-model="form.gender"  class="p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative">
+                                     <select    v-model="form.gender"  class="p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative">
                                         <option value="1">Male</option>
                                         <option value="2">Female</option>
                                     </select>
@@ -54,7 +54,7 @@
                                     <div class="w-1/3 flex -mr-px">
                                         <span class="w-full flex items-center leading-normal ml-2 bg-gray-400 rounded rounded-r-none border border-gray-500 px-3 whitespace-no-wrap text-grey-dark text-sm">Address</span>
                                     </div>
-                                    <select  required  v-model="form.address_id"  class="p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative">
+                                    <select    v-model="form.address_id"  class="p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative">
                                         <option v-for="(address, i) in addresses" :key="i"  :value="address.id" >{{address.name}}</option>
                                     </select>
                                     <span class="text-sm ml-2  text-red-600 mt-1" v-if="errors.address_id">{{errors.address_id[0]}}</span>
@@ -66,7 +66,7 @@
                                     <div class="w-1/3 flex">
                                         <span class="w-full flex items-center leading-normal bg-gray-400 rounded rounded-r-none border border-gray-500 px-3 whitespace-no-wrap text-grey-dark text-sm">Marital</span>
                                     </div>
-                                    <select  required  v-model="form.marital" class=" p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative ">
+                                    <select    v-model="form.marital" class=" p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative ">
                                         <option value="1">اعزب</option>
                                         <option value="2">متزوج</option>
                                         <option value="3">ارمل</option>
@@ -79,7 +79,7 @@
                                     <div class="w-1/3 flex -mr-px">
                                         <span class="w-full flex items-center leading-normal ml-2 bg-gray-400 rounded rounded-r-none border border-gray-500 px-3 whitespace-no-wrap text-grey-dark text-sm">Smoking</span>
                                     </div>
-                                    <select  required  v-model="form.smoking" class=" p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative ">
+                                    <select    v-model="form.smoking" class=" p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative ">
                                         <option value="1">Smoker</option>
                                         <option value="2">Non-Smoker</option>
                                         <option value="3">Ex-Smoker</option>
@@ -93,7 +93,7 @@
                                     <div class="w-1/3 flex">
                                         <span class="w-full flex items-center leading-normal bg-gray-400 rounded rounded-r-none border border-gray-500 px-3 whitespace-no-wrap text-grey-dark text-sm">Education</span>
                                     </div>
-                                    <select  required  v-model="form.educationlevel_id" class=" p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative ">
+                                    <select    v-model="form.educationlevel_id" class=" p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative ">
                                     <option v-for="(education, i) in educationlevels" :key="i"  :value="education.id" >{{education.name}}</option>
                                     </select>
                                     <span class="text-sm ml-2 text-red-600 mt-1" v-if="errors.educationlevel_id">{{errors.educationlevel_id[0]}}</span>
@@ -103,7 +103,7 @@
                                     <div class="w-1/3 flex -mr-px">
                                         <span class="w-full flex items-center leading-normal ml-2 bg-gray-400 rounded rounded-r-none border border-gray-500 px-3 whitespace-no-wrap text-grey-dark text-sm">Occupation</span>
                                     </div>
-                                    <select  required  v-model="form.occupation_id" class=" p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative ">
+                                    <select    v-model="form.occupation_id" class=" p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative ">
                                     <option v-for="(occupation, i) in occupations" :key="i"  :value="occupation.id" >{{occupation.name}}</option>
                                     </select>
                                      <span class="text-sm  ml-2 text-red-600 mt-1" v-if="errors.occupation_id">{{errors.occupation_id[0]}}</span>
@@ -115,7 +115,7 @@
                                     <div class="w-1/3 flex">
                                         <span class="w-full flex items-center leading-normal bg-gray-400 rounded rounded-r-none border border-gray-500 px-3 whitespace-no-wrap text-grey-dark text-sm">D_Type</span>
                                     </div>
-                                    <select  required  v-model="form.type_id" class=" p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative ">
+                                    <select    v-model="form.type_id" class=" p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative ">
                                     <option v-for="(type, i) in types" :key="i"  :value="type.id" >{{type.name}}</option>
                                     </select>
                                      <span class="text-sm text-red-600 mt-1" v-if="errors.type_id">{{errors.type_id[0]}}</span>
@@ -125,7 +125,7 @@
                                     <div class="w-1/3 flex -mr-px">
                                         <span class="w-full flex items-center leading-normal ml-2 bg-gray-400 rounded rounded-r-none border border-gray-500 px-3 whitespace-no-wrap text-grey-dark text-sm">F_History</span>
                                     </div>
-                                    <select  required  v-model="form.fh_of_dm" class="p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative ">
+                                    <select    v-model="form.fh_of_dm" class="p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative ">
                                         <option value="1">Positive</option>
                                         <option value="2">Negative</option>
                                     </select>
@@ -141,24 +141,24 @@
                              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div class="grid grid-cols-2 gap-2 ">
                                     <div class="p-1">
-                                        <input type="text"  required  v-model="form.systolic_bp" placeholder="Systolic_bp"
+                                        <input type="text"    v-model="form.systolic_bp" placeholder="Systolic_bp"
                                             class="p-1 px-2 rounded-sm bg-gray-200 max-w-full focus:shadow-outline"/>
                                             <span class="text-sm text-red-600 mt-1" v-if="errors.systolic_bp">{{errors.systolic_bp[0]}}</span>
                                     </div>
                                     <div class="p-1">
-                                        <input type="text"  required  v-model="form.diastolic_bp" placeholder="Diastolic_bp"
+                                        <input type="text"    v-model="form.diastolic_bp" placeholder="Diastolic_bp"
                                             class="p-1 px-2 rounded-sm bg-gray-200 max-w-full focus:shadow-outline"/>
                                             <span class="text-sm text-red-600 mt-1" v-if="errors.diastolic_bp">{{errors.diastolic_bp[0]}}</span>
                                     </div>
                                 </div>
                                 <div class="grid grid-cols-2 gap-2">
                                     <div class="p-1">
-                                        <input type="text"  required  v-model="form.height" placeholder="Height"
+                                        <input type="text"    v-model="form.height" placeholder="Height"
                                             class="p-1 px-2 rounded-sm bg-gray-200 max-w-full focus:shadow-outline"/>
                                             <span class="text-sm text-red-600 mt-1" v-if="errors.height">{{errors.height[0]}}</span>
                                     </div>
                                     <div class="p-1">
-                                        <input type="text"  required  v-model="form.weight" placeholder="Weight"
+                                        <input type="text"    v-model="form.weight" placeholder="Weight"
                                             class="p-1 px-2 rounded-sm bg-gray-200 max-w-full focus:shadow-outline"/>
                                             <span class="text-sm text-red-600 mt-1" v-if="errors.weight">{{errors.weight[0]}}</span>
                                     </div>

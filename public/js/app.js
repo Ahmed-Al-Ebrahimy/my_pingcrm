@@ -4789,6 +4789,33 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -4804,7 +4831,7 @@ __webpack_require__.r(__webpack_exports__);
     occupations: Array,
     types: Array,
     patient: Object,
-    todaysVisit: Array,
+    todays_visit: Object,
     errors: Object
   },
   data: function data() {
@@ -4820,10 +4847,10 @@ __webpack_require__.r(__webpack_exports__);
         occupation_id: this.patient.occupation_id,
         educationlevel_id: this.patient.educationlevel_id,
         type_id: this.patient.type_id,
-        systolic_bp: this.todaysVisit[0].systolic_bp,
-        diastolic_bp: this.todaysVisit[0].diastolic_bp,
-        height: this.todaysVisit[0].height,
-        weight: this.todaysVisit[0].weight
+        systolic_bp: this.todays_visit.systolic_bp,
+        diastolic_bp: this.todays_visit.diastolic_bp,
+        height: this.todays_visit.height,
+        weight: this.todays_visit.weight
       },
       sending: false
     };
@@ -4836,7 +4863,17 @@ __webpack_require__.r(__webpack_exports__);
       data.append('name', this.form.name);
       data.append('birth_date', this.form.birth_date);
       data.append('gender', this.form.gender);
-      data.append('address', this.form.address);
+      data.append('marital', this.form.marital);
+      data.append('smoking', this.form.smoking);
+      data.append('fh_of_dm', this.form.fh_of_dm);
+      data.append('address_id', this.form.address_id);
+      data.append('occupation_id', this.form.occupation_id);
+      data.append('educationlevel_id', this.form.educationlevel_id);
+      data.append('type_id', this.form.type_id);
+      data.append('systolic_bp', this.form.systolic_bp);
+      data.append('diastolic_bp', this.form.diastolic_bp);
+      data.append('height', this.form.height);
+      data.append('weight', this.form.weight);
       data.append('_method', 'PUT');
       this.$inertia.post(this.route('patients.update', {
         patient: this.patient.id
@@ -56092,7 +56129,7 @@ var render = function() {
                 [
                   _c("text-input", {
                     staticClass: "pr-6 pb-8 w-full lg:w-1/2",
-                    attrs: { error: _vm.errors.name, label: "Last name" },
+                    attrs: { error: _vm.errors.name, label: "Address name" },
                     model: {
                       value: _vm.form.name,
                       callback: function($$v) {
@@ -57418,7 +57455,6 @@ var render = function() {
                                 "rtl text-center placeholder-pink-400 p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative ",
                               attrs: {
                                 placeholder: "Patient name",
-                                required: "",
                                 type: "text"
                               },
                               domProps: { value: _vm.form.name },
@@ -57478,7 +57514,7 @@ var render = function() {
                               ],
                               staticClass:
                                 " p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative ",
-                              attrs: { required: "", type: "date" },
+                              attrs: { type: "date" },
                               domProps: { value: _vm.form.birth_date },
                               on: {
                                 input: function($event) {
@@ -57540,7 +57576,6 @@ var render = function() {
                                 ],
                                 staticClass:
                                   "p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative",
-                                attrs: { required: "" },
                                 on: {
                                   change: function($event) {
                                     var $$selectedVal = Array.prototype.filter
@@ -57617,7 +57652,6 @@ var render = function() {
                                 ],
                                 staticClass:
                                   "p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative",
-                                attrs: { required: "" },
                                 on: {
                                   change: function($event) {
                                     var $$selectedVal = Array.prototype.filter
@@ -57695,7 +57729,6 @@ var render = function() {
                                 ],
                                 staticClass:
                                   " p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative ",
-                                attrs: { required: "" },
                                 on: {
                                   change: function($event) {
                                     var $$selectedVal = Array.prototype.filter
@@ -57777,7 +57810,6 @@ var render = function() {
                                 ],
                                 staticClass:
                                   " p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative ",
-                                attrs: { required: "" },
                                 on: {
                                   change: function($event) {
                                     var $$selectedVal = Array.prototype.filter
@@ -57860,7 +57892,6 @@ var render = function() {
                                 ],
                                 staticClass:
                                   " p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative ",
-                                attrs: { required: "" },
                                 on: {
                                   change: function($event) {
                                     var $$selectedVal = Array.prototype.filter
@@ -57943,7 +57974,6 @@ var render = function() {
                                 ],
                                 staticClass:
                                   " p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative ",
-                                attrs: { required: "" },
                                 on: {
                                   change: function($event) {
                                     var $$selectedVal = Array.prototype.filter
@@ -58024,7 +58054,6 @@ var render = function() {
                                 ],
                                 staticClass:
                                   " p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative ",
-                                attrs: { required: "" },
                                 on: {
                                   change: function($event) {
                                     var $$selectedVal = Array.prototype.filter
@@ -58097,7 +58126,6 @@ var render = function() {
                                 ],
                                 staticClass:
                                   "p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative ",
-                                attrs: { required: "" },
                                 on: {
                                   change: function($event) {
                                     var $$selectedVal = Array.prototype.filter
@@ -58181,7 +58209,6 @@ var render = function() {
                                     "p-1 px-2 rounded-sm bg-gray-200 max-w-full focus:shadow-outline",
                                   attrs: {
                                     type: "text",
-                                    required: "",
                                     placeholder: "Systolic_bp"
                                   },
                                   domProps: { value: _vm.form.systolic_bp },
@@ -58228,7 +58255,6 @@ var render = function() {
                                     "p-1 px-2 rounded-sm bg-gray-200 max-w-full focus:shadow-outline",
                                   attrs: {
                                     type: "text",
-                                    required: "",
                                     placeholder: "Diastolic_bp"
                                   },
                                   domProps: { value: _vm.form.diastolic_bp },
@@ -58276,11 +58302,7 @@ var render = function() {
                                 ],
                                 staticClass:
                                   "p-1 px-2 rounded-sm bg-gray-200 max-w-full focus:shadow-outline",
-                                attrs: {
-                                  type: "text",
-                                  required: "",
-                                  placeholder: "Height"
-                                },
+                                attrs: { type: "text", placeholder: "Height" },
                                 domProps: { value: _vm.form.height },
                                 on: {
                                   input: function($event) {
@@ -58319,11 +58341,7 @@ var render = function() {
                                 ],
                                 staticClass:
                                   "p-1 px-2 rounded-sm bg-gray-200 max-w-full focus:shadow-outline",
-                                attrs: {
-                                  type: "text",
-                                  required: "",
-                                  placeholder: "Weight"
-                                },
+                                attrs: { type: "text", placeholder: "Weight" },
                                 domProps: { value: _vm.form.weight },
                                 on: {
                                   input: function($event) {
@@ -58460,925 +58478,432 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("app-layout", [
-    _c(
-      "div",
-      {
-        staticClass: "py-6 px-1 flex flex-col lg:flex-row border border-red-900"
-      },
-      [
-        _c(
-          "div",
-          {
-            staticClass:
-              "sm:px-1 md:px-2   flex w-full sm:w-3/4 md:w-2/3  lg:w-1/2    mr-2 border border-green-900"
-          },
-          [
-            _c(
-              "div",
-              {
-                staticClass:
-                  "bg-banafsagy-600 overflow-hidden rounded sm:rounded-lg"
-              },
-              [
-                _c(
-                  "div",
-                  {
-                    staticClass: "shadow-lg  rounded-lg border-2 border-red-600"
-                  },
-                  [
-                    _c(
-                      "form",
-                      {
-                        attrs: { id: "create_address" },
-                        on: {
-                          submit: function($event) {
-                            $event.preventDefault()
-                            return _vm.submit()
-                          }
+    _c("div", { staticClass: "py-6 px-1 flex flex-col lg:flex-row" }, [
+      _c(
+        "div",
+        {
+          staticClass:
+            "px-6 sm:px-2 md:px-1   flex w-full sm:w-3/4 md:w-2/3  lg:w-2/4 mr-2"
+        },
+        [
+          _c(
+            "div",
+            {
+              staticClass:
+                "bg-banafsagy-600 overflow-hidden rounded sm:rounded-lg"
+            },
+            [
+              _c(
+                "div",
+                {
+                  staticClass: "shadow-lg  rounded-lg border-2 border-red-600"
+                },
+                [
+                  _c(
+                    "form",
+                    {
+                      attrs: { id: "create_address" },
+                      on: {
+                        submit: function($event) {
+                          $event.preventDefault()
+                          return _vm.submit()
                         }
-                      },
-                      [
-                        _c(
-                          "div",
-                          { staticClass: "bg-indigo-400 p-1 rounded-lg" },
-                          [
+                      }
+                    },
+                    [
+                      _c(
+                        "div",
+                        { staticClass: "bg-indigo-400 p-1 rounded-lg" },
+                        [
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "flex justify-center  bg-indigo-800 rounded-md rounded-b-none  mr-1 ml-1 p-0  shadow-lg text-gray-100"
+                            },
+                            [
+                              _vm._v(
+                                "\n                                Profile Information\n                            "
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "grid grid-cols-2 p-1" }, [
                             _c(
                               "div",
                               {
                                 staticClass:
-                                  "flex justify-center  bg-indigo-800 rounded-md rounded-b-none  mr-1 ml-1 p-0  shadow-lg text-gray-100"
+                                  "flex flex-wrap items-stretch w-full relative "
                               },
                               [
-                                _vm._v(
-                                  "\n                                Profile Information\n                            "
-                                )
+                                _c(
+                                  "div",
+                                  { staticClass: "w-1/3 flex -mr-px " },
+                                  [
+                                    _c(
+                                      "span",
+                                      {
+                                        staticClass:
+                                          "w-full flex items-center leading-normal bg-gray-400 rounded rounded-r-none border border-gray-500 px-3 whitespace-no-wrap text-grey-dark text-sm"
+                                      },
+                                      [_vm._v("Name  ")]
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.form.name,
+                                      expression: "form.name"
+                                    }
+                                  ],
+                                  staticClass:
+                                    "rtl text-center placeholder-pink-400 p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative ",
+                                  attrs: {
+                                    placeholder: "Patient name",
+                                    type: "text"
+                                  },
+                                  domProps: { value: _vm.form.name },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.form,
+                                        "name",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _vm.errors.name
+                                  ? _c(
+                                      "span",
+                                      {
+                                        staticClass:
+                                          "text-sm ml-2 text-red-600 mt-1"
+                                      },
+                                      [_vm._v(_vm._s(_vm.errors.name[0]))]
+                                    )
+                                  : _vm._e()
                               ]
                             ),
                             _vm._v(" "),
-                            _c("div", { staticClass: "grid grid-cols-2 p-1" }, [
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "flex flex-wrap items-stretch w-full relative "
-                                },
-                                [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "flex flex-wrap items-stretch w-full relative "
+                              },
+                              [
+                                _c("div", { staticClass: "w-1/3 flex" }, [
                                   _c(
-                                    "div",
-                                    { staticClass: "w-1/3 flex -mr-px " },
-                                    [
-                                      _c(
-                                        "span",
-                                        {
-                                          staticClass:
-                                            "w-full flex items-center leading-normal bg-gray-400 rounded rounded-r-none border border-gray-500 px-3 whitespace-no-wrap text-grey-dark text-sm"
-                                        },
-                                        [_vm._v("Name  ")]
+                                    "span",
+                                    {
+                                      staticClass:
+                                        "w-full flex items-center leading-normal ml-2 bg-gray-400 rounded rounded-r-none border border-gray-500 px-3 whitespace-no-wrap text-grey-dark text-sm"
+                                    },
+                                    [_vm._v("BirthDate ")]
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.form.birth_date,
+                                      expression: "form.birth_date"
+                                    }
+                                  ],
+                                  staticClass:
+                                    " p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative ",
+                                  attrs: { type: "date" },
+                                  domProps: { value: _vm.form.birth_date },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.form,
+                                        "birth_date",
+                                        $event.target.value
                                       )
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c("input", {
+                                    }
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _vm.errors.birth_date
+                                  ? _c(
+                                      "span",
+                                      {
+                                        staticClass:
+                                          "text-sm text-red-600 mt-1 ml-2"
+                                      },
+                                      [_vm._v(_vm._s(_vm.errors.birth_date[0]))]
+                                    )
+                                  : _vm._e()
+                              ]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "grid grid-cols-2 p-1" }, [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "flex flex-wrap items-stretch w-full relative "
+                              },
+                              [
+                                _c(
+                                  "div",
+                                  { staticClass: "w-1/3 flex -mr-px" },
+                                  [
+                                    _c(
+                                      "span",
+                                      {
+                                        staticClass:
+                                          "w-full flex items-center leading-normal bg-gray-400 rounded rounded-r-none border border-gray-500 px-3 whitespace-no-wrap text-grey-dark text-sm"
+                                      },
+                                      [_vm._v("Gender")]
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "select",
+                                  {
                                     directives: [
                                       {
                                         name: "model",
                                         rawName: "v-model",
-                                        value: _vm.form.name,
-                                        expression: "form.name"
+                                        value: _vm.form.gender,
+                                        expression: "form.gender"
                                       }
                                     ],
                                     staticClass:
-                                      "rtl text-center placeholder-pink-400 p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative ",
-                                    attrs: {
-                                      placeholder: "Patient name",
-                                      required: "",
-                                      type: "text"
-                                    },
-                                    domProps: { value: _vm.form.name },
+                                      "p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative",
                                     on: {
-                                      input: function($event) {
-                                        if ($event.target.composing) {
-                                          return
-                                        }
+                                      change: function($event) {
+                                        var $$selectedVal = Array.prototype.filter
+                                          .call($event.target.options, function(
+                                            o
+                                          ) {
+                                            return o.selected
+                                          })
+                                          .map(function(o) {
+                                            var val =
+                                              "_value" in o ? o._value : o.value
+                                            return val
+                                          })
                                         _vm.$set(
                                           _vm.form,
-                                          "name",
-                                          $event.target.value
+                                          "gender",
+                                          $event.target.multiple
+                                            ? $$selectedVal
+                                            : $$selectedVal[0]
                                         )
                                       }
                                     }
-                                  }),
-                                  _vm._v(" "),
-                                  _vm.errors.name
-                                    ? _c(
-                                        "span",
-                                        {
-                                          staticClass:
-                                            "text-sm ml-2 text-red-600 mt-1"
-                                        },
-                                        [_vm._v(_vm._s(_vm.errors.name[0]))]
-                                      )
-                                    : _vm._e()
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "flex flex-wrap items-stretch w-full relative "
-                                },
-                                [
-                                  _c("div", { staticClass: "w-1/3 flex" }, [
+                                  },
+                                  [
+                                    _c("option", { attrs: { value: "1" } }, [
+                                      _vm._v("Male")
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("option", { attrs: { value: "2" } }, [
+                                      _vm._v("Female")
+                                    ])
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _vm.errors.gender
+                                  ? _c(
+                                      "span",
+                                      {
+                                        staticClass:
+                                          "text-sm ml-2 text-red-600 mt-1"
+                                      },
+                                      [_vm._v(_vm._s(_vm.errors.gender[0]))]
+                                    )
+                                  : _vm._e()
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "flex flex-wrap items-stretch w-full relative"
+                              },
+                              [
+                                _c(
+                                  "div",
+                                  { staticClass: "w-1/3 flex -mr-px" },
+                                  [
                                     _c(
                                       "span",
                                       {
                                         staticClass:
                                           "w-full flex items-center leading-normal ml-2 bg-gray-400 rounded rounded-r-none border border-gray-500 px-3 whitespace-no-wrap text-grey-dark text-sm"
                                       },
-                                      [_vm._v("BirthDate ")]
+                                      [_vm._v("Address")]
                                     )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("input", {
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "select",
+                                  {
                                     directives: [
                                       {
                                         name: "model",
                                         rawName: "v-model",
-                                        value: _vm.form.birth_date,
-                                        expression: "form.birth_date"
+                                        value: _vm.form.address_id,
+                                        expression: "form.address_id"
                                       }
                                     ],
                                     staticClass:
-                                      " p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative ",
-                                    attrs: { required: "", type: "date" },
-                                    domProps: { value: _vm.form.birth_date },
+                                      "p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative",
                                     on: {
-                                      input: function($event) {
-                                        if ($event.target.composing) {
-                                          return
-                                        }
+                                      change: function($event) {
+                                        var $$selectedVal = Array.prototype.filter
+                                          .call($event.target.options, function(
+                                            o
+                                          ) {
+                                            return o.selected
+                                          })
+                                          .map(function(o) {
+                                            var val =
+                                              "_value" in o ? o._value : o.value
+                                            return val
+                                          })
                                         _vm.$set(
                                           _vm.form,
-                                          "birth_date",
-                                          $event.target.value
+                                          "address_id",
+                                          $event.target.multiple
+                                            ? $$selectedVal
+                                            : $$selectedVal[0]
                                         )
                                       }
                                     }
+                                  },
+                                  _vm._l(_vm.addresses, function(address, i) {
+                                    return _c(
+                                      "option",
+                                      {
+                                        key: i,
+                                        domProps: { value: address.id }
+                                      },
+                                      [_vm._v(_vm._s(address.name))]
+                                    )
                                   }),
-                                  _vm._v(" "),
-                                  _vm.errors.birth_date
-                                    ? _c(
-                                        "span",
-                                        {
-                                          staticClass:
-                                            "text-sm text-red-600 mt-1 ml-2"
-                                        },
-                                        [
-                                          _vm._v(
-                                            _vm._s(_vm.errors.birth_date[0])
-                                          )
-                                        ]
-                                      )
-                                    : _vm._e()
-                                ]
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "grid grid-cols-2 p-1" }, [
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "flex flex-wrap items-stretch w-full relative "
-                                },
-                                [
-                                  _c(
-                                    "div",
-                                    { staticClass: "w-1/3 flex -mr-px" },
-                                    [
-                                      _c(
-                                        "span",
-                                        {
-                                          staticClass:
-                                            "w-full flex items-center leading-normal bg-gray-400 rounded rounded-r-none border border-gray-500 px-3 whitespace-no-wrap text-grey-dark text-sm"
-                                        },
-                                        [_vm._v("Gender")]
-                                      )
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "select",
-                                    {
-                                      directives: [
-                                        {
-                                          name: "model",
-                                          rawName: "v-model",
-                                          value: _vm.form.gender,
-                                          expression: "form.gender"
-                                        }
-                                      ],
-                                      staticClass:
-                                        "p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative",
-                                      attrs: { required: "" },
-                                      on: {
-                                        change: function($event) {
-                                          var $$selectedVal = Array.prototype.filter
-                                            .call(
-                                              $event.target.options,
-                                              function(o) {
-                                                return o.selected
-                                              }
-                                            )
-                                            .map(function(o) {
-                                              var val =
-                                                "_value" in o
-                                                  ? o._value
-                                                  : o.value
-                                              return val
-                                            })
-                                          _vm.$set(
-                                            _vm.form,
-                                            "gender",
-                                            $event.target.multiple
-                                              ? $$selectedVal
-                                              : $$selectedVal[0]
-                                          )
-                                        }
-                                      }
-                                    },
-                                    [
-                                      _c("option", { attrs: { value: "1" } }, [
-                                        _vm._v("Male")
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("option", { attrs: { value: "2" } }, [
-                                        _vm._v("Female")
-                                      ])
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _vm.errors.gender
-                                    ? _c(
-                                        "span",
-                                        {
-                                          staticClass:
-                                            "text-sm ml-2 text-red-600 mt-1"
-                                        },
-                                        [_vm._v(_vm._s(_vm.errors.gender[0]))]
-                                      )
-                                    : _vm._e()
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "flex flex-wrap items-stretch w-full relative"
-                                },
-                                [
-                                  _c(
-                                    "div",
-                                    { staticClass: "w-1/3 flex -mr-px" },
-                                    [
-                                      _c(
-                                        "span",
-                                        {
-                                          staticClass:
-                                            "w-full flex items-center leading-normal ml-2 bg-gray-400 rounded rounded-r-none border border-gray-500 px-3 whitespace-no-wrap text-grey-dark text-sm"
-                                        },
-                                        [_vm._v("Address")]
-                                      )
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "select",
-                                    {
-                                      directives: [
-                                        {
-                                          name: "model",
-                                          rawName: "v-model",
-                                          value: _vm.form.address_id,
-                                          expression: "form.address_id"
-                                        }
-                                      ],
-                                      staticClass:
-                                        "p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative",
-                                      attrs: { required: "" },
-                                      on: {
-                                        change: function($event) {
-                                          var $$selectedVal = Array.prototype.filter
-                                            .call(
-                                              $event.target.options,
-                                              function(o) {
-                                                return o.selected
-                                              }
-                                            )
-                                            .map(function(o) {
-                                              var val =
-                                                "_value" in o
-                                                  ? o._value
-                                                  : o.value
-                                              return val
-                                            })
-                                          _vm.$set(
-                                            _vm.form,
-                                            "address_id",
-                                            $event.target.multiple
-                                              ? $$selectedVal
-                                              : $$selectedVal[0]
-                                          )
-                                        }
-                                      }
-                                    },
-                                    _vm._l(_vm.addresses, function(address, i) {
-                                      return _c(
-                                        "option",
-                                        {
-                                          key: i,
-                                          domProps: { value: address.id }
-                                        },
-                                        [_vm._v(_vm._s(address.name))]
-                                      )
-                                    }),
-                                    0
-                                  ),
-                                  _vm._v(" "),
-                                  _vm.errors.address_id
-                                    ? _c(
-                                        "span",
-                                        {
-                                          staticClass:
-                                            "text-sm ml-2  text-red-600 mt-1"
-                                        },
-                                        [
-                                          _vm._v(
-                                            _vm._s(_vm.errors.address_id[0])
-                                          )
-                                        ]
-                                      )
-                                    : _vm._e()
-                                ]
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "grid grid-cols-2 p-1" }, [
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "flex flex-wrap items-stretch w-full relative "
-                                },
-                                [
-                                  _c("div", { staticClass: "w-1/3 flex" }, [
-                                    _c(
+                                  0
+                                ),
+                                _vm._v(" "),
+                                _vm.errors.address_id
+                                  ? _c(
                                       "span",
                                       {
                                         staticClass:
-                                          "w-full flex items-center leading-normal bg-gray-400 rounded rounded-r-none border border-gray-500 px-3 whitespace-no-wrap text-grey-dark text-sm"
+                                          "text-sm ml-2  text-red-600 mt-1"
                                       },
-                                      [_vm._v("Marital")]
+                                      [_vm._v(_vm._s(_vm.errors.address_id[0]))]
                                     )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c(
-                                    "select",
-                                    {
-                                      directives: [
-                                        {
-                                          name: "model",
-                                          rawName: "v-model",
-                                          value: _vm.form.marital,
-                                          expression: "form.marital"
-                                        }
-                                      ],
-                                      staticClass:
-                                        " p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative ",
-                                      attrs: { required: "" },
-                                      on: {
-                                        change: function($event) {
-                                          var $$selectedVal = Array.prototype.filter
-                                            .call(
-                                              $event.target.options,
-                                              function(o) {
-                                                return o.selected
-                                              }
-                                            )
-                                            .map(function(o) {
-                                              var val =
-                                                "_value" in o
-                                                  ? o._value
-                                                  : o.value
-                                              return val
-                                            })
-                                          _vm.$set(
-                                            _vm.form,
-                                            "marital",
-                                            $event.target.multiple
-                                              ? $$selectedVal
-                                              : $$selectedVal[0]
-                                          )
-                                        }
-                                      }
-                                    },
-                                    [
-                                      _c("option", { attrs: { value: "1" } }, [
-                                        _vm._v("اعزب")
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("option", { attrs: { value: "2" } }, [
-                                        _vm._v("متزوج")
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("option", { attrs: { value: "3" } }, [
-                                        _vm._v("ارمل")
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("option", { attrs: { value: "4" } }, [
-                                        _vm._v("مطلق")
-                                      ])
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _vm.errors.marital
-                                    ? _c(
-                                        "span",
-                                        {
-                                          staticClass:
-                                            "text-sm text-red-600 mt-1"
-                                        },
-                                        [_vm._v(_vm._s(_vm.errors.marital[0]))]
-                                      )
-                                    : _vm._e()
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "flex flex-wrap items-stretch w-full relative"
-                                },
-                                [
-                                  _c(
-                                    "div",
-                                    { staticClass: "w-1/3 flex -mr-px" },
-                                    [
-                                      _c(
-                                        "span",
-                                        {
-                                          staticClass:
-                                            "w-full flex items-center leading-normal ml-2 bg-gray-400 rounded rounded-r-none border border-gray-500 px-3 whitespace-no-wrap text-grey-dark text-sm"
-                                        },
-                                        [_vm._v("Smoking")]
-                                      )
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "select",
-                                    {
-                                      directives: [
-                                        {
-                                          name: "model",
-                                          rawName: "v-model",
-                                          value: _vm.form.smoking,
-                                          expression: "form.smoking"
-                                        }
-                                      ],
-                                      staticClass:
-                                        " p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative ",
-                                      attrs: { required: "" },
-                                      on: {
-                                        change: function($event) {
-                                          var $$selectedVal = Array.prototype.filter
-                                            .call(
-                                              $event.target.options,
-                                              function(o) {
-                                                return o.selected
-                                              }
-                                            )
-                                            .map(function(o) {
-                                              var val =
-                                                "_value" in o
-                                                  ? o._value
-                                                  : o.value
-                                              return val
-                                            })
-                                          _vm.$set(
-                                            _vm.form,
-                                            "smoking",
-                                            $event.target.multiple
-                                              ? $$selectedVal
-                                              : $$selectedVal[0]
-                                          )
-                                        }
-                                      }
-                                    },
-                                    [
-                                      _c("option", { attrs: { value: "1" } }, [
-                                        _vm._v("Smoker")
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("option", { attrs: { value: "2" } }, [
-                                        _vm._v("Non-Smoker")
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("option", { attrs: { value: "3" } }, [
-                                        _vm._v("Ex-Smoker")
-                                      ])
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _vm.errors.smoking
-                                    ? _c(
-                                        "span",
-                                        {
-                                          staticClass:
-                                            "text-sm ml-2 text-red-600 mt-1"
-                                        },
-                                        [_vm._v(_vm._s(_vm.errors.smoking[0]))]
-                                      )
-                                    : _vm._e()
-                                ]
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "grid grid-cols-2 p-1" }, [
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "flex flex-wrap items-stretch w-full relative "
-                                },
-                                [
-                                  _c("div", { staticClass: "w-1/3 flex" }, [
-                                    _c(
-                                      "span",
-                                      {
-                                        staticClass:
-                                          "w-full flex items-center leading-normal bg-gray-400 rounded rounded-r-none border border-gray-500 px-3 whitespace-no-wrap text-grey-dark text-sm"
-                                      },
-                                      [_vm._v("Education")]
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c(
-                                    "select",
-                                    {
-                                      directives: [
-                                        {
-                                          name: "model",
-                                          rawName: "v-model",
-                                          value: _vm.form.educationlevel_id,
-                                          expression: "form.educationlevel_id"
-                                        }
-                                      ],
-                                      staticClass:
-                                        " p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative ",
-                                      attrs: { required: "" },
-                                      on: {
-                                        change: function($event) {
-                                          var $$selectedVal = Array.prototype.filter
-                                            .call(
-                                              $event.target.options,
-                                              function(o) {
-                                                return o.selected
-                                              }
-                                            )
-                                            .map(function(o) {
-                                              var val =
-                                                "_value" in o
-                                                  ? o._value
-                                                  : o.value
-                                              return val
-                                            })
-                                          _vm.$set(
-                                            _vm.form,
-                                            "educationlevel_id",
-                                            $event.target.multiple
-                                              ? $$selectedVal
-                                              : $$selectedVal[0]
-                                          )
-                                        }
-                                      }
-                                    },
-                                    _vm._l(_vm.educationlevels, function(
-                                      education,
-                                      i
-                                    ) {
-                                      return _c(
-                                        "option",
-                                        {
-                                          key: i,
-                                          domProps: { value: education.id }
-                                        },
-                                        [_vm._v(_vm._s(education.name))]
-                                      )
-                                    }),
-                                    0
-                                  ),
-                                  _vm._v(" "),
-                                  _vm.errors.educationlevel_id
-                                    ? _c(
-                                        "span",
-                                        {
-                                          staticClass:
-                                            "text-sm ml-2 text-red-600 mt-1"
-                                        },
-                                        [
-                                          _vm._v(
-                                            _vm._s(
-                                              _vm.errors.educationlevel_id[0]
-                                            )
-                                          )
-                                        ]
-                                      )
-                                    : _vm._e()
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "flex flex-wrap items-stretch w-full relative"
-                                },
-                                [
-                                  _c(
-                                    "div",
-                                    { staticClass: "w-1/3 flex -mr-px" },
-                                    [
-                                      _c(
-                                        "span",
-                                        {
-                                          staticClass:
-                                            "w-full flex items-center leading-normal ml-2 bg-gray-400 rounded rounded-r-none border border-gray-500 px-3 whitespace-no-wrap text-grey-dark text-sm"
-                                        },
-                                        [_vm._v("Occupation")]
-                                      )
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "select",
-                                    {
-                                      directives: [
-                                        {
-                                          name: "model",
-                                          rawName: "v-model",
-                                          value: _vm.form.occupation_id,
-                                          expression: "form.occupation_id"
-                                        }
-                                      ],
-                                      staticClass:
-                                        " p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative ",
-                                      attrs: { required: "" },
-                                      on: {
-                                        change: function($event) {
-                                          var $$selectedVal = Array.prototype.filter
-                                            .call(
-                                              $event.target.options,
-                                              function(o) {
-                                                return o.selected
-                                              }
-                                            )
-                                            .map(function(o) {
-                                              var val =
-                                                "_value" in o
-                                                  ? o._value
-                                                  : o.value
-                                              return val
-                                            })
-                                          _vm.$set(
-                                            _vm.form,
-                                            "occupation_id",
-                                            $event.target.multiple
-                                              ? $$selectedVal
-                                              : $$selectedVal[0]
-                                          )
-                                        }
-                                      }
-                                    },
-                                    _vm._l(_vm.occupations, function(
-                                      occupation,
-                                      i
-                                    ) {
-                                      return _c(
-                                        "option",
-                                        {
-                                          key: i,
-                                          domProps: { value: occupation.id }
-                                        },
-                                        [_vm._v(_vm._s(occupation.name))]
-                                      )
-                                    }),
-                                    0
-                                  ),
-                                  _vm._v(" "),
-                                  _vm.errors.occupation_id
-                                    ? _c(
-                                        "span",
-                                        {
-                                          staticClass:
-                                            "text-sm  ml-2 text-red-600 mt-1"
-                                        },
-                                        [
-                                          _vm._v(
-                                            _vm._s(_vm.errors.occupation_id[0])
-                                          )
-                                        ]
-                                      )
-                                    : _vm._e()
-                                ]
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "grid grid-cols-2 p-1" }, [
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "flex flex-wrap items-stretch w-full relative "
-                                },
-                                [
-                                  _c("div", { staticClass: "w-1/3 flex" }, [
-                                    _c(
-                                      "span",
-                                      {
-                                        staticClass:
-                                          "w-full flex items-center leading-normal bg-gray-400 rounded rounded-r-none border border-gray-500 px-3 whitespace-no-wrap text-grey-dark text-sm"
-                                      },
-                                      [_vm._v("D_Type")]
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c(
-                                    "select",
-                                    {
-                                      directives: [
-                                        {
-                                          name: "model",
-                                          rawName: "v-model",
-                                          value: _vm.form.type_id,
-                                          expression: "form.type_id"
-                                        }
-                                      ],
-                                      staticClass:
-                                        " p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative ",
-                                      attrs: { required: "" },
-                                      on: {
-                                        change: function($event) {
-                                          var $$selectedVal = Array.prototype.filter
-                                            .call(
-                                              $event.target.options,
-                                              function(o) {
-                                                return o.selected
-                                              }
-                                            )
-                                            .map(function(o) {
-                                              var val =
-                                                "_value" in o
-                                                  ? o._value
-                                                  : o.value
-                                              return val
-                                            })
-                                          _vm.$set(
-                                            _vm.form,
-                                            "type_id",
-                                            $event.target.multiple
-                                              ? $$selectedVal
-                                              : $$selectedVal[0]
-                                          )
-                                        }
-                                      }
-                                    },
-                                    _vm._l(_vm.types, function(type, i) {
-                                      return _c(
-                                        "option",
-                                        {
-                                          key: i,
-                                          domProps: { value: type.id }
-                                        },
-                                        [_vm._v(_vm._s(type.name))]
-                                      )
-                                    }),
-                                    0
-                                  ),
-                                  _vm._v(" "),
-                                  _vm.errors.type_id
-                                    ? _c(
-                                        "span",
-                                        {
-                                          staticClass:
-                                            "text-sm text-red-600 mt-1"
-                                        },
-                                        [_vm._v(_vm._s(_vm.errors.type_id[0]))]
-                                      )
-                                    : _vm._e()
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "flex flex-wrap items-stretch w-full relative"
-                                },
-                                [
-                                  _c(
-                                    "div",
-                                    { staticClass: "w-1/3 flex -mr-px" },
-                                    [
-                                      _c(
-                                        "span",
-                                        {
-                                          staticClass:
-                                            "w-full flex items-center leading-normal ml-2 bg-gray-400 rounded rounded-r-none border border-gray-500 px-3 whitespace-no-wrap text-grey-dark text-sm"
-                                        },
-                                        [_vm._v("F_History")]
-                                      )
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "select",
-                                    {
-                                      directives: [
-                                        {
-                                          name: "model",
-                                          rawName: "v-model",
-                                          value: _vm.form.fh_of_dm,
-                                          expression: "form.fh_of_dm"
-                                        }
-                                      ],
-                                      staticClass:
-                                        "p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative ",
-                                      attrs: { required: "" },
-                                      on: {
-                                        change: function($event) {
-                                          var $$selectedVal = Array.prototype.filter
-                                            .call(
-                                              $event.target.options,
-                                              function(o) {
-                                                return o.selected
-                                              }
-                                            )
-                                            .map(function(o) {
-                                              var val =
-                                                "_value" in o
-                                                  ? o._value
-                                                  : o.value
-                                              return val
-                                            })
-                                          _vm.$set(
-                                            _vm.form,
-                                            "fh_of_dm",
-                                            $event.target.multiple
-                                              ? $$selectedVal
-                                              : $$selectedVal[0]
-                                          )
-                                        }
-                                      }
-                                    },
-                                    [
-                                      _c("option", { attrs: { value: "1" } }, [
-                                        _vm._v("Positive")
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("option", { attrs: { value: "2" } }, [
-                                        _vm._v("Negative")
-                                      ])
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _vm.errors.fh_of_dm
-                                    ? _c(
-                                        "span",
-                                        {
-                                          staticClass:
-                                            "text-sm ml-2 text-red-600 mt-1"
-                                        },
-                                        [_vm._v(_vm._s(_vm.errors.fh_of_dm[0]))]
-                                      )
-                                    : _vm._e()
-                                ]
-                              )
-                            ]),
-                            _vm._v(" "),
+                                  : _vm._e()
+                              ]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "grid grid-cols-2 p-1" }, [
                             _c(
                               "div",
                               {
                                 staticClass:
-                                  "flex justify-center  bg-indigo-800 m-1 p-0  shadow-lg text-gray-100"
+                                  "flex flex-wrap items-stretch w-full relative "
                               },
                               [
-                                _c("span", [
-                                  _vm._v("Today's Visit Information")
-                                ])
+                                _c("div", { staticClass: "w-1/3 flex" }, [
+                                  _c(
+                                    "span",
+                                    {
+                                      staticClass:
+                                        "w-full flex items-center leading-normal bg-gray-400 rounded rounded-r-none border border-gray-500 px-3 whitespace-no-wrap text-grey-dark text-sm"
+                                    },
+                                    [_vm._v("Marital")]
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "select",
+                                  {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.form.marital,
+                                        expression: "form.marital"
+                                      }
+                                    ],
+                                    staticClass:
+                                      " p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative ",
+                                    on: {
+                                      change: function($event) {
+                                        var $$selectedVal = Array.prototype.filter
+                                          .call($event.target.options, function(
+                                            o
+                                          ) {
+                                            return o.selected
+                                          })
+                                          .map(function(o) {
+                                            var val =
+                                              "_value" in o ? o._value : o.value
+                                            return val
+                                          })
+                                        _vm.$set(
+                                          _vm.form,
+                                          "marital",
+                                          $event.target.multiple
+                                            ? $$selectedVal
+                                            : $$selectedVal[0]
+                                        )
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c("option", { attrs: { value: "1" } }, [
+                                      _vm._v("اعزب")
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("option", { attrs: { value: "2" } }, [
+                                      _vm._v("متزوج")
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("option", { attrs: { value: "3" } }, [
+                                      _vm._v("ارمل")
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("option", { attrs: { value: "4" } }, [
+                                      _vm._v("مطلق")
+                                    ])
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _vm.errors.marital
+                                  ? _c(
+                                      "span",
+                                      {
+                                        staticClass: "text-sm text-red-600 mt-1"
+                                      },
+                                      [_vm._v(_vm._s(_vm.errors.marital[0]))]
+                                    )
+                                  : _vm._e()
                               ]
                             ),
                             _vm._v(" "),
@@ -59386,14 +58911,468 @@ var render = function() {
                               "div",
                               {
                                 staticClass:
-                                  "grid grid-cols-1 md:grid-cols-2 gap-4"
+                                  "flex flex-wrap items-stretch w-full relative"
                               },
                               [
                                 _c(
                                   "div",
-                                  { staticClass: "grid grid-cols-2 gap-2 " },
+                                  { staticClass: "w-1/3 flex -mr-px" },
                                   [
-                                    _c("div", { staticClass: "p-1" }, [
+                                    _c(
+                                      "span",
+                                      {
+                                        staticClass:
+                                          "w-full flex items-center leading-normal ml-2 bg-gray-400 rounded rounded-r-none border border-gray-500 px-3 whitespace-no-wrap text-grey-dark text-sm"
+                                      },
+                                      [_vm._v("Smoking")]
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "select",
+                                  {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.form.smoking,
+                                        expression: "form.smoking"
+                                      }
+                                    ],
+                                    staticClass:
+                                      " p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative ",
+                                    on: {
+                                      change: function($event) {
+                                        var $$selectedVal = Array.prototype.filter
+                                          .call($event.target.options, function(
+                                            o
+                                          ) {
+                                            return o.selected
+                                          })
+                                          .map(function(o) {
+                                            var val =
+                                              "_value" in o ? o._value : o.value
+                                            return val
+                                          })
+                                        _vm.$set(
+                                          _vm.form,
+                                          "smoking",
+                                          $event.target.multiple
+                                            ? $$selectedVal
+                                            : $$selectedVal[0]
+                                        )
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c("option", { attrs: { value: "1" } }, [
+                                      _vm._v("Smoker")
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("option", { attrs: { value: "2" } }, [
+                                      _vm._v("Non-Smoker")
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("option", { attrs: { value: "3" } }, [
+                                      _vm._v("Ex-Smoker")
+                                    ])
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _vm.errors.smoking
+                                  ? _c(
+                                      "span",
+                                      {
+                                        staticClass:
+                                          "text-sm ml-2 text-red-600 mt-1"
+                                      },
+                                      [_vm._v(_vm._s(_vm.errors.smoking[0]))]
+                                    )
+                                  : _vm._e()
+                              ]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "grid grid-cols-2 p-1" }, [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "flex flex-wrap items-stretch w-full relative "
+                              },
+                              [
+                                _c("div", { staticClass: "w-1/3 flex" }, [
+                                  _c(
+                                    "span",
+                                    {
+                                      staticClass:
+                                        "w-full flex items-center leading-normal bg-gray-400 rounded rounded-r-none border border-gray-500 px-3 whitespace-no-wrap text-grey-dark text-sm"
+                                    },
+                                    [_vm._v("Education")]
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "select",
+                                  {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.form.educationlevel_id,
+                                        expression: "form.educationlevel_id"
+                                      }
+                                    ],
+                                    staticClass:
+                                      " p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative ",
+                                    on: {
+                                      change: function($event) {
+                                        var $$selectedVal = Array.prototype.filter
+                                          .call($event.target.options, function(
+                                            o
+                                          ) {
+                                            return o.selected
+                                          })
+                                          .map(function(o) {
+                                            var val =
+                                              "_value" in o ? o._value : o.value
+                                            return val
+                                          })
+                                        _vm.$set(
+                                          _vm.form,
+                                          "educationlevel_id",
+                                          $event.target.multiple
+                                            ? $$selectedVal
+                                            : $$selectedVal[0]
+                                        )
+                                      }
+                                    }
+                                  },
+                                  _vm._l(_vm.educationlevels, function(
+                                    education,
+                                    i
+                                  ) {
+                                    return _c(
+                                      "option",
+                                      {
+                                        key: i,
+                                        domProps: { value: education.id }
+                                      },
+                                      [_vm._v(_vm._s(education.name))]
+                                    )
+                                  }),
+                                  0
+                                ),
+                                _vm._v(" "),
+                                _vm.errors.educationlevel_id
+                                  ? _c(
+                                      "span",
+                                      {
+                                        staticClass:
+                                          "text-sm ml-2 text-red-600 mt-1"
+                                      },
+                                      [
+                                        _vm._v(
+                                          _vm._s(
+                                            _vm.errors.educationlevel_id[0]
+                                          )
+                                        )
+                                      ]
+                                    )
+                                  : _vm._e()
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "flex flex-wrap items-stretch w-full relative"
+                              },
+                              [
+                                _c(
+                                  "div",
+                                  { staticClass: "w-1/3 flex -mr-px" },
+                                  [
+                                    _c(
+                                      "span",
+                                      {
+                                        staticClass:
+                                          "w-full flex items-center leading-normal ml-2 bg-gray-400 rounded rounded-r-none border border-gray-500 px-3 whitespace-no-wrap text-grey-dark text-sm"
+                                      },
+                                      [_vm._v("Occupation")]
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "select",
+                                  {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.form.occupation_id,
+                                        expression: "form.occupation_id"
+                                      }
+                                    ],
+                                    staticClass:
+                                      " p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative ",
+                                    on: {
+                                      change: function($event) {
+                                        var $$selectedVal = Array.prototype.filter
+                                          .call($event.target.options, function(
+                                            o
+                                          ) {
+                                            return o.selected
+                                          })
+                                          .map(function(o) {
+                                            var val =
+                                              "_value" in o ? o._value : o.value
+                                            return val
+                                          })
+                                        _vm.$set(
+                                          _vm.form,
+                                          "occupation_id",
+                                          $event.target.multiple
+                                            ? $$selectedVal
+                                            : $$selectedVal[0]
+                                        )
+                                      }
+                                    }
+                                  },
+                                  _vm._l(_vm.occupations, function(
+                                    occupation,
+                                    i
+                                  ) {
+                                    return _c(
+                                      "option",
+                                      {
+                                        key: i,
+                                        domProps: { value: occupation.id }
+                                      },
+                                      [_vm._v(_vm._s(occupation.name))]
+                                    )
+                                  }),
+                                  0
+                                ),
+                                _vm._v(" "),
+                                _vm.errors.occupation_id
+                                  ? _c(
+                                      "span",
+                                      {
+                                        staticClass:
+                                          "text-sm  ml-2 text-red-600 mt-1"
+                                      },
+                                      [
+                                        _vm._v(
+                                          _vm._s(_vm.errors.occupation_id[0])
+                                        )
+                                      ]
+                                    )
+                                  : _vm._e()
+                              ]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "grid grid-cols-2 p-1" }, [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "flex flex-wrap items-stretch w-full relative "
+                              },
+                              [
+                                _c("div", { staticClass: "w-1/3 flex" }, [
+                                  _c(
+                                    "span",
+                                    {
+                                      staticClass:
+                                        "w-full flex items-center leading-normal bg-gray-400 rounded rounded-r-none border border-gray-500 px-3 whitespace-no-wrap text-grey-dark text-sm"
+                                    },
+                                    [_vm._v("D_Type")]
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "select",
+                                  {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.form.type_id,
+                                        expression: "form.type_id"
+                                      }
+                                    ],
+                                    staticClass:
+                                      " p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative ",
+                                    on: {
+                                      change: function($event) {
+                                        var $$selectedVal = Array.prototype.filter
+                                          .call($event.target.options, function(
+                                            o
+                                          ) {
+                                            return o.selected
+                                          })
+                                          .map(function(o) {
+                                            var val =
+                                              "_value" in o ? o._value : o.value
+                                            return val
+                                          })
+                                        _vm.$set(
+                                          _vm.form,
+                                          "type_id",
+                                          $event.target.multiple
+                                            ? $$selectedVal
+                                            : $$selectedVal[0]
+                                        )
+                                      }
+                                    }
+                                  },
+                                  _vm._l(_vm.types, function(type, i) {
+                                    return _c(
+                                      "option",
+                                      { key: i, domProps: { value: type.id } },
+                                      [_vm._v(_vm._s(type.name))]
+                                    )
+                                  }),
+                                  0
+                                ),
+                                _vm._v(" "),
+                                _vm.errors.type_id
+                                  ? _c(
+                                      "span",
+                                      {
+                                        staticClass: "text-sm text-red-600 mt-1"
+                                      },
+                                      [_vm._v(_vm._s(_vm.errors.type_id[0]))]
+                                    )
+                                  : _vm._e()
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "flex flex-wrap items-stretch w-full relative"
+                              },
+                              [
+                                _c(
+                                  "div",
+                                  { staticClass: "w-1/3 flex -mr-px" },
+                                  [
+                                    _c(
+                                      "span",
+                                      {
+                                        staticClass:
+                                          "w-full flex items-center leading-normal ml-2 bg-gray-400 rounded rounded-r-none border border-gray-500 px-3 whitespace-no-wrap text-grey-dark text-sm"
+                                      },
+                                      [_vm._v("F_History")]
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "select",
+                                  {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.form.fh_of_dm,
+                                        expression: "form.fh_of_dm"
+                                      }
+                                    ],
+                                    staticClass:
+                                      "p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative ",
+                                    on: {
+                                      change: function($event) {
+                                        var $$selectedVal = Array.prototype.filter
+                                          .call($event.target.options, function(
+                                            o
+                                          ) {
+                                            return o.selected
+                                          })
+                                          .map(function(o) {
+                                            var val =
+                                              "_value" in o ? o._value : o.value
+                                            return val
+                                          })
+                                        _vm.$set(
+                                          _vm.form,
+                                          "fh_of_dm",
+                                          $event.target.multiple
+                                            ? $$selectedVal
+                                            : $$selectedVal[0]
+                                        )
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c("option", { attrs: { value: "1" } }, [
+                                      _vm._v("Positive")
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("option", { attrs: { value: "2" } }, [
+                                      _vm._v("Negative")
+                                    ])
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _vm.errors.fh_of_dm
+                                  ? _c(
+                                      "span",
+                                      {
+                                        staticClass:
+                                          "text-sm ml-2 text-red-600 mt-1"
+                                      },
+                                      [_vm._v(_vm._s(_vm.errors.fh_of_dm[0]))]
+                                    )
+                                  : _vm._e()
+                              ]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "flex justify-center  bg-indigo-800 m-1 p-0  shadow-lg text-gray-100"
+                            },
+                            [_c("span", [_vm._v("Today's Visit Information")])]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "grid grid-cols-1 md:grid-cols-2 gap-4 ml-1"
+                            },
+                            [
+                              _c(
+                                "div",
+                                { staticClass: "grid grid-cols-2 gap-2 " },
+                                [
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass:
+                                        "p-1 w-full items-center  bg-gray-400 rounded  border border-gray-600  whitespace-no-wrap text-grey-dark text-sm"
+                                    },
+                                    [
+                                      _c(
+                                        "label",
+                                        {
+                                          staticClass:
+                                            "flex justify-start p-0 pb-1 ",
+                                          attrs: { for: "systolic_bp" }
+                                        },
+                                        [_vm._v("systolic_bp:")]
+                                      ),
+                                      _vm._v(" "),
                                       _c("input", {
                                         directives: [
                                           {
@@ -59404,10 +59383,11 @@ var render = function() {
                                           }
                                         ],
                                         staticClass:
-                                          "p-1 px-2 rounded-sm bg-gray-200 max-w-full focus:shadow-outline",
+                                          "p-1 px-2  border border-gray-600 rounded-sm bg-gray-200 max-w-full focus:shadow-outline",
                                         attrs: {
+                                          autocomplete: "off",
                                           type: "text",
-                                          required: "",
+                                          id: "systolic_bp",
                                           placeholder: "Systolic_bp"
                                         },
                                         domProps: {
@@ -59443,9 +59423,26 @@ var render = function() {
                                             ]
                                           )
                                         : _vm._e()
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("div", { staticClass: "p-1" }, [
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass:
+                                        "p-1 w-full items-center  bg-gray-400 rounded  border border-gray-600  whitespace-no-wrap text-grey-dark text-sm"
+                                    },
+                                    [
+                                      _c(
+                                        "label",
+                                        {
+                                          staticClass:
+                                            "flex justify-start p-0 pb-1 ",
+                                          attrs: { for: "diastolic_bp" }
+                                        },
+                                        [_vm._v("Diastolic_bp:")]
+                                      ),
+                                      _vm._v(" "),
                                       _c("input", {
                                         directives: [
                                           {
@@ -59456,10 +59453,11 @@ var render = function() {
                                           }
                                         ],
                                         staticClass:
-                                          "p-1 px-2 rounded-sm bg-gray-200 max-w-full focus:shadow-outline",
+                                          "p-1 px-2  border border-gray-600 rounded-sm bg-gray-200 max-w-full focus:shadow-outline",
                                         attrs: {
+                                          autocomplete: "off",
                                           type: "text",
-                                          required: "",
+                                          id: "diastolic_bp",
                                           placeholder: "Diastolic_bp"
                                         },
                                         domProps: {
@@ -59495,15 +59493,32 @@ var render = function() {
                                             ]
                                           )
                                         : _vm._e()
-                                    ])
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "div",
-                                  { staticClass: "grid grid-cols-2 gap-2" },
-                                  [
-                                    _c("div", { staticClass: "p-1" }, [
+                                    ]
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "grid grid-cols-2 gap-2 mr-1" },
+                                [
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass:
+                                        "p-1 w-full items-center  bg-gray-400 rounded  border border-gray-600  whitespace-no-wrap text-grey-dark text-sm"
+                                    },
+                                    [
+                                      _c(
+                                        "label",
+                                        {
+                                          staticClass:
+                                            "flex justify-start p-0 pb-1 ",
+                                          attrs: { for: "height" }
+                                        },
+                                        [_vm._v("Height:")]
+                                      ),
+                                      _vm._v(" "),
                                       _c("input", {
                                         directives: [
                                           {
@@ -59514,10 +59529,11 @@ var render = function() {
                                           }
                                         ],
                                         staticClass:
-                                          "p-1 px-2 rounded-sm bg-gray-200 max-w-full focus:shadow-outline",
+                                          "p-1 px-2 border border-gray-600 rounded-sm bg-gray-200 max-w-full focus:shadow-outline",
                                         attrs: {
+                                          autocomplete: "off",
                                           type: "text",
-                                          required: "",
+                                          id: "height",
                                           placeholder: "Height"
                                         },
                                         domProps: { value: _vm.form.height },
@@ -59549,9 +59565,26 @@ var render = function() {
                                             ]
                                           )
                                         : _vm._e()
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("div", { staticClass: "p-1" }, [
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass:
+                                        "p-1  w-full items-center  bg-gray-400 rounded  border border-gray-600  whitespace-no-wrap text-grey-dark text-sm"
+                                    },
+                                    [
+                                      _c(
+                                        "label",
+                                        {
+                                          staticClass:
+                                            "flex justify-start p-0 pb-1 ",
+                                          attrs: { for: "weight" }
+                                        },
+                                        [_vm._v("Weight:")]
+                                      ),
+                                      _vm._v(" "),
                                       _c("input", {
                                         directives: [
                                           {
@@ -59562,10 +59595,11 @@ var render = function() {
                                           }
                                         ],
                                         staticClass:
-                                          "p-1 px-2 rounded-sm bg-gray-200 max-w-full focus:shadow-outline",
+                                          "p-1 px-2  border border-gray-600 rounded-sm bg-gray-200 max-w-full focus:shadow-outline",
                                         attrs: {
+                                          autocomplete: "off",
                                           type: "text",
-                                          required: "",
+                                          id: "weight",
                                           placeholder: "Weight"
                                         },
                                         domProps: { value: _vm.form.weight },
@@ -59597,90 +59631,244 @@ var render = function() {
                                             ]
                                           )
                                         : _vm._e()
-                                    ])
-                                  ]
-                                )
-                              ]
-                            )
-                          ]
+                                    ]
+                                  )
+                                ]
+                              )
+                            ]
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "px-0 py-1 bg-indigo-800  rounded-t-none rounded-md grid grid-cols-4 justify-items-stretch "
+                        },
+                        [
+                          _c(
+                            "div",
+                            { staticClass: "flex justify-start items-center" },
+                            [
+                              _c(
+                                "loading-button",
+                                {
+                                  staticClass:
+                                    "ml-2 bg-green-500 px-2 py-1 rounded text-gray-200 whitespace-no-wrap hover:bg-green-600 focus:bg-green-600",
+                                  attrs: {
+                                    loading: _vm.sending,
+                                    type: "submit"
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                    Update Patient\n                                "
+                                  )
+                                ]
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "flex justify-self-start items-center"
+                            },
+                            [
+                              _c(
+                                "inertia-link",
+                                {
+                                  staticClass:
+                                    "bg-red-500 px-2 py-1 rounded text-gray-200 whitespace-no-wrap hover:bg-red-600 focus:bg-red-600",
+                                  attrs: { href: _vm.route("patients") }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                    Cancel & Back\n                                "
+                                  )
+                                ]
+                              )
+                            ],
+                            1
+                          )
+                        ]
+                      )
+                    ]
+                  )
+                ]
+              )
+            ]
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass:
+            "px-6 sm:px-2 md:px-1  flex w-full  sm:w-1/4 md:w-1/3 lg:w-2/4 mr-2"
+        },
+        [
+          _c("div", { staticClass: "overflow-hidden rounded sm:rounded-lg" }, [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "p-1  bg-banafsagy-600 rounded-lg border-2 border-red-600"
+              },
+              [
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "mb-1 flex justify-center  bg-indigo-800 rounded-md rounded-b-none shadow-lg text-gray-100"
+                  },
+                  [_c("span", [_vm._v(" Patient Visits Information ")])]
+                ),
+                _vm._v(" "),
+                _c(
+                  "table",
+                  { staticClass: "w-full whitespace-no-wrap" },
+                  [
+                    _c("thead", [
+                      _c("tr", { staticClass: "bg-indigo-800 text-gray-200" }, [
+                        _c(
+                          "th",
+                          {
+                            staticClass:
+                              "border border-gray-400 text-left px-2 py-1 text-sm"
+                          },
+                          [_vm._v("Visit Date")]
                         ),
                         _vm._v(" "),
                         _c(
-                          "div",
+                          "th",
                           {
                             staticClass:
-                              "px-2 py-1 bg-indigo-800  rounded-t-none rounded-md grid grid-cols-4 justify-items-stretch "
+                              "border border-gray-400 text-left px-2 py-1 text-sm"
                           },
-                          [
-                            _c(
-                              "div",
-                              {
-                                staticClass: "flex justify-start items-center"
-                              },
-                              [
-                                _c(
-                                  "loading-button",
-                                  {
-                                    staticClass:
-                                      " bg-green-500 px-2 py-1 rounded text-gray-200 whitespace-no-wrap hover:bg-green-600 focus:bg-green-600",
-                                    attrs: {
-                                      loading: _vm.sending,
-                                      type: "submit"
-                                    }
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\n                                    Update Patient\n                                "
-                                    )
-                                  ]
-                                )
-                              ],
-                              1
-                            ),
-                            _vm._v(" "),
-                            _c("div"),
-                            _vm._v(" "),
-                            _c(
-                              "div",
-                              { staticClass: "flex justify-end items-center" },
-                              [
-                                _c(
-                                  "inertia-link",
-                                  {
-                                    staticClass:
-                                      "bg-red-500 px-2 py-1 rounded text-gray-200 whitespace-no-wrap hover:bg-red-600 focus:bg-red-600",
-                                    attrs: { href: _vm.route("patients") }
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\n                                    Cleare & Back\n                                "
-                                    )
-                                  ]
-                                )
-                              ],
-                              1
-                            )
-                          ]
+                          [_vm._v("Systolic_bp")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "th",
+                          {
+                            staticClass:
+                              "border border-gray-400 text-left px-2 py-1 text-sm"
+                          },
+                          [_vm._v("Diastolic_bp")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "th",
+                          {
+                            staticClass:
+                              "border border-gray-400 text-left px-2 py-1 text-sm"
+                          },
+                          [_vm._v("Height")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "th",
+                          {
+                            staticClass:
+                              "border border-gray-400 text-left px-2 py-1 text-sm"
+                          },
+                          [_vm._v("Weight")]
                         )
-                      ]
-                    )
-                  ]
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _vm._l(_vm.patient.visits, function(visit, index) {
+                      return _c(
+                        "tr",
+                        {
+                          key: index,
+                          staticClass:
+                            "font-medium text-gray-800 hover:bg-purple-400 focus-within:bg-gray-100 ",
+                          class: { "bg-purple-300": index % 2 === 0 }
+                        },
+                        [
+                          _c(
+                            "td",
+                            {
+                              staticClass:
+                                "border border-gray-400 text-left px-2"
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(
+                                  _vm
+                                    .moment(visit.created_at)
+                                    .format("YYYY-MM-DD")
+                                )
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            {
+                              staticClass:
+                                "border border-gray-400 text-left px-2"
+                            },
+                            [_vm._v(_vm._s(visit.systolic_bp))]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            {
+                              staticClass:
+                                "border border-gray-400 text-left px-2"
+                            },
+                            [_vm._v(_vm._s(visit.diastolic_bp))]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            {
+                              staticClass:
+                                "border border-gray-400 text-left px-2"
+                            },
+                            [_vm._v(_vm._s(visit.height))]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            {
+                              staticClass:
+                                "border border-gray-400 text-left px-2"
+                            },
+                            [_vm._v(_vm._s(visit.weight))]
+                          )
+                        ]
+                      )
+                    }),
+                    _vm._v(" "),
+                    _vm.patient.visits.length === 0
+                      ? _c("tr", [
+                          _c(
+                            "td",
+                            {
+                              staticClass: "border-t px-6 py-4",
+                              attrs: { colspan: "6" }
+                            },
+                            [_vm._v("No Visits found..!!")]
+                          )
+                        ])
+                      : _vm._e()
+                  ],
+                  2
                 )
               ]
             )
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass:
-              "sm:px-1 md:px-2  flex w-full  sm:w-3/4 md:w-1/3 lg:w-1/2 mr-2 border border-blue-900"
-          },
-          [_c("h1", [_vm._v("grrgwergwergwerg")])]
-        )
-      ]
-    )
+          ])
+        ]
+      )
+    ])
   ])
 }
 var staticRenderFns = []
