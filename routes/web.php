@@ -4,7 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\EducationlevelController;
-use App\Http\Controllers\PostController;
+use App\Http\Controllers\TestController;
+use App\Http\Controllers\LaboratoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,3 +64,36 @@ Route::get('addresses/{address}/edit', [addressController::class, 'edit'])->name
 Route::put('addresses/{address}', [addressController::class, 'update'])->name('addresses.update')->middleware('auth');
 Route::post('addresses/{address}', [addressController::class, 'destroy'])->name('addresses.destroy')->middleware('auth');
 Route::put('addresses/{address}/restore', [addressController::class, 'restore'])->name('addresses.restore')->middleware('auth');
+
+
+// Tests
+Route::get('tests', [TestController::class, 'index'])->name('tests')->middleware('auth');
+Route::get('tests/create', [TestController::class, 'create'])->name('tests.create')->middleware('auth');
+Route::post('tests', [TestController::class, 'store'])->name('tests.store')->middleware('auth');
+Route::get('tests/{test}/edit', [TestController::class, 'edit'])->name('tests.edit')->middleware('auth');
+Route::put('tests/{test}', [TestController::class, 'update'])->name('tests.update')->middleware('auth');
+Route::post('tests/{test}', [TestController::class, 'destroy'])->name('tests.destroy')->middleware('auth');
+Route::put('tests/{test}/restore', [TestController::class, 'restore'])->name('tests.restore')->middleware('auth');
+
+// Laboratory
+Route::get('laboratory', [LaboratoryController::class, 'index'])->name('laboratory')->middleware('auth');
+
+
+Route::get('laboratory/create', [LaboratoryController::class, 'create'])->name('laboratory.create')->middleware('auth');
+Route::post('laboratory', [LaboratoryController::class, 'store'])->name('laboratory.store')->middleware('auth');
+
+
+Route::get('laboratory/{patient}/edit', [LaboratoryController::class, 'edit'])->name('laboratory.edit')->middleware('auth');
+
+Route::put('laboratory/{patient}', [LaboratoryController::class, 'update'])->name('laboratory.update')->middleware('auth');
+
+// Route::post('laboratory/{patient}', [LaboratoryController::class, 'destroy'])->name('laboratory.destroy')->middleware('auth');
+
+
+
+// Route::post('/app/attach_tests/{patient_id}', 'MyController@attachTests');
+//     //Attach_tests routes
+//     //Route::post('/attach_tests', 'TestVisitController@attachTests');
+//     Route::post('/detach_tests', 'TestVisitController@detachTests');
+//     Route::post('/sync_tests',   'TestVisitController@syncTests');
+

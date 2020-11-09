@@ -204,7 +204,7 @@
                                     <th class="border border-gray-400 text-left px-2 py-1 text-sm">Weight</th>
                                 </tr>
                             </thead>
-                            <tr v-for="(visit, index) in patient.visits" :key="index"  class="font-medium text-gray-800 hover:bg-purple-400 focus-within:bg-gray-100 " :class="{'bg-purple-300': index % 2 === 0}">
+                            <tr v-for="(visit, index) in patient.visits" :key="index"  class="font-medium text-gray-800 hover:bg-purple-400 focus-within:bg-gray-100 " :class="{'bg-blue-300': index % 2 === 0}">
                                 <td class="border border-gray-400 text-left px-2">{{moment(visit.created_at).format('YYYY-MM-DD')}}</td>
                                 <td class="border border-gray-400 text-left px-2">{{visit.systolic_bp}}</td>
                                 <td class="border border-gray-400 text-left px-2">{{visit.diastolic_bp}}</td>

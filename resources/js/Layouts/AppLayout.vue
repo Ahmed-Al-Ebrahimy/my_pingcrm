@@ -38,9 +38,13 @@
                                 Education
                             </jet-nav-link>
 
-                            <!-- <jet-nav-link :href="route('patients')"  :active="$page.currentRouteName == 'patients'">
+                            <jet-nav-link :href="route('tests')"  :active="$page.currentRouteName == 'laboratory'">
+                                <icon name="tests" class="block w-5 h-5 mr-1 fill-gray-100" /> Tests
+                            </jet-nav-link>
+
+                            <jet-nav-link :href="route('laboratory')"  :active="$page.currentRouteName == 'laboratory'">
                                 <icon name="laboratory" class="block w-5 h-5 mr-1 fill-gray-100" /> Laboratory
-                            </jet-nav-link> -->
+                            </jet-nav-link>
 
 
                         </div>
