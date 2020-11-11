@@ -46,49 +46,54 @@ class LaboratoryController extends Controller
     public function edit(Patient $patient)
     {
 
-        $today = (date('Y-m-d').' 00:00:00');
-        $todays_visit = Visit::where('patient_id', '=', $patient->id)->where( 'created_at', '>=', $today)->first();
+        // $today = (date('Y-m-d').' 00:00:00');
+        // $todays_visit = Visit::where('patient_id', '=', $patient->id)->where( 'created_at', '>=', $today)->first();
 
-        if($todays_visit != null){
-            $todays_visit_tests = $todays_visit;
+        // if($todays_visit != null){
+        //     $todays_visit_tests = $todays_visit;
 
-        }else{
-            $todays_visit_tests = 'there is no visit todat, plese instruct the patient to go back to secretary to register todays visit';
-        }
+        // }else{
+        //     $todays_visit_tests = 'there is no visit todat, plese instruct the patient to go back to secretary to register todays visit';
+        // }
 
 
 
         return Inertia::render('Laboratory/Edit', [
             'tests'               => Test::orderBy('id', 'asc')->get()->map->only('id', 'name'),
-            'todays_visit_tests'  => $todays_visit_tests,
+            // 'todays_visit_tests'  => $todays_visit_tests,
             'patient' => [
                 'id'              => $patient->id,
                 'name'            => $patient->name,
-                'visits'          => $patient->visits() ? $patient->visits()->orderBy('created_at', 'desc')->get() : null,
+                'visits'          => $patient->visits() ? $patient->visits()->with('tests')->orderBy('created_at', 'desc')->get() : null,
             ],
         ]);
     }
 
     public function update(UpdatePatientData $request, Patient $patient)
     {
-        $today = (date('Y-m-d').' 00:00:00');
-        $visit = Visit::where('patient_id', '=', $patient->id)->where( 'created_at', '>=', $today)->first();
+        // $today = (date('Y-m-d').' 00:00:00');
+        $visit = Visit::where('id', '=', $request->visit_id)->first();
 
-        foreach($request->all() as $key => $value){
-
-            //Please note that $key represent test id as we send it from vue form
-
-            if($value && $key != '_method' ){
-
-                $visit->tests()->attach([$key  => ['value' =>  $value]]);
-
-
-                // echo ' test_id => ' . $key . '  ' . ' test_value => ' . $value;
+            foreach($request->all() as $key => $value){
+                if($value && $key != '_method' && $key != 'visit_id' ){
+                    $visit->tests()->syncWithoutDetaching([$key  => ['value' =>  $value]]);
+                }
             }
 
+            foreach($visit->tests as $test){
+                foreach ($request->all() as $key => $value){
+                    if (!$value && $test->pivot->test_id == $key) {
+                        $visit->tests()->detach($key);
+                        break;
+                    }
+                }
+            }
+
+            return Redirect::back()->with('success', 'tests inserted successfully');
 
 
-        }
+
+
 
 
     }

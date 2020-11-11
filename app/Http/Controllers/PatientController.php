@@ -55,6 +55,8 @@ class PatientController extends Controller
     {
        $request->validated();
 
+
+
        \DB::transaction(function () use ($request) {
 
 
@@ -79,6 +81,7 @@ class PatientController extends Controller
             ]);
 
             Visit::create([
+                //    $next_visit_date = Carbon::now()->addMonths(3);
                 'systolic_bp'  => $request->systolic_bp,
                 'diastolic_bp' => $request->diastolic_bp,
                 'height'       => $request->height,
@@ -157,6 +160,7 @@ class PatientController extends Controller
             $visit = Visit::where('patient_id', '=', $patient->id)->where( 'created_at', '>=', $today)->first();
             if ($visit === null) {
                 Visit::create([
+                    //    $next_visit_date = Carbon::now()->addMonths(3);
                     'patient_id'    => $patient->id,
                     'systolic_bp'   => $patient->systolic_bp,
                     'diastolic_bp'  => $patient->diastolic_bp,

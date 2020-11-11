@@ -25,6 +25,7 @@
                                     <th class="px-2 py-1 text-sm font-bold text-left">Edit</th>
                                     <th class="px-2 py-1 text-sm font-bold text-left">ID</th>
                                     <th class="px-2 py-1 text-sm font-bold text-left">Name</th>
+                                    <th class="px-2 py-1 text-sm font-bold text-left">Created_at</th>
                                     <th class="px-2 py-1 text-sm font-bold text-left">Updated_at</th>
                                 </tr>
                             </thead>
@@ -47,7 +48,12 @@
 
                                 <td class="border-t">
                                     <inertia-link class="px-2 py-1 outline-none  text-sm flex items-center" :href="route('laboratory.edit', patient.id)" tabindex="-1">
-                                    {{ patient.created_at}}
+                                    {{moment(patient.created_at).format('YYYY-MM-DD')}}
+                                    </inertia-link>
+                                </td>
+                                <td class="border-t">
+                                    <inertia-link class="px-2 py-1 outline-none  text-sm flex items-center" :href="route('laboratory.edit', patient.id)" tabindex="-1">
+                                    {{moment(patient.updated_at).format('YYYY-MM-DD')}}
                                     </inertia-link>
                                 </td>
 

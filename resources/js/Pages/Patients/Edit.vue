@@ -1,13 +1,11 @@
 <template>
     <app-layout>
         <div class="py-6 px-1 flex flex-col lg:flex-row">
-
-
-            <div class="px-6 sm:px-2 md:px-1   flex w-full sm:w-3/4 md:w-2/3  lg:w-2/4 mr-2">
-                    <div class="bg-banafsagy-600 overflow-hidden rounded sm:rounded-lg">
-                        <div class="shadow-lg  rounded-lg border-2 border-red-600">
+            <div class="px-2 sm:px-2 md:px-1  flex w-full sm:w-3/4 md:w-2/3  lg:w-2/4 sm:mr-2 mb-4 sm:mb-0">
+                    <div class="bg-banafsagy-600 overflow-hidden rounded sm:rounded-md">
+                        <div class="shadow-lg  rounded-md border-2 border-red-600">
                         <form id="create_address" @submit.prevent="submit()">
-                            <div class="bg-indigo-400 p-1 rounded-lg">
+                            <div class="bg-indigo-400 p-1 rounded-md">
                                 <div class="flex justify-center  bg-indigo-800 rounded-md rounded-b-none  mr-1 ml-1 p-0  shadow-lg text-gray-100">
                                     Profile Information
                                 </div>
@@ -17,7 +15,7 @@
                                         <div class="w-1/3 flex -mr-px ">
                                             <span class="w-full flex items-center leading-normal bg-gray-400 rounded rounded-r-none border border-gray-500 px-3 whitespace-no-wrap text-grey-dark text-sm">Name  </span>
                                         </div>
-                                        <input  placeholder="Patient name"    v-model="form.name"  type="text" class="rtl text-center placeholder-pink-400 p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative ">
+                                        <input  placeholder="Patient name"    v-model="form.name"  type="text" class="rtl text-center placeholder-pink-400 p-1 px-1 rounded-md bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-9 border-gray-500   rounded-l-none relative ">
 
                                         <span class="text-sm ml-2 text-red-600 mt-1" v-if="errors.name">{{errors.name[0]}}</span>
                                     </div>
@@ -26,7 +24,7 @@
                                         <div class="w-1/3 flex">
                                             <span class="w-full flex items-center leading-normal ml-2 bg-gray-400 rounded rounded-r-none border border-gray-500 px-3 whitespace-no-wrap text-grey-dark text-sm">BirthDate </span>
                                         </div>
-                                        <input    v-model="form.birth_date"  type="date" class=" p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative ">
+                                        <input    v-model="form.birth_date"  type="date" class=" p-1 px-2 rounded-md bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-9 border-gray-500   rounded-l-none relative ">
 
                                         <span class="text-sm text-red-600 mt-1 ml-2" v-if="errors.birth_date">{{errors.birth_date[0]}}</span>
                                     </div>
@@ -39,7 +37,7 @@
                                         <div class="w-1/3 flex -mr-px">
                                             <span class="w-full flex items-center leading-normal bg-gray-400 rounded rounded-r-none border border-gray-500 px-3 whitespace-no-wrap text-grey-dark text-sm">Gender</span>
                                         </div>
-                                        <select    v-model="form.gender"  class="p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative">
+                                        <select    v-model="form.gender"  class="p-1 px-2 rounded-md bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-9 border-gray-500   rounded-l-none relative">
                                             <option value="1">Male</option>
                                             <option value="2">Female</option>
                                         </select>
@@ -51,7 +49,7 @@
                                         <div class="w-1/3 flex -mr-px">
                                             <span class="w-full flex items-center leading-normal ml-2 bg-gray-400 rounded rounded-r-none border border-gray-500 px-3 whitespace-no-wrap text-grey-dark text-sm">Address</span>
                                         </div>
-                                        <select    v-model="form.address_id"  class="p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative">
+                                        <select    v-model="form.address_id"  class="p-1 px-2 rounded-md bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-9 border-gray-500   rounded-l-none relative">
                                             <option v-for="(address, i) in addresses" :key="i"  :value="address.id" >{{address.name}}</option>
                                         </select>
                                         <span class="text-sm ml-2  text-red-600 mt-1" v-if="errors.address_id">{{errors.address_id[0]}}</span>
@@ -63,7 +61,7 @@
                                         <div class="w-1/3 flex">
                                             <span class="w-full flex items-center leading-normal bg-gray-400 rounded rounded-r-none border border-gray-500 px-3 whitespace-no-wrap text-grey-dark text-sm">Marital</span>
                                         </div>
-                                        <select    v-model="form.marital" class=" p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative ">
+                                        <select    v-model="form.marital" class=" p-1 px-2 rounded-md bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-9 border-gray-500   rounded-l-none relative ">
                                             <option value="1">اعزب</option>
                                             <option value="2">متزوج</option>
                                             <option value="3">ارمل</option>
@@ -76,7 +74,7 @@
                                         <div class="w-1/3 flex -mr-px">
                                             <span class="w-full flex items-center leading-normal ml-2 bg-gray-400 rounded rounded-r-none border border-gray-500 px-3 whitespace-no-wrap text-grey-dark text-sm">Smoking</span>
                                         </div>
-                                        <select    v-model="form.smoking" class=" p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative ">
+                                        <select    v-model="form.smoking" class=" p-1 px-2 rounded-md bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-9 border-gray-500   rounded-l-none relative ">
                                             <option value="1">Smoker</option>
                                             <option value="2">Non-Smoker</option>
                                             <option value="3">Ex-Smoker</option>
@@ -90,7 +88,7 @@
                                         <div class="w-1/3 flex">
                                             <span class="w-full flex items-center leading-normal bg-gray-400 rounded rounded-r-none border border-gray-500 px-3 whitespace-no-wrap text-grey-dark text-sm">Education</span>
                                         </div>
-                                        <select    v-model="form.educationlevel_id" class=" p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative ">
+                                        <select    v-model="form.educationlevel_id" class=" p-1 px-2 rounded-md bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-9 border-gray-500   rounded-l-none relative ">
                                         <option v-for="(education, i) in educationlevels" :key="i"  :value="education.id" >{{education.name}}</option>
                                         </select>
                                         <span class="text-sm ml-2 text-red-600 mt-1" v-if="errors.educationlevel_id">{{errors.educationlevel_id[0]}}</span>
@@ -100,7 +98,7 @@
                                         <div class="w-1/3 flex -mr-px">
                                             <span class="w-full flex items-center leading-normal ml-2 bg-gray-400 rounded rounded-r-none border border-gray-500 px-3 whitespace-no-wrap text-grey-dark text-sm">Occupation</span>
                                         </div>
-                                        <select    v-model="form.occupation_id" class=" p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative ">
+                                        <select    v-model="form.occupation_id" class=" p-1 px-2 rounded-md bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-9 border-gray-500   rounded-l-none relative ">
                                         <option v-for="(occupation, i) in occupations" :key="i"  :value="occupation.id" >{{occupation.name}}</option>
                                         </select>
                                         <span class="text-sm  ml-2 text-red-600 mt-1" v-if="errors.occupation_id">{{errors.occupation_id[0]}}</span>
@@ -112,7 +110,7 @@
                                         <div class="w-1/3 flex">
                                             <span class="w-full flex items-center leading-normal bg-gray-400 rounded rounded-r-none border border-gray-500 px-3 whitespace-no-wrap text-grey-dark text-sm">D_Type</span>
                                         </div>
-                                        <select    v-model="form.type_id" class=" p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative ">
+                                        <select    v-model="form.type_id" class=" p-1 px-2 rounded-md bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-9 border-gray-500   rounded-l-none relative ">
                                         <option v-for="(type, i) in types" :key="i"  :value="type.id" >{{type.name}}</option>
                                         </select>
                                         <span class="text-sm text-red-600 mt-1" v-if="errors.type_id">{{errors.type_id[0]}}</span>
@@ -122,7 +120,7 @@
                                         <div class="w-1/3 flex -mr-px">
                                             <span class="w-full flex items-center leading-normal ml-2 bg-gray-400 rounded rounded-r-none border border-gray-500 px-3 whitespace-no-wrap text-grey-dark text-sm">F_History</span>
                                         </div>
-                                        <select    v-model="form.fh_of_dm" class="p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative ">
+                                        <select    v-model="form.fh_of_dm" class="p-1 px-2 rounded-md bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-9 border-gray-500   rounded-l-none relative ">
                                             <option value="1">Positive</option>
                                             <option value="2">Negative</option>
                                         </select>
@@ -136,19 +134,19 @@
                                 </div>
 
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 ml-1">
-                                    <div class="grid grid-cols-2 gap-2 ">
+                                    <div class="grid grid-cols-2 gap-2 mr-1">
                                         <div class="p-1 w-full items-center  bg-gray-400 rounded  border border-gray-600  whitespace-no-wrap text-grey-dark text-sm">
                                             <label  class="flex justify-start p-0 pb-1 " for="systolic_bp">systolic_bp:</label>
                                             <input autocomplete="off" type="text"  id="systolic_bp"  v-model="form.systolic_bp" placeholder="Systolic_bp"
-                                                class="p-1 px-2  border border-gray-600 rounded-sm bg-gray-200 max-w-full focus:shadow-outline"/>
+                                                class="p-1 px-2  border border-gray-600 rounded-md bg-gray-200 max-w-full focus:shadow-outline"/>
                                             <span class="text-sm text-red-600 mt-1" v-if="errors.systolic_bp">{{errors.systolic_bp[0]}}</span>
                                         </div>
 
 
                                         <div class="p-1 w-full items-center  bg-gray-400 rounded  border border-gray-600  whitespace-no-wrap text-grey-dark text-sm">
-                                            <label  class="flex justify-start p-0 pb-1 " for="diastolic_bp">Diastolic_bp:</label>
+                                            <label  class="flex justify-start p-0 pb-1" for="diastolic_bp">Diastolic_bp:</label>
                                             <input autocomplete="off" type="text" id="diastolic_bp" v-model="form.diastolic_bp" placeholder="Diastolic_bp"
-                                                class="p-1 px-2  border border-gray-600 rounded-sm bg-gray-200 max-w-full focus:shadow-outline"/>
+                                                class="p-1 px-2  border border-gray-600 rounded-md bg-gray-200 max-w-full focus:shadow-outline"/>
                                             <span class="text-sm text-red-600 mt-1" v-if="errors.diastolic_bp">{{errors.diastolic_bp[0]}}</span>
                                         </div>
                                     </div>
@@ -156,13 +154,13 @@
                                         <div class="p-1 w-full items-center  bg-gray-400 rounded  border border-gray-600  whitespace-no-wrap text-grey-dark text-sm">
                                             <label  class="flex justify-start p-0 pb-1 " for="height">Height:</label>
                                             <input autocomplete="off" type="text" id="height" v-model="form.height" placeholder="Height"
-                                                class="p-1 px-2 border border-gray-600 rounded-sm bg-gray-200 max-w-full focus:shadow-outline"/>
+                                                class="p-1 px-2 border border-gray-600 rounded-md bg-gray-200 max-w-full focus:shadow-outline"/>
                                             <span class="text-sm text-red-600 mt-1" v-if="errors.height">{{errors.height[0]}}</span>
                                         </div>
                                         <div class="p-1  w-full items-center  bg-gray-400 rounded  border border-gray-600  whitespace-no-wrap text-grey-dark text-sm">
                                             <label  class="flex justify-start p-0 pb-1 " for="weight">Weight:</label>
                                             <input autocomplete="off" type="text" id="weight" v-model="form.weight" placeholder="Weight"
-                                                class="p-1 px-2  border border-gray-600 rounded-sm bg-gray-200 max-w-full focus:shadow-outline"/>
+                                                class="p-1 px-2  border border-gray-600 rounded-md bg-gray-200 max-w-full focus:shadow-outline"/>
                                             <span class="text-sm text-red-600 mt-1" v-if="errors.weight">{{errors.weight[0]}}</span>
                                         </div>
                                     </div>
@@ -185,12 +183,11 @@
                         </form>
                         </div>
                     </div>
-
             </div>
 
-            <div class="px-6 sm:px-2 md:px-1  flex w-full  sm:w-1/4 md:w-1/3 lg:w-2/4 mr-2">
-                <div class="overflow-hidden rounded sm:rounded-lg">
-                    <div class="p-1  bg-banafsagy-600 rounded-lg border-2 border-red-600">
+            <div class="px-2 sm:px-2 md:px-1  flex w-full  sm:w-1/4 md:w-1/3 lg:w-2/4 mr-2">
+                <div class="overflow-hidden rounded sm:rounded-md">
+                    <div class="p-1  bg-banafsagy-600 rounded-md border-2 border-red-600">
                         <div class="mb-1 flex justify-center  bg-indigo-800 rounded-md rounded-b-none shadow-lg text-gray-100">
                             <span> Patient Visits Information </span>
                         </div>

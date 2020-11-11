@@ -4558,7 +4558,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Layouts/AppLayout */ "./resources/js/Layouts/AppLayout.vue");
 /* harmony import */ var _Jetstream_Welcome__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Jetstream/Welcome */ "./resources/js/Jetstream/Welcome.vue");
-/* harmony import */ var _Shared_LoadingButton__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Shared/LoadingButton */ "./resources/js/Shared/LoadingButton.vue");
+/* harmony import */ var _Shared_Icon__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Shared/Icon */ "./resources/js/Shared/Icon.vue");
+/* harmony import */ var _Shared_LoadingButton__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Shared/LoadingButton */ "./resources/js/Shared/LoadingButton.vue");
 //
 //
 //
@@ -4638,6 +4639,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -4645,12 +4659,12 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     AppLayout: _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__["default"],
     Welcome: _Jetstream_Welcome__WEBPACK_IMPORTED_MODULE_1__["default"],
-    LoadingButton: _Shared_LoadingButton__WEBPACK_IMPORTED_MODULE_2__["default"]
+    LoadingButton: _Shared_LoadingButton__WEBPACK_IMPORTED_MODULE_3__["default"],
+    Icon: _Shared_Icon__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   props: {
     tests: Array,
     patient: Object,
-    todays_visit: Object,
     errors: Object
   },
   data: function data() {
@@ -4662,11 +4676,12 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    submit: function submit() {
+    submit: function submit(visit_id) {
       var _this = this;
 
-      var form = document.getElementById('form');
+      var form = document.getElementById(visit_id);
       var data = new FormData(form);
+      data.append('visit_id', visit_id);
       data.append('_method', 'PUT');
       this.$inertia.post(this.route('laboratory.update', {
         patient: this.patient.id
@@ -4678,11 +4693,6 @@ __webpack_require__.r(__webpack_exports__);
           return _this.sending = false;
         }
       });
-    },
-    destroy: function destroy() {
-      if (confirm('Are you sure you want to delete this patient?')) {
-        this.$inertia.post(this.route('patients.destroy', this.patient.id));
-      }
     }
   }
 });
@@ -4709,6 +4719,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Shared_SearchFilter__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/Shared/SearchFilter */ "./resources/js/Shared/SearchFilter.vue");
 /* harmony import */ var lodash_throttle__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! lodash/throttle */ "./node_modules/lodash/throttle.js");
 /* harmony import */ var lodash_throttle__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(lodash_throttle__WEBPACK_IMPORTED_MODULE_7__);
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -5111,9 +5127,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Layouts/AppLayout */ "./resources/js/Layouts/AppLayout.vue");
 /* harmony import */ var _Jetstream_Welcome__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Jetstream/Welcome */ "./resources/js/Jetstream/Welcome.vue");
 /* harmony import */ var _Shared_LoadingButton__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Shared/LoadingButton */ "./resources/js/Shared/LoadingButton.vue");
-//
-//
-//
 //
 //
 //
@@ -59335,136 +59348,221 @@ var render = function() {
         "div",
         {
           staticClass:
-            "px-6 sm:px-2 md:px-1   flex w-full sm:w-3/4 md:w-2/3  lg:w-2/4 mr-2"
+            "px-2 sm:px-4 md:px-6   flex w-full sm:w-3/4 md:w-2/3  lg:w-2/4 sm:mr-0 mr-2 mb-3 sm:mb-0"
         },
         [
           _c(
             "div",
-            {
-              staticClass:
-                "bg-banafsagy-600 overflow-hidden rounded sm:rounded-lg"
-            },
+            { staticClass: "bg-banafsagy-600 overflow-hidden rounded-md" },
             [
               _c(
                 "div",
                 {
-                  staticClass: "shadow-lg  rounded-lg border-2 border-red-600"
+                  staticClass:
+                    "bg-banafsagy-600 overflow-hidden rounded-md border-2 border-red-500 "
                 },
                 [
-                  _c(
-                    "form",
-                    {
-                      attrs: { id: "form" },
-                      on: {
-                        submit: function($event) {
-                          $event.preventDefault()
-                          return _vm.submit()
-                        }
-                      }
-                    },
-                    [
-                      _c("div", { staticClass: "bg-indigo-400 rounded-lg" }, [
-                        _c(
-                          "div",
-                          { staticClass: "grid grid-cols-4 p-1" },
-                          _vm._l(_vm.tests, function(test, i) {
-                            return _c(
-                              "div",
-                              {
-                                key: i,
-                                staticClass:
-                                  "flex flex-wrap items-stretch w-full relative p-px"
-                              },
-                              [
-                                _c("div", { staticClass: "w-1/2 flex" }, [
-                                  _c(
-                                    "span",
-                                    {
-                                      staticClass:
-                                        "w-full flex items-center leading-normal bg-gray-400 rounded rounded-r-none border border-gray-500 p-1 h-7 whitespace-no-wrap text-grey-dark text-sm"
-                                    },
-                                    [_vm._v(_vm._s(test.name) + "  ")]
-                                  )
-                                ]),
-                                _vm._v(" "),
-                                _c("input", {
-                                  staticClass:
-                                    "rounded bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-7 p-1 border-gray-500   rounded-l-none relative ",
-                                  attrs: {
-                                    autocomplete: "off",
-                                    name: test.id,
-                                    type: "text"
-                                  },
-                                  domProps: { value: test.value }
-                                })
-                              ]
-                            )
-                          }),
-                          0
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c(
+                  _vm.patient.visits.length > 0 &&
+                  _vm
+                    .moment(_vm.patient.visits[0].created_at)
+                    .format("YYYY-MM-DD") == _vm.moment().format("YYYY-MM-DD")
+                    ? _c(
                         "div",
                         {
                           staticClass:
-                            "py-2 bg-indigo-800  rounded-t-none rounded-md grid grid-cols-4 justify-items-stretch "
+                            "p-2 shadow-lg  rounded-md  overflow-y-auto  max-h-96"
                         },
-                        [
-                          _c(
+                        _vm._l(_vm.patient.visits, function(visit, index) {
+                          return _c(
                             "div",
                             {
+                              key: index,
                               staticClass:
-                                "flex justify-start items-center pl-2 pr-2"
+                                "mb-2 border-2 border-gray-300 rounded-md"
                             },
                             [
                               _c(
-                                "loading-button",
+                                "div",
                                 {
                                   staticClass:
-                                    "bg-green-500 px-2 py-1 rounded text-gray-200 whitespace-no-wrap hover:bg-green-600 focus:bg-green-600",
-                                  attrs: {
-                                    loading: _vm.sending,
-                                    type: "submit"
+                                    "normal-case flex justify-center  bg-indigo-800 rounded-md rounded-b-none  p-0  shadow-lg text-gray-100"
+                                },
+                                [
+                                  _c("span", { staticClass: "p-1" }, [
+                                    _vm._v(
+                                      "Test of Vist " +
+                                        _vm._s(
+                                          _vm.patient.visits.length - index
+                                        ) +
+                                        " on " +
+                                        _vm._s(
+                                          _vm
+                                            .moment(visit.updated_at)
+                                            .format("YYYY-MM-DD")
+                                        )
+                                    )
+                                  ])
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "form",
+                                {
+                                  attrs: { id: visit.id },
+                                  on: {
+                                    submit: function($event) {
+                                      $event.preventDefault()
+                                      return _vm.submit(visit.id)
+                                    }
                                   }
                                 },
                                 [
-                                  _vm._v(
-                                    "\n                                    Update Patient\n                                "
+                                  _c(
+                                    "div",
+                                    { staticClass: "bg-indigo-400 rounded-md" },
+                                    [
+                                      _c(
+                                        "div",
+                                        { staticClass: "grid grid-cols-4 p-1" },
+                                        _vm._l(_vm.tests, function(t, i) {
+                                          return _c(
+                                            "div",
+                                            {
+                                              key: i,
+                                              staticClass:
+                                                "flex flex-wrap items-stretch w-full relative p-px"
+                                            },
+                                            [
+                                              _c(
+                                                "div",
+                                                { staticClass: "w-1/2 flex" },
+                                                [
+                                                  _c(
+                                                    "span",
+                                                    {
+                                                      staticClass:
+                                                        "w-full flex items-center leading-normal bg-gray-400 rounded-md rounded-r-none border border-gray-500 p-1 h-7 whitespace-no-wrap text-grey-dark text-sm"
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        _vm._s(t.name) + "  "
+                                                      )
+                                                    ]
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c("input", {
+                                                staticClass:
+                                                  "rounded-md bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-7 p-1 border-gray-500   rounded-l-none relative ",
+                                                attrs: {
+                                                  autocomplete: "off",
+                                                  name: t.id,
+                                                  type: "text"
+                                                },
+                                                domProps: {
+                                                  value:
+                                                    visit.tests.findIndex(
+                                                      function(test) {
+                                                        return (
+                                                          test.pivot.test_id ===
+                                                          t.id
+                                                        )
+                                                      }
+                                                    ) >= 0
+                                                      ? visit.tests[
+                                                          visit.tests.findIndex(
+                                                            function(test) {
+                                                              return (
+                                                                test.pivot
+                                                                  .test_id ===
+                                                                t.id
+                                                              )
+                                                            }
+                                                          )
+                                                        ].pivot.value
+                                                      : ""
+                                                }
+                                              })
+                                            ]
+                                          )
+                                        }),
+                                        0
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass:
+                                        "py-2 bg-indigo-800  rounded-t-none rounded-md grid grid-cols-4 justify-items-stretch "
+                                    },
+                                    [
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "flex justify-start items-center pl-2 pr-4"
+                                        },
+                                        [
+                                          _c(
+                                            "loading-button",
+                                            {
+                                              staticClass:
+                                                "bg-green-500 px-2 py-1 rounded-md text-gray-200 whitespace-no-wrap hover:bg-green-600 focus:bg-green-600",
+                                              attrs: {
+                                                loading: _vm.sending,
+                                                type: "submit"
+                                              }
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n                                   Update Patient\n                               "
+                                              )
+                                            ]
+                                          )
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "flex justify-self-start items-center"
+                                        },
+                                        [
+                                          _c(
+                                            "inertia-link",
+                                            {
+                                              staticClass:
+                                                "bg-red-500 px-2 py-1 rounded-md text-gray-200 whitespace-no-wrap hover:bg-red-600 focus:bg-red-600",
+                                              attrs: {
+                                                href: _vm.route("laboratory")
+                                              }
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n                                   Cancel & Back\n                               "
+                                              )
+                                            ]
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    ]
                                   )
                                 ]
                               )
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            {
-                              staticClass:
-                                "flex justify-self-start items-center"
-                            },
-                            [
-                              _c(
-                                "inertia-link",
-                                {
-                                  staticClass:
-                                    "bg-red-500 px-2 py-1 rounded text-gray-200 whitespace-no-wrap hover:bg-red-600 focus:bg-red-600",
-                                  attrs: { href: _vm.route("patients") }
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                                    Cancel & Back\n                                "
-                                  )
-                                ]
-                              )
-                            ],
-                            1
+                            ]
                           )
-                        ]
+                        }),
+                        0
                       )
-                    ]
-                  )
+                    : _c("div", [
+                        _c("span", [_vm._v(" todays visit not found")])
+                      ])
                 ]
               )
             ]
@@ -59476,28 +59574,195 @@ var render = function() {
         "div",
         {
           staticClass:
-            "px-6 sm:px-2 md:px-1  flex w-full  sm:w-1/4 md:w-1/3 lg:w-2/4 mr-2"
+            "px-2 sm:px-4 md:px-6  flex w-full  sm:w-1/4 md:w-1/3 lg:w-2/4 mr-2"
         },
         [
-          _c("div", { staticClass: "overflow-hidden rounded sm:rounded-lg" }, [
-            _c(
-              "div",
-              {
-                staticClass:
-                  "p-1  bg-banafsagy-600 rounded-lg border-2 border-red-600"
-              },
-              [
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      "mb-1 flex justify-center  bg-indigo-800 rounded-md rounded-b-none shadow-lg text-gray-100"
-                  },
-                  [_c("span", [_vm._v(" Patient Visits Information ")])]
-                )
-              ]
-            )
-          ])
+          _c(
+            "div",
+            {
+              staticClass:
+                "bg-banafsagy-600 overflow-hidden rounded-md border-2 border-red-500 "
+            },
+            [
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "p-2 shadow-lg  rounded-md  overflow-y-auto  max-h-96"
+                },
+                _vm._l(_vm.patient.visits, function(visit, index) {
+                  return _c(
+                    "div",
+                    {
+                      key: index,
+                      staticClass: "mb-2 border-2 border-gray-300 rounded-md"
+                    },
+                    [
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "normal-case flex justify-center  bg-indigo-800 rounded-md rounded-b-none  p-0  shadow-lg text-gray-100"
+                        },
+                        [
+                          _c("span", { staticClass: "p-1" }, [
+                            _vm._v(
+                              "Test of Vist " +
+                                _vm._s(_vm.patient.visits.length - index) +
+                                " on " +
+                                _vm._s(
+                                  _vm
+                                    .moment(visit.updated_at)
+                                    .format("YYYY-MM-DD")
+                                )
+                            )
+                          ])
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "form",
+                        {
+                          attrs: { id: visit.id },
+                          on: {
+                            submit: function($event) {
+                              $event.preventDefault()
+                              return _vm.submit(visit.id)
+                            }
+                          }
+                        },
+                        [
+                          _c(
+                            "div",
+                            { staticClass: "bg-indigo-400 rounded-md" },
+                            [
+                              _c(
+                                "div",
+                                { staticClass: "grid grid-cols-4 p-1" },
+                                _vm._l(_vm.tests, function(t, i) {
+                                  return _c(
+                                    "div",
+                                    {
+                                      key: i,
+                                      staticClass:
+                                        "flex flex-wrap items-stretch w-full relative p-px"
+                                    },
+                                    [
+                                      _c("div", { staticClass: "w-1/2 flex" }, [
+                                        _c(
+                                          "span",
+                                          {
+                                            staticClass:
+                                              "w-full flex items-center leading-normal bg-gray-400 rounded-md rounded-r-none border border-gray-500 p-1 h-7 whitespace-no-wrap text-grey-dark text-sm"
+                                          },
+                                          [_vm._v(_vm._s(t.name) + "  ")]
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("input", {
+                                        staticClass:
+                                          "rounded-md bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-7 p-1 border-gray-500   rounded-l-none relative ",
+                                        attrs: {
+                                          autocomplete: "off",
+                                          name: t.id,
+                                          type: "text"
+                                        },
+                                        domProps: {
+                                          value:
+                                            visit.tests.findIndex(function(
+                                              test
+                                            ) {
+                                              return test.pivot.test_id === t.id
+                                            }) >= 0
+                                              ? visit.tests[
+                                                  visit.tests.findIndex(
+                                                    function(test) {
+                                                      return (
+                                                        test.pivot.test_id ===
+                                                        t.id
+                                                      )
+                                                    }
+                                                  )
+                                                ].pivot.value
+                                              : ""
+                                        }
+                                      })
+                                    ]
+                                  )
+                                }),
+                                0
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "py-2 bg-indigo-800  rounded-t-none rounded-md grid grid-cols-4 justify-items-stretch "
+                            },
+                            [
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "flex justify-start items-center pl-2 pr-4"
+                                },
+                                [
+                                  _c(
+                                    "loading-button",
+                                    {
+                                      staticClass:
+                                        "bg-green-500 px-2 py-1 rounded-md text-gray-200 whitespace-no-wrap hover:bg-green-600 focus:bg-green-600",
+                                      attrs: {
+                                        loading: _vm.sending,
+                                        type: "submit"
+                                      }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                   Update Patient\n                               "
+                                      )
+                                    ]
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "flex justify-self-start items-center"
+                                },
+                                [
+                                  _c(
+                                    "inertia-link",
+                                    {
+                                      staticClass:
+                                        "bg-red-500 px-2 py-1 rounded-md text-gray-200 whitespace-no-wrap hover:bg-red-600 focus:bg-red-600",
+                                      attrs: { href: _vm.route("laboratory") }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                   Cancel & Back\n                               "
+                                      )
+                                    ]
+                                  )
+                                ],
+                                1
+                              )
+                            ]
+                          )
+                        ]
+                      )
+                    ]
+                  )
+                }),
+                0
+              )
+            ]
+          )
         ]
       )
     ])
@@ -59670,6 +59935,15 @@ var render = function() {
                               staticClass:
                                 "px-2 py-1 text-sm font-bold text-left"
                             },
+                            [_vm._v("Created_at")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "th",
+                            {
+                              staticClass:
+                                "px-2 py-1 text-sm font-bold text-left"
+                            },
                             [_vm._v("Updated_at")]
                           )
                         ]
@@ -59793,7 +60067,44 @@ var render = function() {
                                 [
                                   _vm._v(
                                     "\n                                    " +
-                                      _vm._s(patient.created_at) +
+                                      _vm._s(
+                                        _vm
+                                          .moment(patient.created_at)
+                                          .format("YYYY-MM-DD")
+                                      ) +
+                                      "\n                                    "
+                                  )
+                                ]
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            { staticClass: "border-t" },
+                            [
+                              _c(
+                                "inertia-link",
+                                {
+                                  staticClass:
+                                    "px-2 py-1 outline-none  text-sm flex items-center",
+                                  attrs: {
+                                    href: _vm.route(
+                                      "laboratory.edit",
+                                      patient.id
+                                    ),
+                                    tabindex: "-1"
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                    " +
+                                      _vm._s(
+                                        _vm
+                                          .moment(patient.updated_at)
+                                          .format("YYYY-MM-DD")
+                                      ) +
                                       "\n                                    "
                                   )
                                 ]
@@ -60953,20 +61264,20 @@ var render = function() {
         "div",
         {
           staticClass:
-            "px-6 sm:px-2 md:px-1   flex w-full sm:w-3/4 md:w-2/3  lg:w-2/4 mr-2"
+            "px-2 sm:px-2 md:px-1  flex w-full sm:w-3/4 md:w-2/3  lg:w-2/4 sm:mr-2 mb-4 sm:mb-0"
         },
         [
           _c(
             "div",
             {
               staticClass:
-                "bg-banafsagy-600 overflow-hidden rounded sm:rounded-lg"
+                "bg-banafsagy-600 overflow-hidden rounded sm:rounded-md"
             },
             [
               _c(
                 "div",
                 {
-                  staticClass: "shadow-lg  rounded-lg border-2 border-red-600"
+                  staticClass: "shadow-lg  rounded-md border-2 border-red-600"
                 },
                 [
                   _c(
@@ -60983,7 +61294,7 @@ var render = function() {
                     [
                       _c(
                         "div",
-                        { staticClass: "bg-indigo-400 p-1 rounded-lg" },
+                        { staticClass: "bg-indigo-400 p-1 rounded-md" },
                         [
                           _c(
                             "div",
@@ -61031,7 +61342,7 @@ var render = function() {
                                     }
                                   ],
                                   staticClass:
-                                    "rtl text-center placeholder-pink-400 p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative ",
+                                    "rtl text-center placeholder-pink-400 p-1 px-1 rounded-md bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-9 border-gray-500   rounded-l-none relative ",
                                   attrs: {
                                     placeholder: "Patient name",
                                     type: "text"
@@ -61092,7 +61403,7 @@ var render = function() {
                                     }
                                   ],
                                   staticClass:
-                                    " p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative ",
+                                    " p-1 px-2 rounded-md bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-9 border-gray-500   rounded-l-none relative ",
                                   attrs: { type: "date" },
                                   domProps: { value: _vm.form.birth_date },
                                   on: {
@@ -61158,7 +61469,7 @@ var render = function() {
                                       }
                                     ],
                                     staticClass:
-                                      "p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative",
+                                      "p-1 px-2 rounded-md bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-9 border-gray-500   rounded-l-none relative",
                                     on: {
                                       change: function($event) {
                                         var $$selectedVal = Array.prototype.filter
@@ -61240,7 +61551,7 @@ var render = function() {
                                       }
                                     ],
                                     staticClass:
-                                      "p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative",
+                                      "p-1 px-2 rounded-md bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-9 border-gray-500   rounded-l-none relative",
                                     on: {
                                       change: function($event) {
                                         var $$selectedVal = Array.prototype.filter
@@ -61322,7 +61633,7 @@ var render = function() {
                                       }
                                     ],
                                     staticClass:
-                                      " p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative ",
+                                      " p-1 px-2 rounded-md bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-9 border-gray-500   rounded-l-none relative ",
                                     on: {
                                       change: function($event) {
                                         var $$selectedVal = Array.prototype.filter
@@ -61411,7 +61722,7 @@ var render = function() {
                                       }
                                     ],
                                     staticClass:
-                                      " p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative ",
+                                      " p-1 px-2 rounded-md bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-9 border-gray-500   rounded-l-none relative ",
                                     on: {
                                       change: function($event) {
                                         var $$selectedVal = Array.prototype.filter
@@ -61495,7 +61806,7 @@ var render = function() {
                                       }
                                     ],
                                     staticClass:
-                                      " p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative ",
+                                      " p-1 px-2 rounded-md bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-9 border-gray-500   rounded-l-none relative ",
                                     on: {
                                       change: function($event) {
                                         var $$selectedVal = Array.prototype.filter
@@ -61588,7 +61899,7 @@ var render = function() {
                                       }
                                     ],
                                     staticClass:
-                                      " p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative ",
+                                      " p-1 px-2 rounded-md bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-9 border-gray-500   rounded-l-none relative ",
                                     on: {
                                       change: function($event) {
                                         var $$selectedVal = Array.prototype.filter
@@ -61677,7 +61988,7 @@ var render = function() {
                                       }
                                     ],
                                     staticClass:
-                                      " p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative ",
+                                      " p-1 px-2 rounded-md bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-9 border-gray-500   rounded-l-none relative ",
                                     on: {
                                       change: function($event) {
                                         var $$selectedVal = Array.prototype.filter
@@ -61757,7 +62068,7 @@ var render = function() {
                                       }
                                     ],
                                     staticClass:
-                                      "p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative ",
+                                      "p-1 px-2 rounded-md bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-9 border-gray-500   rounded-l-none relative ",
                                     on: {
                                       change: function($event) {
                                         var $$selectedVal = Array.prototype.filter
@@ -61824,7 +62135,7 @@ var render = function() {
                             [
                               _c(
                                 "div",
-                                { staticClass: "grid grid-cols-2 gap-2 " },
+                                { staticClass: "grid grid-cols-2 gap-2 mr-1" },
                                 [
                                   _c(
                                     "div",
@@ -61853,7 +62164,7 @@ var render = function() {
                                           }
                                         ],
                                         staticClass:
-                                          "p-1 px-2  border border-gray-600 rounded-sm bg-gray-200 max-w-full focus:shadow-outline",
+                                          "p-1 px-2  border border-gray-600 rounded-md bg-gray-200 max-w-full focus:shadow-outline",
                                         attrs: {
                                           autocomplete: "off",
                                           type: "text",
@@ -61907,7 +62218,7 @@ var render = function() {
                                         "label",
                                         {
                                           staticClass:
-                                            "flex justify-start p-0 pb-1 ",
+                                            "flex justify-start p-0 pb-1",
                                           attrs: { for: "diastolic_bp" }
                                         },
                                         [_vm._v("Diastolic_bp:")]
@@ -61923,7 +62234,7 @@ var render = function() {
                                           }
                                         ],
                                         staticClass:
-                                          "p-1 px-2  border border-gray-600 rounded-sm bg-gray-200 max-w-full focus:shadow-outline",
+                                          "p-1 px-2  border border-gray-600 rounded-md bg-gray-200 max-w-full focus:shadow-outline",
                                         attrs: {
                                           autocomplete: "off",
                                           type: "text",
@@ -61999,7 +62310,7 @@ var render = function() {
                                           }
                                         ],
                                         staticClass:
-                                          "p-1 px-2 border border-gray-600 rounded-sm bg-gray-200 max-w-full focus:shadow-outline",
+                                          "p-1 px-2 border border-gray-600 rounded-md bg-gray-200 max-w-full focus:shadow-outline",
                                         attrs: {
                                           autocomplete: "off",
                                           type: "text",
@@ -62065,7 +62376,7 @@ var render = function() {
                                           }
                                         ],
                                         staticClass:
-                                          "p-1 px-2  border border-gray-600 rounded-sm bg-gray-200 max-w-full focus:shadow-outline",
+                                          "p-1 px-2  border border-gray-600 rounded-md bg-gray-200 max-w-full focus:shadow-outline",
                                         attrs: {
                                           autocomplete: "off",
                                           type: "text",
@@ -62179,15 +62490,15 @@ var render = function() {
         "div",
         {
           staticClass:
-            "px-6 sm:px-2 md:px-1  flex w-full  sm:w-1/4 md:w-1/3 lg:w-2/4 mr-2"
+            "px-2 sm:px-2 md:px-1  flex w-full  sm:w-1/4 md:w-1/3 lg:w-2/4 mr-2"
         },
         [
-          _c("div", { staticClass: "overflow-hidden rounded sm:rounded-lg" }, [
+          _c("div", { staticClass: "overflow-hidden rounded sm:rounded-md" }, [
             _c(
               "div",
               {
                 staticClass:
-                  "p-1  bg-banafsagy-600 rounded-lg border-2 border-red-600"
+                  "p-1  bg-banafsagy-600 rounded-md border-2 border-red-600"
               },
               [
                 _c(
@@ -67210,6 +67521,91 @@ var render = function() {
             }),
             _c("path", {
               attrs: { d: "m256 482h256v30h-256z", fill: "#cae8ea" }
+            })
+          ])
+        ]
+      )
+    : _vm.name === "sorry"
+    ? _c(
+        "svg",
+        {
+          attrs: {
+            id: "Capa_1",
+            "enable-background": "new 0 0 512.004 512.004",
+            height: "512",
+            viewBox: "0 0 512.004 512.004",
+            width: "512",
+            xmlns: "http://www.w3.org/2000/svg"
+          }
+        },
+        [
+          _c("g", [
+            _c("ellipse", {
+              attrs: {
+                cx: "93.817",
+                cy: "392.944",
+                fill: "#6a95d6",
+                rx: "51.102",
+                ry: "51.102",
+                transform: "matrix(.16 -.987 .987 .16 -309.081 422.607)"
+              }
+            }),
+            _c("ellipse", {
+              attrs: {
+                cx: "423.343",
+                cy: "392.944",
+                fill: "#6a95d6",
+                rx: "51.102",
+                ry: "51.102",
+                transform: "matrix(.987 -.16 .16 .987 -57.476 72.886)"
+              }
+            }),
+            _c("path", {
+              attrs: {
+                d:
+                  "m401.381 288.825h-285.602v-165.73c0-31.582 25.602-57.184 57.184-57.184h171.232c31.582 0 57.185 25.602 57.185 57.184v165.73z",
+                fill: "#8daee1"
+              }
+            }),
+            _c("path", {
+              attrs: {
+                d:
+                  "m204.548 65.911h-31.584c-31.582 0-57.184 25.602-57.184 57.185v165.73h132.096c-58.87-35.078-68.878-150.671-43.328-222.915z",
+                fill: "#6a95d6"
+              }
+            }),
+            _c("g", [
+              _c("g", { attrs: { fill: "#fff" } }, [
+                _c("ellipse", {
+                  attrs: {
+                    cx: "178.957",
+                    cy: "171.494",
+                    rx: "29.355",
+                    ry: "23.377"
+                  }
+                }),
+                _c("ellipse", {
+                  attrs: {
+                    cx: "338.071",
+                    cy: "171.494",
+                    rx: "29.355",
+                    ry: "23.377"
+                  }
+                })
+              ])
+            ]),
+            _c("path", {
+              attrs: {
+                d:
+                  "m288.295 436.814c-7.147 5.8-16.25 9.279-26.149 9.279-16.972 0-31.601-10.225-38.05-24.839-12.871 7.115-27.658 11.166-43.376 11.166-43.997 0-80.719-31.748-88.454-73.54-3.13.402-6.293.606-9.466.606-24.513 0-48.635-10.467-64.524-27.998-7.456-8.227-11.261-18.863-10.717-29.952.537-10.929 5.237-21.008 13.248-28.434-6.55-11.417-9.234-24.896-7.257-38.667 4.638-32.308 32.788-54.868 67.694-54.868 29.298 0 50.31 16.414 54.224 19.705 17.275 14.524 19.745 40.219 5.737 57.751.851 1.142 1.663 2.306 2.431 3.49 30.6-13.903 67.659-9.798 94.871 13.063 6.696-4.646 14.818-7.378 23.564-7.393h25.826c6.719 0 13.212.957 19.348 2.739 4.396-18.202 20.807-31.771 40.332-31.806h12.334c-1.76-24.388 17.596-44.62 41.463-44.62 11.932 0 23.089 5.048 30.906 13.756 13.718-15.043 36.336-17.85 53.345-6.785 19.215 12.51 24.669 38.308 12.166 57.514l-23.961 36.808-.091 37.156c-.049 19.712-13.914 36.254-32.388 40.44 3.552 36.834-39.041 59.474-67.55 36.364-5.516 4.476-12.195 7.57-19.509 8.748-8.399 28.144-42.992 38.967-65.997 20.317z",
+                fill: "#a2ddfd"
+              }
+            }),
+            _c("path", {
+              attrs: {
+                d:
+                  "m180.72 286.793c-30.698 0-55.672 24.974-55.672 55.671 0 30.698 24.974 55.672 55.672 55.672 30.697 0 55.671-24.974 55.671-55.672 0-30.697-24.974-55.671-55.671-55.671zm0 96.782c-22.669 0-41.111-18.442-41.111-41.111 0-22.668 18.442-41.111 41.111-41.111 22.668 0 41.111 18.442 41.111 41.111s-18.442 41.111-41.111 41.111zm300.603-87.553 22.753-34.951c14.758-22.672 8.316-53.127-14.362-67.892-18.069-11.756-41.112-10.333-57.407 2.779-6.736-5.465-14.834-9.045-23.426-10.375v-54.795c0-4.142-3.358-7.5-7.5-7.5s-7.5 3.358-7.5 7.5v54.79c-22.03 3.436-39.404 21.44-41.393 44.036h-4.926c-20.167.036-37.867 12.222-45.305 30.41-11.195-2.119-17.452-1.054-40.201-1.343-8.093.015-15.939 1.996-22.989 5.771-24.225-18.116-55.722-23.856-84.547-15.852 7.157-18.982 2.009-41.419-14.227-55.07-1.979-1.663-7.974-6.406-17.015-11.011v-59.424c0-27.396 22.289-49.685 49.685-49.685h171.233c18.344 0 35.133 10.053 43.815 26.235 1.959 3.65 6.507 5.022 10.154 3.063 3.65-1.958 5.022-6.504 3.063-10.154-11.298-21.061-33.152-34.144-57.033-34.144h-171.231c-35.667 0-64.685 29.018-64.685 64.685v53.249c-7.93-2.521-17.04-4.277-27.036-4.277-38.478 0-69.933 25.189-75.117 61.302-1.918 13.367.002 26.538 5.558 38.425-15.657 18.355-15.838 46.113 1.035 64.73 8.986 9.915 20.384 17.747 32.99 22.988-6.813 9.731-10.494 21.264-10.494 33.431 0 3.847.376 7.696 1.118 11.441.708 3.571 3.842 6.044 7.349 6.044.483 0 .973-.047 1.465-.145 4.063-.805 6.705-4.751 5.899-8.814-.552-2.787-.832-5.655-.832-8.526 0-10.624 3.759-20.607 10.651-28.528 8.739 2.057 17.553 2.84 25.499 2.492 6.011 23.29 20.254 42.881 39.204 55.893-15.876 16.92-41.913 18.234-59.417 3.848-3.2-2.63-7.927-2.167-10.556 1.032-2.63 3.2-2.168 7.926 1.032 10.556 24.747 20.339 61.518 17.075 82.2-7.785 26.7 12.722 56.797 12.274 82.15.757 14.565 22.445 44.498 29.195 67.315 14.818 25.903 16.352 60.319 5.069 71.674-23.068 3.736-.971 7.345-2.388 10.75-4.207 9.714 19.917 29.904 32.795 52.625 32.795 32.313 0 58.602-26.288 58.602-58.602 0-11.875-3.632-23.425-10.304-33.141 6.026-8.195 9.572-18.233 9.598-28.841zm-57.98 140.524c-11.762 0-22.612-4.641-30.561-12.451 27.317 4.052 55.492-16.374 56.259-47.186 4.226-1.561 8.164-3.694 11.737-6.29 17.193 28.801-3.502 65.927-37.435 65.927zm44.2-146.85c-.789 1.212-1.211 2.627-1.214 4.074l-.09 37.155c-.04 15.728-11.203 29.668-26.546 33.144-3.683.834-6.17 4.276-5.808 8.034 2.908 30.163-32.008 48.748-55.361 29.817-2.754-2.233-6.696-2.232-9.448.002-4.621 3.75-10.146 6.228-15.977 7.168-2.842.458-5.17 2.501-5.994 5.26-6.749 22.616-34.888 32.203-54.087 16.637-2.754-2.232-6.695-2.232-9.449.002-17.499 14.202-43.583 7.697-52.611-12.764-1.775-4.023-6.628-5.67-10.491-3.536-48.692 26.918-110.535-1.578-120.827-57.176-.724-3.914-4.378-6.583-8.33-6.074-23.052 2.959-50.167-5.89-67.478-24.989-12.587-13.888-11.561-35.209 2.073-47.849 2.562-2.375 3.145-6.203 1.407-9.232-5.861-10.217-8.053-21.929-6.339-33.87 4.094-28.517 28.877-48.433 60.269-48.433 26.698 0 45.834 14.949 49.398 17.945 14.024 11.79 16.134 33.022 4.704 47.329-2.129 2.665-2.192 6.432-.152 9.166.755 1.012 1.479 2.05 2.151 3.087 2.02 3.115 6.015 4.284 9.395 2.747 28.659-13.019 62.786-8.318 86.944 11.977 2.591 2.176 6.318 2.35 9.1.419 5.691-3.949 12.365-6.043 19.288-6.055 21.641.474 29.985-1.362 43.082 2.441 4.116 1.194 8.38-1.295 9.382-5.442 3.7-15.319 17.292-26.038 33.042-26.066h12.334c4.349 0 7.794-3.695 7.48-8.04-1.459-20.226 14.654-36.58 33.983-36.58 9.668 0 18.897 4.106 25.324 11.266 2.892 3.221 8.052 3.412 11.124.044 11.272-12.361 29.656-14.697 43.711-5.554 15.745 10.251 20.219 31.396 9.973 47.137zm-373.82-26.233c-12.685-4.679-24.432-9.792-27.131-10.98-7.875-5.617-6.329-19.022 6.385-22.853 16.286-4.905 30.865 6.871 31.085 7.05 3.077 2.567 7.654 2.164 10.234-.908 2.587-3.078 2.189-7.67-.889-10.257-.832-.699-20.654-17.048-44.631-9.827-24.531 7.391-28.658 36.93-9.706 49.286 2.04 1.328 21.93 9.315 29.613 12.149 11.374 4.195 17.12 10.954 15.765 18.542-1.296 7.26-9.325 14.975-21.649 14.975-10.957 0-21.548-4.469-28.332-11.955-2.7-2.978-7.304-3.205-10.284-.506-2.979 2.7-3.205 7.305-.506 10.284 9.499 10.481 24.123 16.738 39.122 16.738 17.768 0 33.237-11.597 35.983-26.977 3.152-17.651-10.878-29.53-25.059-34.761zm164.791-108.276c-12.642 0-24.541 6.683-32.648 18.335-2.365 3.4-1.527 8.074 1.873 10.44s8.075 1.526 10.44-1.874c5.262-7.564 12.673-11.901 20.334-11.901s15.073 4.338 20.335 11.901c2.358 3.389 7.029 4.246 10.44 1.874 3.4-2.366 4.239-7.04 1.874-10.44-8.106-11.652-20.006-18.335-32.648-18.335zm-53.243-17.124c-2.874 3.298-7.024 5.19-11.384 5.19-4.361 0-8.511-1.892-11.385-5.19-2.722-3.123-7.459-3.447-10.582-.727-3.122 2.722-3.448 7.459-.727 10.582 5.724 6.568 13.996 10.335 22.693 10.335 8.698 0 16.969-3.767 22.693-10.335 2.721-3.123 2.396-7.86-.727-10.582-3.122-2.721-7.86-2.396-10.581.727zm201.986 165.769c0-17.884-15.188-32.433-33.856-32.433h-25.719c-.005 0-.01.001-.016.001s-.01-.001-.016-.001c-4.021 0-7.28 3.26-7.28 7.28v96.783c0 4.021 3.26 7.28 7.28 7.28 4.021 0 7.28-3.26 7.28-7.28v-39.126c.297-.002.6-.003.908-.005l38.673 43.94c2.66 3.022 7.261 3.308 10.275.655 3.018-2.656 3.312-7.257.655-10.275l-30.302-34.429c17.865-.87 32.118-15.065 32.118-32.39zm-33.856 17.872c-4.232 0-12.479.039-18.47.071v-35.816h18.47c10.459 0 19.296 8.185 19.296 17.873 0 9.687-8.836 17.872-19.296 17.872zm93.526-93.5c-3.369-2.193-7.879-1.24-10.073 2.13l-24.569 37.741-24.809-37.995c-2.198-3.367-6.711-4.313-10.076-2.115-3.367 2.198-4.314 6.709-2.115 10.076l29.724 45.523-.116 47.261c-.01 4.021 3.242 7.288 7.262 7.298h.019c4.012 0 7.27-3.248 7.28-7.262l.116-47.286 29.487-45.297c2.193-3.371 1.24-7.881-2.13-10.074zm-145.175 104.695c0-17.884-15.188-32.433-33.857-32.433h-25.718c-.005 0-.01.001-.016.001-.005 0-.01-.001-.016-.001-4.021 0-7.28 3.26-7.28 7.28v96.783c0 4.021 3.26 7.28 7.28 7.28s7.28-3.259 7.28-7.28v-39.126c.297-.002.6-.003.908-.005l38.673 43.94c2.659 3.022 7.261 3.308 10.275.655 3.018-2.656 3.312-7.257.655-10.275l-30.302-34.429c17.864-.869 32.118-15.065 32.118-32.39zm-33.856 17.873c-4.234 0-12.48.039-18.469.071v-35.816h18.469c10.46 0 19.296 8.185 19.296 17.872 0 9.688-8.837 17.873-19.296 17.873zm46.63-212.709c-2.874 3.298-7.024 5.19-11.384 5.19-4.361 0-8.51-1.892-11.384-5.19-2.722-3.122-7.459-3.448-10.582-.727s-3.448 7.459-.727 10.582c5.723 6.568 13.995 10.335 22.693 10.335s16.969-3.767 22.693-10.335c2.721-3.123 2.396-7.86-.727-10.582-3.123-2.721-7.861-2.396-10.582.727z"
+              }
             })
           ])
         ]

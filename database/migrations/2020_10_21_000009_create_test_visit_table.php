@@ -15,7 +15,7 @@ class CreateTestVisitTable extends Migration
     {
         Schema::enableForeignKeyConstraints();
         Schema::create('test_visit', function (Blueprint $table) {
-
+            $table->id();
             $table->foreignId('test_id')->constrained()->onDelete('restrict')->onUpdate('cascade');
             $table->foreignId('visit_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
 
