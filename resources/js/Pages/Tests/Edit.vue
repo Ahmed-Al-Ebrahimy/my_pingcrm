@@ -11,7 +11,7 @@
                                 <h1 class=" font-bold text-xl">
                                     <h1 class="font-bold text-xl">
                                     <inertia-link class="text-indigo-400 hover:text-indigo-600" :href="route('tests')">Tests</inertia-link>
-                                    <span class="text-indigo-400 font-medium">/</span> Create a new test
+                                    <span class="text-indigo-400 font-medium">/</span> Update
                                     </h1>
                                 </h1>
                             </div>
@@ -29,7 +29,7 @@
                                     <div class="w-1/3 flex">
                                         <span class="w-full flex items-center leading-normal ml-2 bg-gray-400 rounded rounded-r-none border border-gray-500 px-3 whitespace-no-wrap text-grey-dark text-sm">Full Name </span>
                                     </div>
-                                    <input placeholder="Test Full Name"  v-model="form.testFullName"  type="text" class=" p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative ">
+                                    <input  placeholder="Test Full Name"  v-model="form.testFullName"  type="text" class=" p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative ">
                                     <span class="text-sm text-red-600 mt-1 ml-2" v-if="errors.testFullName">{{errors.testFullName[0]}}</span>
                                 </div>
                             </div>
@@ -126,7 +126,7 @@ export default {
 
 
     clearFields(){
-         this.form = mapValues(this.form, () => null)
+         this.form = mapValues(this.form, () => '')
       },
 
     destroy() {

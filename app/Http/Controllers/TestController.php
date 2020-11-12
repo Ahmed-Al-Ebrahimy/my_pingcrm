@@ -24,6 +24,8 @@ class testController extends Controller
                 ->only('id', 'name', 'testFullName', 'testNormalValue', 'deleted_at', 'created_at'),
         ]);
     }
+
+
     public function create()
     {
         return Inertia::render('Tests/Create', [

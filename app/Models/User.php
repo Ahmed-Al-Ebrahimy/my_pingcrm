@@ -73,4 +73,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Test::class);
     }
+
+
+    public function educationlevels()
+    {
+        return $this->hasMany(Educationlevel::class);
+    }
 }

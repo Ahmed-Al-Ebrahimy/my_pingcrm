@@ -14,8 +14,6 @@ use App\Models\Test;
 
 class LaboratoryController extends Controller
 {
-
-
     public function index()
     {
         return Inertia::render('Laboratory/Index', [
@@ -27,40 +25,10 @@ class LaboratoryController extends Controller
         ]);
     }
 
-
-
-
-    // public function edit(Address $address)
-    // {
-    //     return Inertia::render('laboratory/Edit', [
-    //         'address' => [
-    //             'id' => $address->id,
-    //             'name' => $address->name,
-    //             'patients' => $address->patients()->orderByName()->get()->map->only('id', 'name', 'created_at'),
-    //         ],
-    //         // 'address' => $address
-    //     ]);
-    // }
-
-
     public function edit(Patient $patient)
     {
-
-        // $today = (date('Y-m-d').' 00:00:00');
-        // $todays_visit = Visit::where('patient_id', '=', $patient->id)->where( 'created_at', '>=', $today)->first();
-
-        // if($todays_visit != null){
-        //     $todays_visit_tests = $todays_visit;
-
-        // }else{
-        //     $todays_visit_tests = 'there is no visit todat, plese instruct the patient to go back to secretary to register todays visit';
-        // }
-
-
-
         return Inertia::render('Laboratory/Edit', [
             'tests'               => Test::orderBy('id', 'asc')->get()->map->only('id', 'name'),
-            // 'todays_visit_tests'  => $todays_visit_tests,
             'patient' => [
                 'id'              => $patient->id,
                 'name'            => $patient->name,
@@ -71,7 +39,6 @@ class LaboratoryController extends Controller
 
     public function update(UpdatePatientData $request, Patient $patient)
     {
-        // $today = (date('Y-m-d').' 00:00:00');
         $visit = Visit::where('id', '=', $request->visit_id)->first();
 
             foreach($request->all() as $key => $value){
@@ -89,13 +56,7 @@ class LaboratoryController extends Controller
                 }
             }
 
-            return Redirect::back()->with('success', 'tests inserted successfully');
-
-
-
-
-
-
+        return Redirect::back()->with('success', 'tests inserted successfully');
     }
 
 }

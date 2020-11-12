@@ -1,71 +1,64 @@
 <template>
-    <!-- <div class="max-w-sm sm:max-w-2xl md:bg-purple-800  md:max-w-xl lg:bg-pink-500 lg:max-w-6xl bg-banafsagy-600  mx-auto my-auto mt-6 p-3 pb-2  rounded shadow-md "> -->
-
     <app-layout>
         <div class="py-6">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-banafsagy-600 overflow-hidden shadow-xl p-3  rounded sm:rounded-lg">
-        <!-- <p v-if="$page.flash.message" class="text-sm">{{ $page.flash.message }}</p> -->
-         <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md my-3" role="alert" v-if="$page.flash.message">
-            <div class="flex">
-            <div>
-                <p class="text-sm">{{ $page.flash.message }}</p>
-            </div>
-            </div>
-        </div>
-        <div class="mb-2 flex justify-between">
-            <!-- <button @click="focusInput()">focus</button> -->
-            <div class="flex items-center ">
-                <div class="flex w-full bg-white shadow rounded  ml-1">
-                <input :autofocus="'autofocus'" class="relative w-full border border-pink-500  focus:shadow-outline  px-1 py-1 rounded" v-model="term" autocomplete="off" type="text" id="search" placeholder="Search…">
-                </div>
-                <button class="ml-1 bg-indigo-800  w-1/4 border border-pink-500  px-1 py-1 shadow-md  text-gray-300 hover:bg-indigo-900 rounded-md "  @click="reset">Reset</button>
-            </div>
-            <div class="flex items-center  mr-1">
+                <div class="bg-banafsagy-600 overflow-hidden shadow p-3  rounded sm:rounded-lg">
+
+        <div class="mb-1 flex justify-between">
+            <search-filter v-model="form.search" class="w-1/3 max-w-sm ml-1 mr-4" @reset="reset">
+
+            </search-filter>
+            <div class="flex   mr-1">
                 <inertia-link class="border border-pink-500 bg-indigo-800  text-gray-300 px-3 py-1 shadow-md  hover:bg-indigo-900 rounded-md" :href="route('educationlevels.create')">
                     <span>Create educationlevel</span>
                 </inertia-link>
             </div>
         </div>
         <div class="bg-white rounded shadow overflow-x-auto">
-      <table class="w-full whitespace-no-wrap">
+        <table class="w-full whitespace-no-wrap">
           <thead>
-            <tr class="bg-banafsagy-900 text-samaee-900">
-                <th class="px-2 py-1 text-sm font-bold text-left">Edit</th>
-                <th class="px-2 py-1 text-sm font-bold text-left">ID</th>
-                <th class="px-2 py-1 text-sm font-bold text-left">name</th>
+            <tr class="bg-banafsagy-900 text-gray-200">
+                <th class="border-2 border-blue-400 px-2 py-1 text-center">ID</th>
+                <th class="border-2 border-blue-400 px-2 py-1 text-center">Name</th>
+                <th class="border-2 border-blue-400 px-2 py-1 text-center">updated_at</th>
+                <th class="border-2 border-blue-400 px-2 py-1 text-center">Created_at</th>
             </tr>
           </thead>
           <tfoot>
-            <tr class="bg-banafsagy-800 text-samaee-900">
-                <th class="p-2"><inertia-link v-if="educationlevels.prev_page_url" class="border border-pink-500 bg-banafsagy-900 hover:bg-indigo-900 text-samaee-800 shadow-2xl px-2 py-1 text-sm font-bold text-left rounded-full rounded-r-none" :href="educationlevels.prev_page_url">Previous Page</inertia-link>
-                <inertia-link v-if="educationlevels.next_page_url" class="border border-pink-500 bg-banafsagy-900 hover:bg-indigo-900 text-samaee-800 shadow-2xl  px-2 py-1 text-sm font-bold text-left rounded-full rounded-l-none" :href="educationlevels.next_page_url"> Next Page </inertia-link></th>
-                <th class="text-center">Total Rows:-  {{educationlevels.total}}</th>
-                <th class="text-center" ></th>
-            </tr>
+
           </tfoot>
-            <tr v-for="(educationlevel, index) in educationlevels.data" :key="index"  class="font-medium text-gray-800 hover:bg-purple-400 focus-within:bg-gray-100 " :class="{'bg-purple-300': index % 2 === 0}">
-                <td class="border-t w-px ">
-                    <inertia-link class="px-4 flex outline-none  items-center" :href="route('educationlevels.edit', educationlevel.id)" tabindex="-1">
-                    <icon name="edit3" class="block w-6 h-6 "/>
-                    </inertia-link>
-                </td>
-                <td class="border-t">
-                    <inertia-link class="px-2 py-1 outline-none text-sm flex items-center" :href="route('educationlevels.edit', educationlevel.id)" tabindex="-1">
+            <tr v-for="(educationlevel, index) in educationlevels.data" :key="index"  class="text-center font-medium text-gray-800 hover:bg-purple-400 focus-within:bg-gray-100 " :class="{'bg-purple-300': index % 2 === 0}">
+
+                <td class="text-center border  border-l-2 border-blue-400">
+                    <inertia-link class="px-2 py-1 outline-none text-sm flex " :href="route('educationlevels.edit', educationlevel.id)" tabindex="-1">
                     {{ educationlevel.id }}
                     </inertia-link>
                 </td>
-                <td class="border-t">
-                    <inertia-link class="px-2 py-1 outline-none  text-sm flex items-center" :href="route('educationlevels.edit', educationlevel.id)" tabindex="-1">
+                <td class="text-center  border border-blue-400">
+                    <inertia-link class="px-2 py-1 outline-none  text-sm flex " :href="route('educationlevels.edit', educationlevel.id)" tabindex="-1">
                     {{ educationlevel.name }}
                     </inertia-link>
                 </td>
+
+                <td class="text-center  border border-blue-400">
+                    <inertia-link class="px-2 py-1 outline-none  text-sm flex " :href="route('educationlevels.edit', educationlevel.id)" tabindex="-1">
+                    {{moment(educationlevel.updated_at).format('YYYY-MM-DD')}}
+                    </inertia-link>
+                </td>
+
+                <td class="text-center  border border-blue-400">
+                    <inertia-link class="px-2 py-1 outline-none  text-sm flex " :href="route('educationlevels.edit', educationlevel.id)" tabindex="-1">
+                    {{moment(educationlevel.created_at).format('YYYY-MM-DD')}}
+                    </inertia-link>
+                </td>
+
             </tr>
             <tr v-if="educationlevels.data.length === 0">
-                <td class="border-t px-6 py-4" colspan="4">No educationlevels found.</td>
+                <td class="text-center  border border-blue-400 px-6 py-4" colspan="4">No educationlevels found.</td>
             </tr>
         </table>
         </div>
+        <pagination :links="educationlevels.links" />
     </div>
     </div>
     </div>
@@ -76,37 +69,44 @@
     import AppLayout from '@/Layouts/AppLayout'
     import Welcome from '@/Jetstream/Welcome'
     import Icon from '@/Shared/Icon'
+    import mapValues from 'lodash/mapValues'
     import Pagination from '@/Shared/Pagination'
-
-    import _ from 'lodash'
-
+    import pickBy from 'lodash/pickBy'
+    import SearchFilter from '@/Shared/SearchFilter'
+    import throttle from 'lodash/throttle'
     export default {
         components: {
             AppLayout,
             Welcome,
-            Pagination,
             Icon,
+            Pagination,
+            SearchFilter,
         },
-        props: ['educationlevels', 'errors'],
-
-        data() {
-            return {
-                term: '',
-            }
+        props: {
+            educationlevels: Object,
+            filters: Object,
         },
-        watch: {
-          term: {
-            handler: _.throttle(function() {
-                this.$inertia.replace(this.route('educationlevels', {term: this.term}))
-            }, 200),
-            deep: true,
-            },
-        },
-        methods: {
-            reset() {
-                this.term =  null;
-            },
-        },
+  data() {
+    return {
+      form: {
+        search: this.filters.search,
+      },
+    }
+  },
+  watch: {
+    form: {
+      handler: throttle(function() {
+        let query = pickBy(this.form)
+        this.$inertia.replace(this.route('educationlevels', Object.keys(query).length ? query : { remember: 'forget' }))
+      }, 150),
+      deep: true,
+    },
+  },
+  methods: {
+    reset() {
+      this.form = mapValues(this.form, () => null)
+    },
+  },
 
     }
 </script>

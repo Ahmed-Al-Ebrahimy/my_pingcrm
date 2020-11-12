@@ -26,9 +26,9 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia\Inertia::render('Dashboard');
 })->name('dashboard');
 
-// Route::get('/design_test', function () {
-//     return Inertia\Inertia::render('design_test');
-// })->name('design_test');
+Route::get('/design_test', function () {
+    return Inertia\Inertia::render('design_test');
+})->name('design_test');
 
 // // Resource Route for posts.
 // Route::resource('posts', PostController::class);
