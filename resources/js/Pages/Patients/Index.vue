@@ -22,32 +22,50 @@
                         <table class="w-full whitespace-no-wrap">
                             <thead>
                                 <tr class="bg-banafsagy-900 text-samaee-900">
-                                    <th class="px-2 py-1 text-sm font-bold text-left">Edit</th>
-                                    <th class="px-2 py-1 text-sm font-bold text-left">ID</th>
-                                    <th class="px-2 py-1 text-sm font-bold text-left">Name</th>
-                                    <th class="px-2 py-1 text-sm font-bold text-left">AddressName</th>
+                                    <th class="border-2 border-blue-400 px-2 py-1 text-center">الرقم</th>
+                                    <th class="border-2 border-blue-400 px-2 py-1 text-center">الاسم</th>
+                                    <th class="border-2 border-blue-400 px-2 py-1 text-center">الموعد</th>
+                                    <th class="border-2 border-blue-400 px-2 py-1 text-center">اخر مراجعة</th>
+                                    <th class="border-2 border-blue-400 px-2 py-1 text-center">اخر تعديل</th>
                                 </tr>
                             </thead>
                             <tr v-for="(patient, index) in patients.data" :key="index"  class="font-medium text-gray-800 hover:bg-purple-400 focus-within:bg-gray-100 " :class="{'bg-purple-300': index % 2 === 0}">
-                                <td class="border-t w-px ">
-                                    <inertia-link class="px-4 flex outline-none  items-center" :href="route('patients.edit', patient.id)" tabindex="-1">
-                                    <icon name="edit3" class="block w-6 h-6 "/>
-                                    </inertia-link>
-                                </td>
-                                <td class="border-t">
-                                    <inertia-link class="px-2 py-1 outline-none text-sm flex items-center" :href="route('patients.edit', patient.id)" tabindex="-1">
+
+                                <td class="border border-l-2  border-blue-400">
+                                    <inertia-link class="px-1 py-1 outline-none flex" :href="route('patients.edit', patient.id)">
                                     {{ patient.id }}
                                     </inertia-link>
                                 </td>
-                                <td class="border-t">
-                                    <inertia-link class="px-2 py-1 outline-none  text-sm flex items-center" :href="route('patients.edit', patient.id)" tabindex="-1">
+
+                                <td class="border border-blue-400">
+                                    <inertia-link class="px-1 py-1 outline-none flex" :href="route('patients.edit', patient.id)" tabindex="-1">
                                     {{ patient.name }}
                                     </inertia-link>
                                 </td>
 
-                                <td class="border-t">
-                                    <inertia-link class="px-2 py-1 outline-none  text-sm flex items-center" :href="route('patients.edit', patient.id)" tabindex="-1">
-                                    {{ patient.address.name }}
+                                <td class="border border-blue-400">
+                                    <inertia-link class="px-1 py-1 outline-none flex" :href="route('patients.edit', patient.id)" tabindex="-1">
+                                    {{
+                                       !patient.last_visit ? 'غير معروف' :
+                                       !patient.last_visit.next_visit  ? 'غير معروف'
+                                        : moment(patient.last_visit.next_visit).format('YYYY-MM-DD')
+
+                                    }}
+                                    </inertia-link>
+                                </td>
+
+                                <td class="border border-blue-400">
+                                    <inertia-link class="px-1 py-1 outline-none flex" :href="route('patients.edit', patient.id)" tabindex="-1">
+                                    {{
+                                       patient.last_visit ? moment(patient.last_visit.created_at).format('YYYY-MM-DD') : 'غير معروف'
+
+                                    }}
+                                    </inertia-link>
+                                </td>
+
+                                <td class="border  border-blue-400">
+                                    <inertia-link class="px-1 py-1 outline-none flex" :href="route('patients.edit', patient.id)" tabindex="-1">
+                                    {{moment(patient.updated_at).format('YYYY-MM-DD, h:m a')}}
                                     </inertia-link>
                                 </td>
 

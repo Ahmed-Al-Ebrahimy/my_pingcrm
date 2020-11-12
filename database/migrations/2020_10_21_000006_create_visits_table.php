@@ -31,8 +31,9 @@ class CreateVisitsTable extends Migration
 
             $table->string('notes')->nullable();
 
-            $table->softDeletes();
+            $table->date('next_visit')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

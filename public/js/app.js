@@ -5630,6 +5630,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -63056,36 +63074,45 @@ var render = function() {
                             "th",
                             {
                               staticClass:
-                                "px-2 py-1 text-sm font-bold text-left"
+                                "border-2 border-blue-400 px-2 py-1 text-center"
                             },
-                            [_vm._v("Edit")]
+                            [_vm._v("الرقم")]
                           ),
                           _vm._v(" "),
                           _c(
                             "th",
                             {
                               staticClass:
-                                "px-2 py-1 text-sm font-bold text-left"
+                                "border-2 border-blue-400 px-2 py-1 text-center"
                             },
-                            [_vm._v("ID")]
+                            [_vm._v("الاسم")]
                           ),
                           _vm._v(" "),
                           _c(
                             "th",
                             {
                               staticClass:
-                                "px-2 py-1 text-sm font-bold text-left"
+                                "border-2 border-blue-400 px-2 py-1 text-center"
                             },
-                            [_vm._v("Name")]
+                            [_vm._v("الموعد")]
                           ),
                           _vm._v(" "),
                           _c(
                             "th",
                             {
                               staticClass:
-                                "px-2 py-1 text-sm font-bold text-left"
+                                "border-2 border-blue-400 px-2 py-1 text-center"
                             },
-                            [_vm._v("AddressName")]
+                            [_vm._v("اخر مراجعة")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "th",
+                            {
+                              staticClass:
+                                "border-2 border-blue-400 px-2 py-1 text-center"
+                            },
+                            [_vm._v("تاريخ ووقت التحديث")]
                           )
                         ]
                       )
@@ -63103,48 +63130,16 @@ var render = function() {
                         [
                           _c(
                             "td",
-                            { staticClass: "border-t w-px " },
+                            {
+                              staticClass: "border border-l-2  border-blue-400"
+                            },
                             [
                               _c(
                                 "inertia-link",
                                 {
-                                  staticClass:
-                                    "px-4 flex outline-none  items-center",
+                                  staticClass: "px-1 py-1 outline-none flex",
                                   attrs: {
-                                    href: _vm.route(
-                                      "patients.edit",
-                                      patient.id
-                                    ),
-                                    tabindex: "-1"
-                                  }
-                                },
-                                [
-                                  _c("icon", {
-                                    staticClass: "block w-6 h-6 ",
-                                    attrs: { name: "edit3" }
-                                  })
-                                ],
-                                1
-                              )
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "td",
-                            { staticClass: "border-t" },
-                            [
-                              _c(
-                                "inertia-link",
-                                {
-                                  staticClass:
-                                    "px-2 py-1 outline-none text-sm flex items-center",
-                                  attrs: {
-                                    href: _vm.route(
-                                      "patients.edit",
-                                      patient.id
-                                    ),
-                                    tabindex: "-1"
+                                    href: _vm.route("patients.edit", patient.id)
                                   }
                                 },
                                 [
@@ -63161,13 +63156,12 @@ var render = function() {
                           _vm._v(" "),
                           _c(
                             "td",
-                            { staticClass: "border-t" },
+                            { staticClass: "border border-blue-400" },
                             [
                               _c(
                                 "inertia-link",
                                 {
-                                  staticClass:
-                                    "px-2 py-1 outline-none  text-sm flex items-center",
+                                  staticClass: "px-1 py-1 outline-none flex",
                                   attrs: {
                                     href: _vm.route(
                                       "patients.edit",
@@ -63190,13 +63184,12 @@ var render = function() {
                           _vm._v(" "),
                           _c(
                             "td",
-                            { staticClass: "border-t" },
+                            { staticClass: "border border-blue-400" },
                             [
                               _c(
                                 "inertia-link",
                                 {
-                                  staticClass:
-                                    "px-2 py-1 outline-none  text-sm flex items-center",
+                                  staticClass: "px-1 py-1 outline-none flex",
                                   attrs: {
                                     href: _vm.route(
                                       "patients.edit",
@@ -63208,7 +63201,85 @@ var render = function() {
                                 [
                                   _vm._v(
                                     "\n                                    " +
-                                      _vm._s(patient.address.name) +
+                                      _vm._s(
+                                        !patient.last_visit
+                                          ? "غير معروف"
+                                          : !patient.last_visit.next_visit
+                                          ? "غير معروف"
+                                          : _vm
+                                              .moment(
+                                                patient.last_visit.next_visit
+                                              )
+                                              .format("YYYY-MM-DD")
+                                      ) +
+                                      "\n                                    "
+                                  )
+                                ]
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            { staticClass: "border border-blue-400" },
+                            [
+                              _c(
+                                "inertia-link",
+                                {
+                                  staticClass: "px-1 py-1 outline-none flex",
+                                  attrs: {
+                                    href: _vm.route(
+                                      "patients.edit",
+                                      patient.id
+                                    ),
+                                    tabindex: "-1"
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                    " +
+                                      _vm._s(
+                                        patient.last_visit
+                                          ? _vm
+                                              .moment(
+                                                patient.last_visit.created_at
+                                              )
+                                              .format("YYYY-MM-DD")
+                                          : "غير معروف"
+                                      ) +
+                                      "\n                                    "
+                                  )
+                                ]
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            { staticClass: "border  border-blue-400" },
+                            [
+                              _c(
+                                "inertia-link",
+                                {
+                                  staticClass: "px-1 py-1 outline-none flex",
+                                  attrs: {
+                                    href: _vm.route(
+                                      "patients.edit",
+                                      patient.id
+                                    ),
+                                    tabindex: "-1"
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                    " +
+                                      _vm._s(
+                                        _vm
+                                          .moment(patient.updated_at)
+                                          .format("YYYY-MM-DD, h:m a")
+                                      ) +
                                       "\n                                    "
                                   )
                                 ]

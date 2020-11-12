@@ -16,6 +16,7 @@ use App\Http\Requests\StorePatientData;
 use App\Http\Requests\UpdatePatientData;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
+use Carbon\Carbon;
 use Inertia\Inertia;
 
 class PatientController extends Controller
@@ -30,10 +31,12 @@ class PatientController extends Controller
                 ->paginate(10)
                 ->transform(function ($patient) {
                     return [
-                        'id' => $patient->id,
-                        'name' => $patient->name,
-                        'deleted_at' => $patient->deleted_at,
-                        'address' => $patient->address ? $patient->address->only('name') : null,
+                        'id'            => $patient->id,
+                        'name'          => $patient->name,
+                        'deleted_at'    => $patient->deleted_at,
+                        'created_at'    => $patient->created_at,
+                        'updated_at'    => $patient->updated_at,
+                        'last_visit'    => $patient->visits ? $patient->visits->map->only('created_at', 'next_visit')->last(): null,
                     ];
                 }),
         ]);
@@ -59,7 +62,7 @@ class PatientController extends Controller
 
        \DB::transaction(function () use ($request) {
 
-
+        $today2 = (date('Y-m-d'));
             $patient = Patient::create([
                 'name'              => $request->name,
                 'birth_date'        => $request->birth_date,
@@ -81,12 +84,12 @@ class PatientController extends Controller
             ]);
 
             Visit::create([
-                //    $next_visit_date = Carbon::now()->addMonths(3);
                 'systolic_bp'  => $request->systolic_bp,
                 'diastolic_bp' => $request->diastolic_bp,
                 'height'       => $request->height,
                 'weight'       => $request->weight,
                 'patient_id'   => $patient->id,
+                'next_visit'   => Carbon::today()->addMonths(3)->toDateString(),
                 'user_id'      => Auth::user()->id,
             ]);
 
@@ -134,7 +137,6 @@ class PatientController extends Controller
 
     public function update(Patient $patient)
     {
-
         \DB::transaction(function () use ($patient) {
             $patient->update(
                 Request::validate([
@@ -157,16 +159,17 @@ class PatientController extends Controller
             );
 
             $today = (date('Y-m-d').' 00:00:00');
+            //$today2 = Carbon::today()->toDateString();
             $visit = Visit::where('patient_id', '=', $patient->id)->where( 'created_at', '>=', $today)->first();
             if ($visit === null) {
                 Visit::create([
-                    //    $next_visit_date = Carbon::now()->addMonths(3);
-                    'patient_id'    => $patient->id,
                     'systolic_bp'   => $patient->systolic_bp,
                     'diastolic_bp'  => $patient->diastolic_bp,
                     'height'        => $patient->height,
                     'weight'        => $patient->weight,
-                    'user_id' => Auth::user()->id,
+                    'patient_id'    => $patient->id,
+                    'next_visit'    => Carbon::today()->addMonths(3)->toDateString(),
+                    'user_id'       => Auth::user()->id,
                 ]);
             }else{
                 Visit::where('id', $visit->id)->update([
@@ -175,7 +178,7 @@ class PatientController extends Controller
                     'diastolic_bp'  => $patient->diastolic_bp,
                     'height'        => $patient->height,
                     'weight'        => $patient->weight,
-                    'user_id' => Auth::user()->id,
+                    'user_id'       => Auth::user()->id,
                 ]);
             }
         });
