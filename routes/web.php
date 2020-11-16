@@ -6,6 +6,7 @@ use App\Http\Controllers\PatientController;
 use App\Http\Controllers\EducationlevelController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\LaboratoryController;
+use App\Http\Controllers\QueueController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,7 +36,8 @@ Route::get('/design_test', function () {
 // // Route for get posts for yajra post request.
 // Route::get('get-posts', [PostController::class, 'getPosts'])->name('get-posts');
 
-
+// Queue
+Route::get('queue', [QueueController::class, 'index'])->name('queue')->middleware('auth');
 
 // Educationlevels
 Route::get('educationlevels', [EducationlevelController::class, 'index'])->name('educationlevels')->middleware('auth');

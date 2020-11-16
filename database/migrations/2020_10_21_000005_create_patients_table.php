@@ -51,7 +51,7 @@ class CreatePatientsTable extends Migration
             $table->foreignId('occupation_id')->nullable()->constrained()->onDelete('set null')->onUpdate('cascade');
             $table->foreignId('type_id')->nullable()->constrained()->onDelete('set null')->onUpdate('cascade');
             $table->foreignId('destination_id')->nullable()->constrained()->onDelete('set null')->onUpdate('cascade');
-            $table->foreignId('clinic_id')->nullable()->constrained()->onDelete('set null')->onUpdate('cascade');
+
             $table->foreignId('user_id')->constrained()->onDelete('restrict')->onUpdate('cascade');
 
             $table->boolean('queue')->default(0);

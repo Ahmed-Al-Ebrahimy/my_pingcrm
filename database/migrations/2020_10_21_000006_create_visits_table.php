@@ -30,7 +30,7 @@ class CreateVisitsTable extends Migration
             $table->integer('diastolic_bp')->nullable();
 
             $table->string('notes')->nullable();
-
+            $table->foreignId('clinic_id')->nullable();
             $table->date('next_visit')->nullable();
             $table->timestamps();
             $table->softDeletes();
