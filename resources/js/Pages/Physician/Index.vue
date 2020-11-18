@@ -12,6 +12,11 @@
                             <option value="only">Only Trashed</option>
                             </select>
                         </search-filter>
+                        <div class="flex items-center  mr-1">
+                            <inertia-link class="border border-pink-500 bg-indigo-800  text-gray-300 px-3 py-1 shadow-md  hover:bg-indigo-900 rounded-md" :href="route('patients.create')">
+                                <span>Create patient</span>
+                            </inertia-link>
+                        </div>
                     </div>
                     <div class="bg-white rounded shadow overflow-x-auto">
                         <table class="w-full whitespace-no-wrap">
@@ -26,28 +31,28 @@
                             </thead>
                             <tr v-for="(patient, index) in patients.data" :key="index"  class="font-medium text-gray-800 hover:bg-purple-400 focus-within:bg-gray-100 " :class="{'bg-purple-300': index % 2 === 0}">
                                 <td class="border-t w-px ">
-                                    <inertia-link class="px-4 flex outline-none  items-center" :href="route('laboratory.edit', patient.id)" tabindex="-1">
+                                    <inertia-link class="px-4 flex outline-none  items-center" :href="route('physician.edit', patient.id)" tabindex="-1">
                                     <icon name="edit3" class="block w-6 h-6 "/>
                                     </inertia-link>
                                 </td>
                                 <td class="border-t">
-                                    <inertia-link class="px-2 py-1 outline-none text-sm flex items-center" :href="route('laboratory.edit', patient.id)" tabindex="-1">
+                                    <inertia-link class="px-2 py-1 outline-none text-sm flex items-center" :href="route('physician.edit', patient.id)" tabindex="-1">
                                     {{ patient.id }}
                                     </inertia-link>
                                 </td>
                                 <td class="border-t">
-                                    <inertia-link class="px-2 py-1 outline-none  text-sm flex items-center" :href="route('laboratory.edit', patient.id)" tabindex="-1">
+                                    <inertia-link class="px-2 py-1 outline-none  text-sm flex items-center" :href="route('physician.edit', patient.id)" tabindex="-1">
                                     {{ patient.name }}
                                     </inertia-link>
                                 </td>
 
                                 <td class="border-t">
-                                    <inertia-link class="px-2 py-1 outline-none  text-sm flex items-center" :href="route('laboratory.edit', patient.id)" tabindex="-1">
+                                    <inertia-link class="px-2 py-1 outline-none  text-sm flex items-center" :href="route('physician.edit', patient.id)" tabindex="-1">
                                     {{moment(patient.created_at).format('YYYY-MM-DD')}}
                                     </inertia-link>
                                 </td>
                                 <td class="border-t">
-                                    <inertia-link class="px-2 py-1 outline-none  text-sm flex items-center" :href="route('laboratory.edit', patient.id)" tabindex="-1">
+                                    <inertia-link class="px-2 py-1 outline-none  text-sm flex items-center" :href="route('physician.edit', patient.id)" tabindex="-1">
                                     {{moment(patient.updated_at).format('YYYY-MM-DD')}}
                                     </inertia-link>
                                 </td>

@@ -30,7 +30,7 @@
                                 <icon name="address" class="block w-5 h-5 mr-1 fill-gray-100" /> Address
                             </jet-nav-link>
 
-                            <jet-nav-link :href="route('patients')"  :active="$page.currentRouteName == 'patients'">
+                            <jet-nav-link :href="route('physician')"  :active="$page.currentRouteName == 'physician'">
                                 <icon name="physician" class="block w-5 h-5 mr-1 fill-gray-100" /> Physician
                             </jet-nav-link>
 

@@ -7,6 +7,7 @@ use App\Http\Controllers\EducationlevelController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\LaboratoryController;
 use App\Http\Controllers\QueueController;
+use App\Http\Controllers\PhysicianController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,14 +28,22 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia\Inertia::render('Dashboard');
 })->name('dashboard');
 
-Route::get('/design_test', function () {
-    return Inertia\Inertia::render('design_test');
-})->name('design_test');
+// Route::get('/design_test', function () {
+//     return Inertia\Inertia::render('design_test');
+// })->name('design_test');
 
-// // Resource Route for posts.
-// Route::resource('posts', PostController::class);
-// // Route for get posts for yajra post request.
-// Route::get('get-posts', [PostController::class, 'getPosts'])->name('get-posts');
+// Physician
+Route::middleware(['auth:sanctum', 'verified'])->get('physician', [PhysicianController::class, 'index'])->name('physician');
+Route::middleware(['auth:sanctum', 'verified'])->get('physician/{patient}/edit', [PhysicianController::class, 'edit'])->name('physician.edit');
+
+// Route::middleware(['auth:sanctum', 'verified'])->get('patients/create', [PhysicianController::class, 'create'])->name('patients.create');
+// Route::middleware(['auth:sanctum', 'verified'])->post('patients', [PhysicianController::class, 'store'])->name('patients.store');
+// Route::middleware(['auth:sanctum', 'verified'])->get('patients/{patient}/edit', [PhysicianController::class, 'edit'])->name('patients.edit');
+// Route::middleware(['auth:sanctum', 'verified'])->put('patients/{patient}', [PhysicianController::class, 'update'])->name('patients.update');
+// Route::middleware(['auth:sanctum', 'verified'])->post('patients/{patient}', [PhysicianController::class, 'destroy'])->name('patients.destroy');
+// Route::middleware(['auth:sanctum', 'verified'])->put('patients/{patient}/restore', [PhysicianController::class, 'restore'])->name('patients.restore');
+
+
 
 // Queue
 Route::get('queue', [QueueController::class, 'index'])->name('queue')->middleware('auth');
