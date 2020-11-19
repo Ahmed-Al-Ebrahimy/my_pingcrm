@@ -11,7 +11,7 @@
         <!-- <input type="text" v-model="form.name" class="pr-6 pb-8 w-full lg:w-1/2 border-b" placeholder="name"/>
         <div class="text-sm text-red-600 mt-1" v-if="errors.name">{{errors.name[0]}}</div> -->
 
-        <text-input v-model="form.name" :error="errors.name" class="pr-6 pb-8 w-full lg:w-1/2" label="Last name" />
+        <text-input v-model="form.name" :error="errors.name" class="pr-6 pb-8 w-full lg:w-1/2" label="Address name" />
     </div>
 
     <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex justify-end items-center">

@@ -22,42 +22,7 @@
                 </div>
                 </form>
             </div>
-            <h2 class="mt-12 font-bold text-2xl">Patients</h2>
-            <div class="mt-6 bg-white rounded shadow overflow-x-auto">
-            <table class="w-full whitespace-no-wrap">
-                <tr class="text-left font-bold">
-                <th class="px-6 pt-6 pb-4">Name</th>
-                <th class="px-6 pt-6 pb-4">Birth_date</th>
-                <th class="px-6 pt-6 pb-4" colspan="2">Gender</th>
-                </tr>
-                <tr v-if="address.patients[0]" v-for="patient in address.patients" :key="patient.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
-                <td class="border-t">
-                    <inertia-link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="route('patients.edit', patient.id)">
-                    {{ patient.name }}
-                    <icon v-if="patient.deleted_at" name="trash" class="flex-shrink-0 w-3 h-3 fill-gray-400 ml-2" />
-                    </inertia-link>
-                </td>
-                <td class="border-t">
-                    <inertia-link class="px-6 py-4 flex items-center" :href="route('patients.edit', patient.id)" tabindex="-1">
-                    {{ patient.city }}
-                    </inertia-link>
-                </td>
-                <td class="border-t">
-                    <inertia-link class="px-6 py-4 flex items-center" :href="route('patients.edit', patient.id)" tabindex="-1">
-                    {{ patient.phone }}
-                    </inertia-link>
-                </td>
-                <td class="border-t w-px">
-                    <inertia-link class="px-4 flex items-center" :href="route('patients.edit', patient.id)" tabindex="-1">
-                    <icon name="cheveron-right" class="block w-6 h-6 fill-gray-400" />
-                    </inertia-link>
-                </td>
-                </tr>
-                <tr v-else>
-                <td class="border-t px-6 py-4" colspan="4">No patients found.</td>
-                </tr>
-            </table>
-            </div>
+
         </div>
     </app-layout>
 </template>

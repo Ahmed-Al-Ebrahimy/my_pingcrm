@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Clinic extends Model
 {
-    protected $fillable = ['id', 'clinicName'];
+    protected $fillable = ['id', 'name'];
 
-    public function patients()
+    public function visits()
     {
-        return $this->hasMany('App\Patient');
+        return $this->hasMany('App\Visit');
     }
 }

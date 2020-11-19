@@ -3,7 +3,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+// use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use App\Models\Educationlevel;
@@ -12,14 +14,14 @@ use Illuminate\Validation\Rule;
 
 class EducationlevelController extends Controller
 {
-    public function index(Request $request)
+
+    public function index()
     {
         return Inertia::render('Educationlevels/Index', [
-            'educationlevels' =>  Educationlevel::when( $request->term, function($query, $term){
-
-                $query->where('name', 'like', '%' . $term . '%');
-
-            }) ->paginate(10)
+            'filters' => Request::all('search'),
+            'educationlevels' => Educationlevel::orderBy('id')
+                ->filter(Request::only('search'))
+                ->paginate(10)->only('id', 'name', 'deleted_at', 'created_at'),
         ]);
     }
 
@@ -31,20 +33,20 @@ class EducationlevelController extends Controller
         ]);
     }
 
+
     public function store(Request $request)
     {
 
-        $request->validate([
-            'name'       => ['required', 'unique:educationlevels'],
-        ]);
+        Auth::user()->educationlevels()->create(
+            Request::validate([
+                'name' => ['required', 'max:100', 'min:5', 'unique:educationlevels'],
+            ])
+        );
 
-
-        Educationlevel::create([
-            'name' => $request->input('name'),
-        ]);
-
-        return Redirect::route('educationlevels')->with('message', 'Educationlevel created.');
+        return Redirect::back()->with('success', 'Educationlevel created.');
     }
+
+
 
     public function edit(Educationlevel $educationlevel)
     {
@@ -52,19 +54,29 @@ class EducationlevelController extends Controller
             'educationlevel' => $educationlevel
         ]);
     }
-
-    public function update(Educationlevel $educationlevel, Request $request)
+    public function update(Educationlevel $educationlevel)
     {
-            $request->validate([
-                'name'       => ['required', Rule::unique('educationlevels')->ignore($educationlevel->id)],
-            ]);
 
-            Educationlevel::where('id', $educationlevel->id)->update([
-                'name'       => $request->input('name'),
-            ]);
-
-            return Redirect::route('educationlevels')->with('message', 'Educationlevel updated.');
+        $educationlevel->update(
+            Request::validate([
+                'name'    => ['required','min:6', Rule::unique('educationlevels')->ignore($educationlevel->id)],
+            ])
+        );
+        return Redirect::route('educationlevels')->with('message', 'Test Updated');
     }
+
+    // public function update(Educationlevel $educationlevel, Request $request)
+    // {
+    //         $request->validate([
+    //             'name'       => ['required', Rule::unique('educationlevels')->ignore($educationlevel->id)],
+    //         ]);
+
+    //         Educationlevel::where('id', $educationlevel->id)->update([
+    //             'name'       => $request->input('name'),
+    //         ]);
+
+    //         return Redirect::route('educationlevels')->with('message', 'Educationlevel updated.');
+    // }
 
     public function destroy(Educationlevel $educationlevel)
     {

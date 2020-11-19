@@ -1,33 +1,65 @@
 <template>
- <app-layout>
-<div>
-<h1 class="mb-8 font-bold text-3xl">
-    <h1 class=""> Create new educationlevel</h1>
-</h1>
-<div class="bg-white rounded shadow overflow-hidden max-w-3xl">
-    <form id="create_educationlevel" @submit.prevent="submit()">
+    <app-layout>
+        <div class="py-6">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <div class="bg-banafsagy-600 overflow-hidden lg:w-1/2  rounded-md border-2 border-red-500">
+                    <form id="create_address" @submit.prevent="submit()">
 
-    <div class="p-8 -mr-6 -mb-8 flex flex-wrap">
-        <input type="text" v-model="form.name" class="pr-6 pb-8 w-full lg:w-1/2 border-b" placeholder="name"/>
-        <div class="text-sm text-red-600 mt-1" required="required" v-if="errors.name">{{errors.name[0]}}</div>
-    </div>
+                        <div class="bg-indigo-400  rounded-md">
+                             <div class="flex justify-center  bg-indigo-800 rounded-md rounded-b-none shadow-lg text-gray-100">
+                                <h1 class=" font-bold text-xl">
+                                    <h1 class="font-bold text-xl">
+                                    <inertia-link class="text-indigo-400 hover:text-indigo-600" :href="route('educationlevels')">Educationlevels</inertia-link>
+                                    <span class="text-indigo-400 font-medium">/</span> Create
+                                    </h1>
+                                </h1>
+                            </div>
+                            <div class="grid grid-cols-1 p-1">
+                                <div class="flex flex-wrap items-stretch w-3/4 relative p-3 ml-6">
+                                    <div class="w-1/3 flex -mr-px ">
+                                        <span class="w-full flex items-center leading-normal bg-gray-400 rounded rounded-r-none border border-gray-500 px-3 whitespace-no-wrap text-grey-dark text-sm">Name </span>
+                                    </div>
+                                    <input required placeholder="Educationlevel Name"  v-model="form.name"  type="text" class="p-1 px-2 rounded-sm bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-10 border-gray-500   rounded-l-none relative ">
+                                </div>
+                                <div v-if="errors.name" class="flex w-3/4 relative pl-2 ml-12">
+                                     <span class="text-sm ml-2 text-red-600">{{errors.name[0]}}</span>
+                                </div>
+                            </div>
 
-    <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex justify-end items-center">
+                        </div>
 
-         <loading-button :loading="sending" class="btn-indigo" type="submit">Create educationlevel</loading-button>
-        <!-- <button  class="btn-indigo" :loading="sending"  type="submit">Create educationlevel</button> -->
-    </div>
+                        <div class="px-2 py-1 bg-indigo-800  rounded-t-none rounded-md grid grid-cols-4 justify-items-stretch ">
+                            <div class="flex justify-start items-center">
+                                <loading-button :loading="sending" class=" bg-green-500 px-2 py-1 rounded text-gray-200 whitespace-no-wrap hover:bg-green-600 focus:bg-green-600" type="submit">
+                                     Create Educationlevel
+                                </loading-button>
+                            </div>
+                            <div></div>
 
-    </form>
-</div>
-</div>
-</app-layout>
+                            <div class="flex justify-self-end items-center">
+                                <button type="button"  @click="clearFields"  class="bg-blue-600 px-2 py-1 rounded text-gray-200 whitespace-no-wrap hover:bg-blue-700 focus:bg-blue-700">
+                                     Cleare Field
+                                </button>
+                            </div>
+
+                            <div class="flex justify-end items-center">
+                                <inertia-link :href="route('educationlevels')" class="bg-red-500 px-2 py-1 rounded text-gray-200 whitespace-no-wrap hover:bg-red-600 focus:bg-red-600">
+                                    Cleare & Back
+                                </inertia-link>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </app-layout>
 </template>
 
 <script>
 import AppLayout from '@/Layouts/AppLayout'
 import Welcome from '@/Jetstream/Welcome'
-
+import mapValues from 'lodash/mapValues'
 import LoadingButton from '@/Shared/LoadingButton'
 
 export default {
@@ -48,10 +80,18 @@ export default {
     }
   },
   methods: {
+
+      clearFields(){
+         this.form = mapValues(this.form, () => null)
+      },
+
       submit() {
         this.$inertia.post(this.route('educationlevels.store'), this.form, {
           onStart: () => this.sending = true,
-          onFinish: () => this.sending = false,
+           onFinish: () => {
+                 this.clearFields(),
+                 this.sending = false
+          }
         })
       },
   },

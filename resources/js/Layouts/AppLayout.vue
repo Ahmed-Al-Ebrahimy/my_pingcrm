@@ -1,9 +1,5 @@
 <template>
 <div class="min-h-screen bg-gray-200  font-sans capitalize ">
-
-
-
-
         <nav class="border-b border-purple-600 bg-indigo-800 ">
             <!-- Primary Navigation Menu -->
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-4">
@@ -26,11 +22,15 @@
                                 <icon name="id_card" class="block w-5 h-5 mr-1 fill-gray-100" /> Data_Entry
                             </jet-nav-link>
 
+                             <jet-nav-link :href="route('queue')"  :active="$page.currentRouteName == 'queue'">
+                                Queue
+                            </jet-nav-link>
+
                             <jet-nav-link :href="route('addresses')"  :active="$page.currentRouteName == 'addresses'">
                                 <icon name="address" class="block w-5 h-5 mr-1 fill-gray-100" /> Address
                             </jet-nav-link>
 
-                            <jet-nav-link :href="route('patients')"  :active="$page.currentRouteName == 'patients'">
+                            <jet-nav-link :href="route('physician')"  :active="$page.currentRouteName == 'physician'">
                                 <icon name="physician" class="block w-5 h-5 mr-1 fill-gray-100" /> Physician
                             </jet-nav-link>
 
@@ -38,9 +38,13 @@
                                 Education
                             </jet-nav-link>
 
-                            <!-- <jet-nav-link :href="route('patients')"  :active="$page.currentRouteName == 'patients'">
+                            <jet-nav-link :href="route('tests')"  :active="$page.currentRouteName == 'tests'">
+                                <icon name="tests" class="block w-5 h-5 mr-1 fill-gray-100" /> Tests
+                            </jet-nav-link>
+
+                            <jet-nav-link :href="route('laboratory')"  :active="$page.currentRouteName == 'laboratory'">
                                 <icon name="laboratory" class="block w-5 h-5 mr-1 fill-gray-100" /> Laboratory
-                            </jet-nav-link> -->
+                            </jet-nav-link>
 
 
                         </div>
