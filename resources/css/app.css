@@ -13,6 +13,23 @@
 
 /* Utilities */
 @import "tailwindcss/utilities";
+.tooltip {
+    position: relative;
+  }
+  .tooltip .tooltiptext  {
+    visibility: hidden;
+
+    top: -5px;
+  left: 105%;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+  }
+
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+  }
 
 .rtl{
     direction: rtl;

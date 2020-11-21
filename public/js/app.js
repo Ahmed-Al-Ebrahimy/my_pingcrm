@@ -5708,7 +5708,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Layouts/AppLayout */ "./resources/js/Layouts/AppLayout.vue");
 /* harmony import */ var _Jetstream_Welcome__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Jetstream/Welcome */ "./resources/js/Jetstream/Welcome.vue");
-/* harmony import */ var _Shared_LoadingButton__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Shared/LoadingButton */ "./resources/js/Shared/LoadingButton.vue");
+/* harmony import */ var _Shared_Icon__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Shared/Icon */ "./resources/js/Shared/Icon.vue");
+/* harmony import */ var _Shared_LoadingButton__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Shared/LoadingButton */ "./resources/js/Shared/LoadingButton.vue");
 //
 //
 //
@@ -5838,6 +5839,69 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -5845,7 +5909,8 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     AppLayout: _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__["default"],
     Welcome: _Jetstream_Welcome__WEBPACK_IMPORTED_MODULE_1__["default"],
-    LoadingButton: _Shared_LoadingButton__WEBPACK_IMPORTED_MODULE_2__["default"]
+    LoadingButton: _Shared_LoadingButton__WEBPACK_IMPORTED_MODULE_3__["default"],
+    Icon: _Shared_Icon__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   props: {
     addresses: Array,
@@ -5854,7 +5919,8 @@ __webpack_require__.r(__webpack_exports__);
     types: Array,
     patient: Object,
     todays_visit: Object,
-    errors: Object
+    errors: Object,
+    tests: Array
   },
   data: function data() {
     return {
@@ -5869,16 +5935,31 @@ __webpack_require__.r(__webpack_exports__);
         occupation_id: this.patient.occupation_id,
         educationlevel_id: this.patient.educationlevel_id,
         type_id: this.patient.type_id,
-        systolic_bp: this.todays_visit.systolic_bp,
-        diastolic_bp: this.todays_visit.diastolic_bp,
-        height: this.todays_visit.height,
-        weight: this.todays_visit.weight
+        systolic_bp: this.patient.systolic_bp,
+        diastolic_bp: this.patient.diastolic_bp,
+        height: this.patient.height,
+        weight: this.patient.weight
       },
-      sending: false
+      sending: false,
+      visitsIndex: 0,
+      incresButton: true
     };
   },
   methods: {
-    submit: function submit() {
+    increaseIndex: function increaseIndex() {
+      if (this.visitsIndex < this.patient.visits.length - 1) {
+        this.visitsIndex++;
+      }
+    },
+    reSetIndex: function reSetIndex() {
+      this.visitsIndex = 0;
+    },
+    decreseIndex: function decreseIndex() {
+      if (this.visitsIndex > 0) {
+        this.visitsIndex--;
+      }
+    },
+    submitProfileForm: function submitProfileForm() {
       var _this = this;
 
       var data = new FormData();
@@ -5897,7 +5978,7 @@ __webpack_require__.r(__webpack_exports__);
       data.append('height', this.form.height);
       data.append('weight', this.form.weight);
       data.append('_method', 'PUT');
-      this.$inertia.post(this.route('patients.update', {
+      this.$inertia.post(this.route('physician.updateProfile', {
         patient: this.patient.id
       }), data, {
         onStart: function onStart() {
@@ -5905,6 +5986,24 @@ __webpack_require__.r(__webpack_exports__);
         },
         onFinish: function onFinish() {
           return _this.sending = false;
+        }
+      });
+    },
+    submitTestsForm: function submitTestsForm(visit_id) {
+      var _this2 = this;
+
+      var form = document.getElementById(visit_id);
+      var data = new FormData(form);
+      data.append('visit_id', visit_id);
+      data.append('_method', 'PUT');
+      this.$inertia.post(this.route('physician.updateTests', {
+        patient: this.patient.id
+      }), data, {
+        onStart: function onStart() {
+          return _this2.sending = true;
+        },
+        onFinish: function onFinish() {
+          return _this2.sending = false;
         }
       });
     },
@@ -7645,6 +7744,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
 //
 //
 //
@@ -63786,8 +63887,8 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("app-layout", [
-    _c("div", { staticClass: "px-1 flex flex-col" }, [
-      _c("div", { staticClass: "w-full mb-4" }, [
+    _c("div", { staticClass: "p-1 flex flex-col" }, [
+      _c("div", { staticClass: "w-full mb-4 border-4 border-gray-900" }, [
         _c(
           "form",
           {
@@ -63795,7 +63896,7 @@ var render = function() {
             on: {
               submit: function($event) {
                 $event.preventDefault()
-                return _vm.submit()
+                return _vm.submitProfileForm()
               }
             }
           },
@@ -63806,12 +63907,13 @@ var render = function() {
               [
                 _c("table", { staticClass: "w-full whitespace-no-wrap" }, [
                   _c("thead", [
-                    _c("tr", { staticClass: "bg-indigo-800 text-gray-300" }, [
+                    _c("tr", { staticClass: "bg-purple-900 text-gray-200" }, [
                       _c(
                         "th",
                         {
                           staticClass:
-                            "border border-blue-400 px-2 py-1 text-center"
+                            "border border-yellow-300 px-1 py-1 text-center",
+                          attrs: { width: "20%" }
                         },
                         [_vm._v("Name")]
                       ),
@@ -63820,7 +63922,8 @@ var render = function() {
                         "th",
                         {
                           staticClass:
-                            "border border-blue-400 px-2 py-1 text-center"
+                            "border border-yellow-300 px-1 py-1 text-center",
+                          attrs: { width: "10%" }
                         },
                         [_vm._v("BirthDate")]
                       ),
@@ -63829,7 +63932,8 @@ var render = function() {
                         "th",
                         {
                           staticClass:
-                            "border border-blue-400 px-2 py-1 text-center"
+                            "border border-yellow-300 px-1 py-1 text-center",
+                          attrs: { width: "8%" }
                         },
                         [_vm._v("Address")]
                       ),
@@ -63838,7 +63942,8 @@ var render = function() {
                         "th",
                         {
                           staticClass:
-                            "border border-blue-400 px-2 py-1 text-center"
+                            "border border-yellow-300 px-1 py-1 text-center",
+                          attrs: { width: "8%" }
                         },
                         [_vm._v("Gender")]
                       ),
@@ -63847,7 +63952,8 @@ var render = function() {
                         "th",
                         {
                           staticClass:
-                            "border border-blue-400 px-2 py-1 text-center"
+                            "border border-yellow-300 px-1 py-1 text-center",
+                          attrs: { width: "8%" }
                         },
                         [_vm._v("marital")]
                       ),
@@ -63856,7 +63962,8 @@ var render = function() {
                         "th",
                         {
                           staticClass:
-                            "border border-blue-400 px-2 py-1 text-center"
+                            "border border-yellow-300 px-1 py-1 text-center",
+                          attrs: { width: "8%" }
                         },
                         [_vm._v("smoking")]
                       ),
@@ -63865,7 +63972,8 @@ var render = function() {
                         "th",
                         {
                           staticClass:
-                            "border border-blue-400 px-2 py-1 text-center"
+                            "border border-yellow-300 px-1 py-1 text-center",
+                          attrs: { width: "10%" }
                         },
                         [_vm._v("Education")]
                       ),
@@ -63874,7 +63982,8 @@ var render = function() {
                         "th",
                         {
                           staticClass:
-                            "border border-blue-400 px-2 py-1 text-center"
+                            "border border-yellow-300 px-1 py-1 text-center",
+                          attrs: { width: "10%" }
                         },
                         [_vm._v("Occupation")]
                       ),
@@ -63883,7 +63992,8 @@ var render = function() {
                         "th",
                         {
                           staticClass:
-                            "border border-blue-400 px-2 py-1 text-center"
+                            "border border-yellow-300 px-1 py-1 text-center",
+                          attrs: { width: "10%" }
                         },
                         [_vm._v("DMFH")]
                       ),
@@ -63892,7 +64002,8 @@ var render = function() {
                         "th",
                         {
                           staticClass:
-                            "border  border-blue-400 px-2 py-1 text-center"
+                            "border border-yellow-300 px-1 py-1 text-center",
+                          attrs: { width: "10%" }
                         },
                         [_vm._v("Created_at")]
                       )
@@ -63900,7 +64011,7 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("tr", { staticClass: "font-medium text-gray-800" }, [
-                    _c("td", { staticClass: "border border-blue-400" }, [
+                    _c("td", { staticClass: "border border-yellow-300" }, [
                       _c("input", {
                         directives: [
                           {
@@ -63910,7 +64021,7 @@ var render = function() {
                             expression: "form.name"
                           }
                         ],
-                        staticClass: "rtl px-1 w-full",
+                        staticClass: "rtl w-full bg-yellow-100 px-1",
                         attrs: { type: "text" },
                         domProps: { value: _vm.form.name },
                         on: {
@@ -63924,7 +64035,7 @@ var render = function() {
                       })
                     ]),
                     _vm._v(" "),
-                    _c("td", { staticClass: "border border-blue-400" }, [
+                    _c("td", { staticClass: "border border-yellow-300" }, [
                       _c("input", {
                         directives: [
                           {
@@ -63934,7 +64045,7 @@ var render = function() {
                             expression: "form.birth_date"
                           }
                         ],
-                        staticClass: "w-full",
+                        staticClass: "w-full bg-yellow-100 px-1",
                         attrs: { type: "text" },
                         domProps: { value: _vm.form.birth_date },
                         on: {
@@ -63952,7 +64063,7 @@ var render = function() {
                       })
                     ]),
                     _vm._v(" "),
-                    _c("td", { staticClass: "border border-blue-400" }, [
+                    _c("td", { staticClass: "border border-yellow-300" }, [
                       _c(
                         "select",
                         {
@@ -63964,7 +64075,7 @@ var render = function() {
                               expression: "form.address_id"
                             }
                           ],
-                          staticClass: "w-full",
+                          staticClass: "w-full bg-yellow-100 px-1",
                           on: {
                             change: function($event) {
                               var $$selectedVal = Array.prototype.filter
@@ -63996,7 +64107,7 @@ var render = function() {
                       )
                     ]),
                     _vm._v(" "),
-                    _c("td", { staticClass: "border border-blue-400" }, [
+                    _c("td", { staticClass: "border border-yellow-300" }, [
                       _c(
                         "select",
                         {
@@ -64008,7 +64119,7 @@ var render = function() {
                               expression: "form.gender"
                             }
                           ],
-                          staticClass: "w-full",
+                          staticClass: "w-full bg-yellow-100 px-1",
                           on: {
                             change: function($event) {
                               var $$selectedVal = Array.prototype.filter
@@ -64041,7 +64152,7 @@ var render = function() {
                       )
                     ]),
                     _vm._v(" "),
-                    _c("td", { staticClass: "border border-blue-400" }, [
+                    _c("td", { staticClass: "border border-yellow-300" }, [
                       _c(
                         "select",
                         {
@@ -64053,7 +64164,7 @@ var render = function() {
                               expression: "form.marital"
                             }
                           ],
-                          staticClass: "w-full",
+                          staticClass: "w-full bg-yellow-100 px-1",
                           on: {
                             change: function($event) {
                               var $$selectedVal = Array.prototype.filter
@@ -64094,7 +64205,7 @@ var render = function() {
                       )
                     ]),
                     _vm._v(" "),
-                    _c("td", { staticClass: "border border-blue-400" }, [
+                    _c("td", { staticClass: "border border-yellow-300" }, [
                       _c(
                         "select",
                         {
@@ -64106,25 +64217,30 @@ var render = function() {
                               expression: "form.smoking"
                             }
                           ],
-                          staticClass: "w-full",
+                          staticClass: "w-full bg-yellow-100 px-1",
                           on: {
-                            change: function($event) {
-                              var $$selectedVal = Array.prototype.filter
-                                .call($event.target.options, function(o) {
-                                  return o.selected
-                                })
-                                .map(function(o) {
-                                  var val = "_value" in o ? o._value : o.value
-                                  return val
-                                })
-                              _vm.$set(
-                                _vm.form,
-                                "smoking",
-                                $event.target.multiple
-                                  ? $$selectedVal
-                                  : $$selectedVal[0]
-                              )
-                            }
+                            change: [
+                              function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.$set(
+                                  _vm.form,
+                                  "smoking",
+                                  $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                )
+                              },
+                              function($event) {
+                                return _vm.submitProfileForm()
+                              }
+                            ]
                           }
                         },
                         [
@@ -64143,7 +64259,7 @@ var render = function() {
                       )
                     ]),
                     _vm._v(" "),
-                    _c("td", { staticClass: "border border-blue-400" }, [
+                    _c("td", { staticClass: "border  border-yellow-300" }, [
                       _c(
                         "select",
                         {
@@ -64155,7 +64271,7 @@ var render = function() {
                               expression: "form.educationlevel_id"
                             }
                           ],
-                          staticClass: "w-full bg-indigo-300",
+                          staticClass: "w-full bg-yellow-100 px-1",
                           on: {
                             change: function($event) {
                               var $$selectedVal = Array.prototype.filter
@@ -64187,7 +64303,7 @@ var render = function() {
                       )
                     ]),
                     _vm._v(" "),
-                    _c("td", { staticClass: "border border-blue-400" }, [
+                    _c("td", { staticClass: "border border-yellow-300" }, [
                       _c(
                         "select",
                         {
@@ -64199,7 +64315,7 @@ var render = function() {
                               expression: "form.occupation_id"
                             }
                           ],
-                          staticClass: "w-full px-1",
+                          staticClass: "w-full bg-yellow-100 px-1",
                           on: {
                             change: function($event) {
                               var $$selectedVal = Array.prototype.filter
@@ -64220,7 +64336,7 @@ var render = function() {
                             }
                           }
                         },
-                        _vm._l(_vm.occupations, function(occupation, i) {
+                        _vm._l(_vm.addresses, function(occupation, i) {
                           return _c(
                             "option",
                             { key: i, domProps: { value: occupation.id } },
@@ -64231,7 +64347,7 @@ var render = function() {
                       )
                     ]),
                     _vm._v(" "),
-                    _c("td", { staticClass: "border border-blue-400" }, [
+                    _c("td", { staticClass: "border border-yellow-300" }, [
                       _c(
                         "select",
                         {
@@ -64243,7 +64359,7 @@ var render = function() {
                               expression: "form.fh_of_dm"
                             }
                           ],
-                          staticClass: "w-full",
+                          staticClass: "w-full bg-yellow-100 px-1",
                           on: {
                             change: function($event) {
                               var $$selectedVal = Array.prototype.filter
@@ -64276,17 +64392,24 @@ var render = function() {
                       )
                     ]),
                     _vm._v(" "),
-                    _c("td", { staticClass: "border border-blue-400" }, [
-                      _vm._v(
-                        "\n                            " +
-                          _vm._s(
-                            _vm
-                              .moment(_vm.patient.created_at)
-                              .format("YYYY-MM-DD")
-                          ) +
-                          "\n                        "
-                      )
-                    ])
+                    _c(
+                      "td",
+                      {
+                        staticClass:
+                          "border border-yellow-300 bg-yellow-100 px-1"
+                      },
+                      [
+                        _vm._v(
+                          "\n                        " +
+                            _vm._s(
+                              _vm
+                                .moment(_vm.patient.created_at)
+                                .format("YYYY-MM-DD")
+                            ) +
+                            "\n                    "
+                        )
+                      ]
+                    )
                   ]),
                   _vm._v(" "),
                   !_vm.patient
@@ -64303,174 +64426,399 @@ var render = function() {
                     : _vm._e()
                 ])
               ]
-            )
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "flex  w-full" }, [
+              _c("div", { staticClass: "w-1/3 bg-purple-700" }, [
+                _c("div", { staticClass: "flex mb-1" }, [
+                  _c("span", { staticClass: "flex  w-1/2 px-1 bg-gray-400" }, [
+                    _vm._v("systolic_bp")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.form.systolic_bp,
+                        expression: "form.systolic_bp"
+                      }
+                    ],
+                    staticClass: "flex  w-1/4 px-1 bg-gray-200",
+                    domProps: { value: _vm.form.systolic_bp },
+                    on: {
+                      change: function($event) {
+                        return _vm.submitProfileForm()
+                      },
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.form, "systolic_bp", $event.target.value)
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex mb-1" }, [
+                  _c("span", { staticClass: "flex  w-1/2 px-1 bg-gray-400" }, [
+                    _vm._v("diastolic_bp")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.form.diastolic_bp,
+                        expression: "form.diastolic_bp"
+                      }
+                    ],
+                    staticClass: "flex  w-1/4 px-1 bg-gray-200",
+                    domProps: { value: _vm.form.diastolic_bp },
+                    on: {
+                      change: function($event) {
+                        return _vm.submitProfileForm()
+                      },
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.form, "diastolic_bp", $event.target.value)
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex mb-1" }, [
+                  _c("span", { staticClass: "flex w-1/2 px-1 bg-gray-400" }, [
+                    _vm._v("height")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.form.height,
+                        expression: "form.height"
+                      }
+                    ],
+                    staticClass: "flex w-1/4 px-1 bg-gray-200",
+                    domProps: { value: _vm.form.height },
+                    on: {
+                      change: function($event) {
+                        return _vm.submitProfileForm()
+                      },
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.form, "height", $event.target.value)
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex" }, [
+                  _c("span", { staticClass: "flex w-1/2 px-1 bg-gray-400" }, [
+                    _vm._v("weight")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.form.weight,
+                        expression: "form.weight"
+                      }
+                    ],
+                    staticClass: "flex w-1/4 px-1 bg-gray-200",
+                    domProps: { value: _vm.form.weight },
+                    on: {
+                      change: function($event) {
+                        return _vm.submitProfileForm()
+                      },
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.form, "weight", $event.target.value)
+                      }
+                    }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "flex flex-lg-grow-1 mr-1 ml-1 w-full p-1 bg-purple-800"
+                },
+                [_vm._v("2")]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "flex flex-lg-grow-1 w-full p-1 bg-purple-900" },
+                [_vm._v("3")]
+              )
+            ])
           ]
         )
       ]),
       _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass:
-            "px-2 sm:px-2 md:px-1  flex w-full  sm:w-1/4 md:w-1/3 lg:w-2/4 mr-2"
-        },
-        [
-          _c("div", { staticClass: "overflow-hidden rounded sm:rounded-md" }, [
+      _c("div", { staticClass: "flex border-2 w-full border-red-600" }, [
+        _c(
+          "div",
+          { staticClass: "flex flex-lg-grow-1 w-full w mr-1 bg-purple-700" },
+          [
             _c(
               "div",
               {
                 staticClass:
-                  "p-1  bg-indigo-600 rounded-md border-2 border-red-600"
+                  "bg-banafsagy-600 overflow-hidden rounded-md rounded-t-none  border-2 border-red-500  overflow-y-auto  max-h-screen"
               },
               [
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      "mb-1 flex justify-center  bg-indigo-800 rounded-md rounded-b-none shadow-lg text-gray-100"
-                  },
-                  [_c("span", [_vm._v(" Patient Visits Information ")])]
-                ),
-                _vm._v(" "),
-                _c(
-                  "table",
-                  { staticClass: "w-full whitespace-no-wrap" },
-                  [
-                    _c("thead", [
-                      _c("tr", { staticClass: "bg-indigo-800 text-gray-200" }, [
-                        _c(
-                          "th",
-                          {
-                            staticClass:
-                              "border border-gray-400 text-left px-2 py-1 text-sm"
-                          },
-                          [_vm._v("Visit Date")]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          {
-                            staticClass:
-                              "border border-gray-400 text-left px-2 py-1 text-sm"
-                          },
-                          [_vm._v("Systolic_bp")]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          {
-                            staticClass:
-                              "border border-gray-400 text-left px-2 py-1 text-sm"
-                          },
-                          [_vm._v("Diastolic_bp")]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          {
-                            staticClass:
-                              "border border-gray-400 text-left px-2 py-1 text-sm"
-                          },
-                          [_vm._v("Height")]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          {
-                            staticClass:
-                              "border border-gray-400 text-left px-2 py-1 text-sm"
-                          },
-                          [_vm._v("Weight")]
-                        )
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _vm._l(_vm.patient.visits, function(visit, index) {
-                      return _c(
-                        "tr",
+                _vm.patient.visits.length > 0
+                  ? _c("div", { staticClass: "p-2 shadow-lg  rounded-md" }, [
+                      _c(
+                        "div",
                         {
-                          key: index,
                           staticClass:
-                            "font-medium text-gray-800 hover:bg-purple-400 focus-within:bg-gray-100 ",
-                          class: { "bg-blue-300": index % 2 === 0 }
+                            "mb-2 border-2 border-gray-300 rounded-md"
                         },
                         [
                           _c(
-                            "td",
+                            "div",
                             {
                               staticClass:
-                                "border border-gray-400 text-left px-2"
+                                "normal-case flex justify-center  bg-indigo-800 rounded-md rounded-b-none  p-0  shadow-lg text-gray-100"
                             },
                             [
-                              _vm._v(
-                                _vm._s(
-                                  _vm
-                                    .moment(visit.created_at)
-                                    .format("YYYY-MM-DD")
+                              _c("span", { staticClass: "p-1" }, [
+                                _vm._v(
+                                  "Tests of Vist " +
+                                    _vm._s(
+                                      _vm.patient.visits.length -
+                                        _vm.visitsIndex
+                                    ) +
+                                    " on " +
+                                    _vm._s(
+                                      _vm
+                                        .moment(
+                                          _vm.patient.visits[_vm.visitsIndex]
+                                            .updated_at
+                                        )
+                                        .format("YYYY-MM-DD")
+                                    )
                                 )
-                              )
+                              ])
                             ]
                           ),
                           _vm._v(" "),
                           _c(
-                            "td",
+                            "form",
                             {
-                              staticClass:
-                                "border border-gray-400 text-left px-2"
+                              attrs: {
+                                id: _vm.patient.visits[_vm.visitsIndex].id
+                              },
+                              on: {
+                                submit: function($event) {
+                                  $event.preventDefault()
+                                  return _vm.submitTestsForm(
+                                    _vm.patient.visits[_vm.visitsIndex].id
+                                  )
+                                }
+                              }
                             },
-                            [_vm._v(_vm._s(visit.systolic_bp))]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "td",
-                            {
-                              staticClass:
-                                "border border-gray-400 text-left px-2"
-                            },
-                            [_vm._v(_vm._s(visit.diastolic_bp))]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "td",
-                            {
-                              staticClass:
-                                "border border-gray-400 text-left px-2"
-                            },
-                            [_vm._v(_vm._s(visit.height))]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "td",
-                            {
-                              staticClass:
-                                "border border-gray-400 text-left px-2"
-                            },
-                            [_vm._v(_vm._s(visit.weight))]
+                            [
+                              _c(
+                                "div",
+                                { staticClass: "bg-indigo-400 rounded-md" },
+                                [
+                                  _c(
+                                    "div",
+                                    { staticClass: "grid grid-cols-5 p-1" },
+                                    _vm._l(_vm.tests, function(t, i) {
+                                      return _c(
+                                        "div",
+                                        {
+                                          key: i,
+                                          staticClass:
+                                            "flex flex-wrap items-stretch w-full relative p-px"
+                                        },
+                                        [
+                                          _c(
+                                            "div",
+                                            { staticClass: "w-1/2 flex" },
+                                            [
+                                              _c(
+                                                "span",
+                                                {
+                                                  staticClass:
+                                                    "w-full flex items-center leading-normal bg-gray-400 rounded-md rounded-r-none border border-gray-500 p-1 h-7 whitespace-no-wrap text-grey-dark text-sm"
+                                                },
+                                                [_vm._v(_vm._s(t.name) + "  ")]
+                                              )
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("input", {
+                                            staticClass:
+                                              "rounded-md bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-7 p-1 border-gray-500   rounded-l-none relative ",
+                                            attrs: {
+                                              autocomplete: "off",
+                                              name: t.id,
+                                              type: "text"
+                                            },
+                                            domProps: {
+                                              value:
+                                                _vm.patient.visits[
+                                                  _vm.visitsIndex
+                                                ].tests.findIndex(function(
+                                                  test
+                                                ) {
+                                                  return (
+                                                    test.pivot.test_id === t.id
+                                                  )
+                                                }) >= 0
+                                                  ? _vm.patient.visits[
+                                                      _vm.visitsIndex
+                                                    ].tests[
+                                                      _vm.patient.visits[
+                                                        _vm.visitsIndex
+                                                      ].tests.findIndex(
+                                                        function(test) {
+                                                          return (
+                                                            test.pivot
+                                                              .test_id === t.id
+                                                          )
+                                                        }
+                                                      )
+                                                    ].pivot.value
+                                                  : ""
+                                            },
+                                            on: {
+                                              change: function($event) {
+                                                return _vm.submitTestsForm(
+                                                  _vm.patient.visits[
+                                                    _vm.visitsIndex
+                                                  ].id
+                                                )
+                                              }
+                                            }
+                                          })
+                                        ]
+                                      )
+                                    }),
+                                    0
+                                  )
+                                ]
+                              )
+                            ]
                           )
                         ]
                       )
-                    }),
-                    _vm._v(" "),
-                    _vm.patient.visits.length === 0
-                      ? _c("tr", [
-                          _c(
-                            "td",
-                            {
-                              staticClass: "border-t px-6 py-4",
-                              attrs: { colspan: "6" }
-                            },
-                            [_vm._v("No Visits found..!!")]
-                          )
-                        ])
-                      : _vm._e()
-                  ],
-                  2
-                )
+                    ])
+                  : _c(
+                      "div",
+                      {
+                        staticClass:
+                          "rtl bg-banafsagy-900 p-2 shadow-lg  rounded-md  overflow-y-auto h-full"
+                      },
+                      [
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "mb-1 normal-case flex justify-center  bg-indigo-900 rounded-md rounded-t-none p-0  shadow-lg text-red-600"
+                          },
+                          [
+                            _c("span", { staticClass: "p-1" }, [
+                              _vm._v(" لا توجد مراجعات ..!!")
+                            ])
+                          ]
+                        )
+                      ]
+                    )
               ]
             )
+          ]
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "w-full bg-purple-800" }, [
+          _c("div", { staticClass: "flex p-1 justify-center" }, [
+            _c(
+              "button",
+              {
+                staticClass: "flex rounded-full",
+                on: { click: _vm.increaseIndex }
+              },
+              [
+                _c("icon", {
+                  staticClass: "block w-10 h-10 fill-gray-100",
+                  attrs: { name: "leftArrow" }
+                })
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "flex rounded-full",
+                on: { click: _vm.reSetIndex }
+              },
+              [
+                _c("icon", {
+                  staticClass: "block w-10 h-10 fill-gray-100",
+                  attrs: { name: "circle" }
+                })
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "flex rounded-full",
+                on: { click: _vm.decreseIndex }
+              },
+              [
+                _c("icon", {
+                  staticClass: "block w-10 h-10 fill-gray-100",
+                  attrs: { name: "rightArrow" }
+                })
+              ],
+              1
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _c("input", {
+              attrs: { type: "text" },
+              domProps: {
+                value: _vm.patient.visits[_vm.visitsIndex].diastolic_bp
+              }
+            })
           ])
-        ]
-      )
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "flex flex-lg-grow-1 w-full p-1 bg-purple-900" },
+          [
+            _vm._v(
+              "\n           " +
+                _vm._s(_vm.patient.visits[_vm.visitsIndex].diastolic_bp) +
+                "\n        "
+            )
+          ]
+        )
+      ])
     ])
   ])
 }
@@ -68241,6 +68589,72 @@ var render = function() {
             attrs: {
               d:
                 "M7 8a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm0 1c2.15 0 4.2.4 6.1 1.09L12 16h-1.25L10 20H4l-.75-4H2L.9 10.09A17.93 17.93 0 0 1 7 9zm8.31.17c1.32.18 2.59.48 3.8.92L18 16h-1.25L16 20h-3.96l.37-2h1.25l1.65-8.83zM13 0a4 4 0 1 1-1.33 7.76 5.96 5.96 0 0 0 0-7.52C12.1.1 12.53 0 13 0z"
+            }
+          })
+        ]
+      )
+    : _vm.name === "rightArrow"
+    ? _c(
+        "svg",
+        {
+          staticClass: "w-6 h-6",
+          attrs: {
+            fill: "currentColor",
+            viewBox: "0 0 20 20",
+            xmlns: "http://www.w3.org/2000/svg"
+          }
+        },
+        [
+          _c("path", {
+            attrs: {
+              "fill-rule": "evenodd",
+              d:
+                "M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z",
+              "clip-rule": "evenodd"
+            }
+          })
+        ]
+      )
+    : _vm.name === "circle"
+    ? _c(
+        "svg",
+        {
+          staticClass: "w-6 h-6",
+          attrs: {
+            fill: "currentColor",
+            viewBox: "0 0 20 20",
+            xmlns: "http://www.w3.org/2000/svg"
+          }
+        },
+        [
+          _c("path", {
+            attrs: {
+              "fill-rule": "evenodd",
+              d:
+                "M10 18a8 8 0 100-16 8 8 0 000 16zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z",
+              "clip-rule": "evenodd"
+            }
+          })
+        ]
+      )
+    : _vm.name === "leftArrow"
+    ? _c(
+        "svg",
+        {
+          staticClass: "w-6 h-6",
+          attrs: {
+            fill: "currentColor",
+            viewBox: "0 0 20 20",
+            xmlns: "http://www.w3.org/2000/svg"
+          }
+        },
+        [
+          _c("path", {
+            attrs: {
+              "fill-rule": "evenodd",
+              d:
+                "M10 18a8 8 0 100-16 8 8 0 000 16zm.707-10.293a1 1 0 00-1.414-1.414l-3 3a1 1 0 000 1.414l3 3a1 1 0 001.414-1.414L9.414 11H13a1 1 0 100-2H9.414l1.293-1.293z",
+              "clip-rule": "evenodd"
             }
           })
         ]

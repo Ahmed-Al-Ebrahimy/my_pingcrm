@@ -34,7 +34,13 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
 // Physician
 Route::middleware(['auth:sanctum', 'verified'])->get('physician', [PhysicianController::class, 'index'])->name('physician');
+
 Route::middleware(['auth:sanctum', 'verified'])->get('physician/{patient}/edit', [PhysicianController::class, 'edit'])->name('physician.edit');
+
+Route::middleware(['auth:sanctum', 'verified'])->put('physician/{patient}', [PhysicianController::class, 'updateTests'])->name('physician.updateTests');
+
+Route::middleware(['auth:sanctum', 'verified'])->put('physician/{patient}', [PhysicianController::class, 'updateProfile'])->name('physician.updateProfile');
+
 
 // Route::middleware(['auth:sanctum', 'verified'])->get('patients/create', [PhysicianController::class, 'create'])->name('patients.create');
 // Route::middleware(['auth:sanctum', 'verified'])->post('patients', [PhysicianController::class, 'store'])->name('patients.store');
