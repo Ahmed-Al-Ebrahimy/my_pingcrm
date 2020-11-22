@@ -78,10 +78,9 @@ class PhysicianController extends Controller
 
 
 
-    public function updateTests(UpdatePatientData $request, Patient $patient)
+    public function updateTests(UpdatePatientData $request, Visit $visit)
     {
             $success = '';
-            $visit = Visit::where('id', '=', $request->visit_id)->first();
 
             foreach($request->all() as $key => $value){
                 if($value && $key != '_method' && $key != 'visit_id' ){

@@ -122,70 +122,82 @@
 
 
 
-        <div class="flex border-2 w-full border-red-600">
+            <div class="flex border-2 w-full border-red-600">
 
-            <div class="flex flex-lg-grow-1 w-full w mr-1 bg-purple-700">
-                <div class="bg-banafsagy-600 overflow-hidden rounded-md rounded-t-none  border-2 border-red-500  overflow-y-auto  max-h-screen">
-                    <div v-if="patient.visits.length>0" class="p-2 shadow-lg  rounded-md">
-                    <div class="mb-2 border-2 border-gray-300 rounded-md">
-                        <div  class="normal-case flex justify-center  bg-indigo-800 rounded-md rounded-b-none  p-0  shadow-lg text-gray-100">
-                            <span class="p-1">Tests of Vist {{patient.visits.length - visitsIndex}} on {{moment(patient.visits[visitsIndex].updated_at).format('YYYY-MM-DD')}}</span>
-                        </div>
-                        <form  :id="patient.visits[visitsIndex].id" @submit.prevent="submitTestsForm(patient.visits[visitsIndex].id)">
-                        <div class="bg-indigo-400 rounded-md">
-                            <div class="grid grid-cols-5 p-1">
-                                <div class="flex flex-wrap items-stretch w-full relative p-px" v-for="(t, i) in tests" :key="i">
-                                    <div class="w-1/2 flex">
-                                        <span class="w-full flex items-center leading-normal bg-gray-400 rounded-md rounded-r-none border border-gray-500 p-1 h-7 whitespace-no-wrap text-grey-dark text-sm">{{t.name}}  </span>
-                                    </div>
-                                    <input @change="submitTestsForm(patient.visits[visitsIndex].id)" autocomplete="off" :name="t.id" :value="(patient.visits[visitsIndex].tests.findIndex(test => test.pivot.test_id === t.id) >=0 ) ?  patient.visits[visitsIndex].tests[patient.visits[visitsIndex].tests.findIndex(test => test.pivot.test_id === t.id)].pivot.value : ''" type="text" class="rounded-md bg-gray-200 flex-shrink focus:shadow-outline flex-grow flex-auto leading-normal w-px  border h-7 p-1 border-gray-500   rounded-l-none relative ">
-                                </div>
+                <div v-if="patient.visits.length>0"  class="flex w-2/5 p-0.5 flex-lg-grow-1 bg-purple-900">
+                    <form  :id="patient.visits[visitsIndex].id" @submit.prevent="submitTestsForm(patient.visits[visitsIndex].id)">
+                        <div class="grid grid-cols-5">
+                            <div class="flex p-0.5" v-for="(t, i) in tests" :key="i">
+                                <span  class="flex w-1/2 px-1 bg-gray-400">{{t.name}}</span>
+                                <input class="flex w-1/2 px-1 bg-gray-200" @change="submitTestsForm(patient.visits[visitsIndex].id)" autocomplete="off" :name="t.id" :value="(patient.visits[visitsIndex].tests.findIndex(test => test.pivot.test_id === t.id) >=0 ) ?  patient.visits[visitsIndex].tests[patient.visits[visitsIndex].tests.findIndex(test => test.pivot.test_id === t.id)].pivot.value : ''" type="text">
                             </div>
                         </div>
                     </form>
-                    </div>
-                    </div>
-                    <div v-else class="rtl bg-banafsagy-900 p-2 shadow-lg  rounded-md  overflow-y-auto h-full">
-                        <div class="mb-1 normal-case flex justify-center  bg-indigo-900 rounded-md rounded-t-none p-0  shadow-lg text-red-600">
-                            <span class="p-1"> لا توجد مراجعات ..!!</span>
+                </div>
+
+
+
+
+
+
+                        <div class="bg-green-700 border border-red-700" style="width: 14%">
+
+                            <div class="flex p-0.5 justify-center">
+                                <button class="flex rounded-full mr-1 bg-blue-600 shadow-lg" @click="increaseIndex">
+                                    <icon name="leftArrow" class="block w-10 h-10 fill-gray-100" />
+                                </button>
+
+                                <button class="flex rounded-full mr-1  bg-blue-600 shadow-lg" @click="reSetIndex">
+                                    <icon name="circle" class="block w-10 h-10 fill-gray-100" />
+                                </button>
+
+                                <button class="flex rounded-full bg-blue-600 shadow-lg " @click="decreseIndex">
+                                    <icon name="rightArrow" class="block w-10 h-10 fill-gray-100" />
+                                </button>
+                            </div>
+
+                            <div class="flex text-center bg-blue-600 shadow-lg m-0.5 rounded-lg px-1">
+                                <span class="flex w-1/3 lowercase text-gray-200">{{visitsIndex+1}} of {{patient.visits.length}}</span>
+                                <span class="flex w-2/3 text-gray-200">{{moment(patient.visits[visitsIndex].created_at).format('YYYY-MM-DD')}}</span>
+                            </div>
+
+                            <form  :id="patient.visits[visitsIndex].id" @submit.prevent="submitTestsForm(patient.visits[visitsIndex].id)">
+                            <div class="grid grid-cols-1">
+
+                                <div class="flex p-px">
+                                    <span  class="flex w-2/3 px-px bg-gray-400">Systolic_bp</span>
+                                    <input class="flex w-1/3 px-px bg-gray-200" type="text">
+                                </div>
+
+                                <div class="flex p-px">
+                                    <span  class="flex w-2/3  px-px bg-gray-400">Diastolic_bp</span>
+                                    <input class="flex w-1/3  px-px bg-gray-200" type="text">
+                                </div>
+
+                                <div class="flex p-px">
+                                    <span  class="flex w-2/3 px-px bg-gray-400">Height</span>
+                                    <input class="flex w-1/3 px-px bg-gray-200" type="text">
+                                </div>
+
+                                <div class="flex p-px">
+                                    <span  class="flex w-2/3 px-px bg-gray-400">Weight</span>
+                                    <input class="flex w-1/3 px-px bg-gray-200" type="text">
+                                </div>
+                            </div>
+                             </form>
                         </div>
-                    </div>
-                </div>
 
+                        <div class="flex bg-yellow-400 border border-red-700" style="width: 23%">
+                            2222
+                        </div>
 
-            </div>
+                        <div class="flex bg-blue-900 border border-red-700 " style="width:23%">
+                            3333
+                        </div>
 
-
-
-            <div class="w-full bg-purple-800">
-                <div class="flex p-1 justify-center">
-                    <button class="flex rounded-full" @click="increaseIndex">
-                        <icon name="leftArrow" class="block w-10 h-10 fill-gray-100" />
-                    </button>
-
-                    <button class="flex rounded-full" @click="reSetIndex">
-                        <icon name="circle" class="block w-10 h-10 fill-gray-100" />
-                    </button>
-
-                    <button class="flex rounded-full" @click="decreseIndex">
-                        <icon name="rightArrow" class="block w-10 h-10 fill-gray-100" />
-                    </button>
-                </div>
-
-                <div>
-                <input type="text" :value="patient.visits[visitsIndex].diastolic_bp">
-                </div>
 
 
             </div>
-
-            <div class="flex flex-lg-grow-1 w-full p-1 bg-purple-900">
-               {{patient.visits[visitsIndex].diastolic_bp}}
-            </div>
-
-        </div>
-
-
         </div>
     </app-layout>
 </template>
@@ -228,13 +240,15 @@ export default {
         occupation_id:      this.patient.occupation_id,
         educationlevel_id:  this.patient.educationlevel_id,
         type_id:            this.patient.type_id,
-
         systolic_bp:        this.patient.systolic_bp,
         diastolic_bp:       this.patient.diastolic_bp,
         height:             this.patient.height,
         weight:             this.patient.weight,
-
       },
+
+    //   visitForm: {
+    //      notes: this.patient.visits[this.visitsIndex].notes
+    //   },
       sending: false,
       visitsIndex: 0 ,
       incresButton: true,
@@ -277,8 +291,6 @@ export default {
         data.append('height', this.form.height);
         data.append('weight', this.form.weight);
 
-        data.append('_method', 'PUT');
-
         this.$inertia.post(this.route('physician.updateProfile', {patient: this.patient.id}), data, {
             onStart: () => this.sending = true,
             onFinish: () => this.sending = false,
@@ -292,7 +304,20 @@ export default {
             data.append('visit_id', visit_id);
             data.append('_method', 'PUT');
 
-        this.$inertia.post(this.route('physician.updateTests', {patient: this.patient.id}), data, {
+        this.$inertia.post(this.route('physician.updateTests', {visit: visit_id}), data, {
+            onStart: () => this.sending = true,
+            onFinish: () => this.sending = false,
+         })
+    },
+
+
+    submitVisitForm(visit_id) {
+            var form = document.getElementById('update_visit');
+            var data = new FormData(form);
+            data.append('visit_id', visit_id);
+            data.append('_method', 'PUT');
+
+        this.$inertia.post(this.route('physician.updateTests', {visit: visit_id}), data, {
             onStart: () => this.sending = true,
             onFinish: () => this.sending = false,
          })
