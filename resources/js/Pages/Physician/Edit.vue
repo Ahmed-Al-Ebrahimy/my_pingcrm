@@ -127,9 +127,9 @@
                 <div v-if="patient.visits.length>0"  class="flex w-2/5 p-0.5 flex-lg-grow-1 bg-purple-900">
                     <form  :id="patient.visits[visitsIndex].id" @submit.prevent="submitTestsForm(patient.visits[visitsIndex].id)">
                         <div class="grid grid-cols-5">
-                            <div class="flex p-0.5" v-for="(t, i) in tests" :key="i">
-                                <span  class="flex w-1/2 px-1 bg-gray-400">{{t.name}}</span>
-                                <input class="flex w-1/2 px-1 bg-gray-200" @change="submitTestsForm(patient.visits[visitsIndex].id)" autocomplete="off" :name="t.id" :value="(patient.visits[visitsIndex].tests.findIndex(test => test.pivot.test_id === t.id) >=0 ) ?  patient.visits[visitsIndex].tests[patient.visits[visitsIndex].tests.findIndex(test => test.pivot.test_id === t.id)].pivot.value : ''" type="text">
+                            <div class="flex p-0.5 " v-for="(t, i) in tests" :key="i">
+                                <span  class="flex w-1/2 px-1 shadow-lg  bg-gray-400">{{t.name}}</span>
+                                <input class="flex w-1/2 px-1 shadow-lg bg-gray-200" @change="submitTestsForm(patient.visits[visitsIndex].id)" autocomplete="off" :name="t.id" :value="(patient.visits[visitsIndex].tests.findIndex(test => test.pivot.test_id === t.id) >=0 ) ?  patient.visits[visitsIndex].tests[patient.visits[visitsIndex].tests.findIndex(test => test.pivot.test_id === t.id)].pivot.value : ''" type="text">
                             </div>
                         </div>
                     </form>
@@ -161,35 +161,55 @@
                                 <span class="flex w-2/3 text-gray-200">{{moment(patient.visits[visitsIndex].created_at).format('YYYY-MM-DD')}}</span>
                             </div>
 
-                            <form  :id="patient.visits[visitsIndex].id" @submit.prevent="submitTestsForm(patient.visits[visitsIndex].id)">
+                            <form  id="visitFormOne" @submit.prevent="submitVisitFormOne(patient.visits[visitsIndex].id)">
                             <div class="grid grid-cols-1">
 
                                 <div class="flex p-px">
                                     <span  class="flex w-2/3 px-px bg-gray-400">Systolic_bp</span>
-                                    <input class="flex w-1/3 px-px bg-gray-200" type="text">
+                                    <input class="flex w-1/3 px-px bg-gray-200" type="text"  @change="submitVisitFormOne(patient.visits[visitsIndex].id)"
+                                    name="systolic_bp" :value="(patient.visits[visitsIndex].systolic_bp)"
+                                    >
                                 </div>
 
                                 <div class="flex p-px">
                                     <span  class="flex w-2/3  px-px bg-gray-400">Diastolic_bp</span>
-                                    <input class="flex w-1/3  px-px bg-gray-200" type="text">
+                                    <input class="flex w-1/3  px-px bg-gray-200" type="text"  @change="submitVisitFormOne(patient.visits[visitsIndex].id)"
+                                    name="diastolic_bp" :value="(patient.visits[visitsIndex].diastolic_bp)"
+                                    >
                                 </div>
 
                                 <div class="flex p-px">
                                     <span  class="flex w-2/3 px-px bg-gray-400">Height</span>
-                                    <input class="flex w-1/3 px-px bg-gray-200" type="text">
+                                    <input class="flex w-1/3 px-px bg-gray-200" type="text"  @change="submitVisitFormOne(patient.visits[visitsIndex].id)"
+                                    name="height" :value="(patient.visits[visitsIndex].height)"
+                                    >
                                 </div>
 
                                 <div class="flex p-px">
                                     <span  class="flex w-2/3 px-px bg-gray-400">Weight</span>
-                                    <input class="flex w-1/3 px-px bg-gray-200" type="text">
+                                    <input class="flex w-1/3 px-px bg-gray-200" type="text"  @change="submitVisitFormOne(patient.visits[visitsIndex].id)"
+                                    name="weight" :value="(patient.visits[visitsIndex].weight)"
+                                    >
                                 </div>
                             </div>
                              </form>
                         </div>
 
                         <div class="flex bg-yellow-400 border border-red-700" style="width: 23%">
-                            2222
+                            <form  id="visitFormTwo" @submit.prevent="submitVisitFormTwo(patient.visits[visitsIndex].id)">
+                            <div class="flex min-w-full min-h-full">
+                                <div class="flex min-w-full min-h-full">
+                                    <textarea  cols="40" class="w-full min-h-full p-1 bg-gray-200"
+                                    name="notes" :value="(patient.visits[visitsIndex].notes)"
+                                    @change="submitVisitFormTwo(patient.visits[visitsIndex].id)"
+                                    ></textarea>
+
+
+                                </div>
+                            </div>
+                            </form>
                         </div>
+
 
                         <div class="flex bg-blue-900 border border-red-700 " style="width:23%">
                             3333
@@ -311,13 +331,23 @@ export default {
     },
 
 
-    submitVisitForm(visit_id) {
-            var form = document.getElementById('update_visit');
+    submitVisitFormOne(visit_id) {
+            var form = document.getElementById('visitFormOne');
             var data = new FormData(form);
             data.append('visit_id', visit_id);
-            data.append('_method', 'PUT');
 
-        this.$inertia.post(this.route('physician.updateTests', {visit: visit_id}), data, {
+        this.$inertia.post(this.route('physician.updateVisitFormOne', {visit: visit_id}), data, {
+            onStart: () => this.sending = true,
+            onFinish: () => this.sending = false,
+         })
+    },
+
+    submitVisitFormTwo(visit_id) {
+            var form = document.getElementById('visitFormTwo');
+            var data = new FormData(form);
+            data.append('visit_id', visit_id);
+
+        this.$inertia.post(this.route('physician.updateVisitFormTwo', {visit: visit_id}), data, {
             onStart: () => this.sending = true,
             onFinish: () => this.sending = false,
          })

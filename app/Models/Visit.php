@@ -11,7 +11,7 @@ class Visit extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $fillable = ['id', 'patient_id', 'user_id', 'mph', 'height', 'weight', 'bmi', 'systolic_bp', 'diastolic_bp', 'clinical_notes', 'treatment', 'next_visit'];
+    protected $fillable = ['id', 'patient_id', 'user_id', 'mph', 'height', 'weight', 'bmi', 'systolic_bp', 'diastolic_bp', 'notes', 'treatment', 'next_visit'];
 
 
 

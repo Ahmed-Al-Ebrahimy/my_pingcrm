@@ -5913,6 +5913,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -6021,14 +6041,13 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
     },
-    submitVisitForm: function submitVisitForm(visit_id) {
+    submitVisitFormOne: function submitVisitFormOne(visit_id) {
       var _this3 = this;
 
-      var form = document.getElementById('update_visit');
+      var form = document.getElementById('visitFormOne');
       var data = new FormData(form);
       data.append('visit_id', visit_id);
-      data.append('_method', 'PUT');
-      this.$inertia.post(this.route('physician.updateTests', {
+      this.$inertia.post(this.route('physician.updateVisitFormOne', {
         visit: visit_id
       }), data, {
         onStart: function onStart() {
@@ -6036,6 +6055,23 @@ __webpack_require__.r(__webpack_exports__);
         },
         onFinish: function onFinish() {
           return _this3.sending = false;
+        }
+      });
+    },
+    submitVisitFormTwo: function submitVisitFormTwo(visit_id) {
+      var _this4 = this;
+
+      var form = document.getElementById('visitFormTwo');
+      var data = new FormData(form);
+      data.append('visit_id', visit_id);
+      this.$inertia.post(this.route('physician.updateVisitFormTwo', {
+        visit: visit_id
+      }), data, {
+        onStart: function onStart() {
+          return _this4.sending = true;
+        },
+        onFinish: function onFinish() {
+          return _this4.sending = false;
         }
       });
     },
@@ -64628,16 +64664,20 @@ var render = function() {
                       _vm._l(_vm.tests, function(t, i) {
                         return _c(
                           "div",
-                          { key: i, staticClass: "flex p-0.5" },
+                          { key: i, staticClass: "flex p-0.5 " },
                           [
                             _c(
                               "span",
-                              { staticClass: "flex w-1/2 px-1 bg-gray-400" },
+                              {
+                                staticClass:
+                                  "flex w-1/2 px-1 shadow-lg  bg-gray-400"
+                              },
                               [_vm._v(_vm._s(t.name))]
                             ),
                             _vm._v(" "),
                             _c("input", {
-                              staticClass: "flex w-1/2 px-1 bg-gray-200",
+                              staticClass:
+                                "flex w-1/2 px-1 shadow-lg bg-gray-200",
                               attrs: {
                                 autocomplete: "off",
                                 name: t.id,
@@ -64766,11 +64806,11 @@ var render = function() {
             _c(
               "form",
               {
-                attrs: { id: _vm.patient.visits[_vm.visitsIndex].id },
+                attrs: { id: "visitFormOne" },
                 on: {
                   submit: function($event) {
                     $event.preventDefault()
-                    return _vm.submitTestsForm(
+                    return _vm.submitVisitFormOne(
                       _vm.patient.visits[_vm.visitsIndex].id
                     )
                   }
@@ -64787,7 +64827,17 @@ var render = function() {
                     _vm._v(" "),
                     _c("input", {
                       staticClass: "flex w-1/3 px-px bg-gray-200",
-                      attrs: { type: "text" }
+                      attrs: { type: "text", name: "systolic_bp" },
+                      domProps: {
+                        value: _vm.patient.visits[_vm.visitsIndex].systolic_bp
+                      },
+                      on: {
+                        change: function($event) {
+                          return _vm.submitVisitFormOne(
+                            _vm.patient.visits[_vm.visitsIndex].id
+                          )
+                        }
+                      }
                     })
                   ]),
                   _vm._v(" "),
@@ -64800,7 +64850,17 @@ var render = function() {
                     _vm._v(" "),
                     _c("input", {
                       staticClass: "flex w-1/3  px-px bg-gray-200",
-                      attrs: { type: "text" }
+                      attrs: { type: "text", name: "diastolic_bp" },
+                      domProps: {
+                        value: _vm.patient.visits[_vm.visitsIndex].diastolic_bp
+                      },
+                      on: {
+                        change: function($event) {
+                          return _vm.submitVisitFormOne(
+                            _vm.patient.visits[_vm.visitsIndex].id
+                          )
+                        }
+                      }
                     })
                   ]),
                   _vm._v(" "),
@@ -64813,7 +64873,17 @@ var render = function() {
                     _vm._v(" "),
                     _c("input", {
                       staticClass: "flex w-1/3 px-px bg-gray-200",
-                      attrs: { type: "text" }
+                      attrs: { type: "text", name: "height" },
+                      domProps: {
+                        value: _vm.patient.visits[_vm.visitsIndex].height
+                      },
+                      on: {
+                        change: function($event) {
+                          return _vm.submitVisitFormOne(
+                            _vm.patient.visits[_vm.visitsIndex].id
+                          )
+                        }
+                      }
                     })
                   ]),
                   _vm._v(" "),
@@ -64826,7 +64896,17 @@ var render = function() {
                     _vm._v(" "),
                     _c("input", {
                       staticClass: "flex w-1/3 px-px bg-gray-200",
-                      attrs: { type: "text" }
+                      attrs: { type: "text", name: "weight" },
+                      domProps: {
+                        value: _vm.patient.visits[_vm.visitsIndex].weight
+                      },
+                      on: {
+                        change: function($event) {
+                          return _vm.submitVisitFormOne(
+                            _vm.patient.visits[_vm.visitsIndex].id
+                          )
+                        }
+                      }
                     })
                   ])
                 ])
@@ -64841,7 +64921,42 @@ var render = function() {
             staticClass: "flex bg-yellow-400 border border-red-700",
             staticStyle: { width: "23%" }
           },
-          [_vm._v("\n                        2222\n                    ")]
+          [
+            _c(
+              "form",
+              {
+                attrs: { id: "visitFormTwo" },
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    return _vm.submitVisitFormTwo(
+                      _vm.patient.visits[_vm.visitsIndex].id
+                    )
+                  }
+                }
+              },
+              [
+                _c("div", { staticClass: "flex min-w-full min-h-full" }, [
+                  _c("div", { staticClass: "flex min-w-full min-h-full" }, [
+                    _c("textarea", {
+                      staticClass: "w-full min-h-full p-1 bg-gray-200",
+                      attrs: { cols: "40", name: "notes" },
+                      domProps: {
+                        value: _vm.patient.visits[_vm.visitsIndex].notes
+                      },
+                      on: {
+                        change: function($event) {
+                          return _vm.submitVisitFormTwo(
+                            _vm.patient.visits[_vm.visitsIndex].id
+                          )
+                        }
+                      }
+                    })
+                  ])
+                ])
+              ]
+            )
+          ]
         ),
         _vm._v(" "),
         _c(

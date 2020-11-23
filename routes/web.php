@@ -37,9 +37,13 @@ Route::middleware(['auth:sanctum', 'verified'])->get('physician', [PhysicianCont
 
 Route::middleware(['auth:sanctum', 'verified'])->get('physician/{patient}/edit', [PhysicianController::class, 'edit'])->name('physician.edit');
 
+Route::middleware(['auth:sanctum', 'verified'])->post('physician/{patient}', [PhysicianController::class, 'updateProfile'])->name('physician.updateProfile');
+
 Route::middleware(['auth:sanctum', 'verified'])->put('physician/{visit}', [PhysicianController::class, 'updateTests'])->name('physician.updateTests');
 
-Route::middleware(['auth:sanctum', 'verified'])->post('physician/{patient}', [PhysicianController::class, 'updateProfile'])->name('physician.updateProfile');
+Route::middleware(['auth:sanctum', 'verified'])->post('update_visit_form_one/{visit}', [PhysicianController::class, 'updateVisitFormOne'])->name('physician.updateVisitFormOne');
+Route::middleware(['auth:sanctum', 'verified'])->post('update_visit_form_two/{visit}', [PhysicianController::class, 'updateVisitFormTwo'])->name('physician.updateVisitFormTwo');
+// Route::middleware(['auth:sanctum', 'verified'])->post('physician/{visit}', [PhysicianController::class, 'updateVisitFormThree'])->name('physician.updateVisitFormThree');
 
 
 // Route::middleware(['auth:sanctum', 'verified'])->get('patients/create', [PhysicianController::class, 'create'])->name('patients.create');

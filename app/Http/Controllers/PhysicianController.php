@@ -76,34 +76,6 @@ class PhysicianController extends Controller
     }
 
 
-
-
-    public function updateTests(UpdatePatientData $request, Visit $visit)
-    {
-            $success = '';
-
-            foreach($request->all() as $key => $value){
-                if($value && $key != '_method' && $key != 'visit_id' ){
-                    $visit->tests()->syncWithoutDetaching([$key  => ['value' =>  $value]]);
-                    $success = 'test inserted successfully';
-                }
-            }
-
-            foreach($visit->tests as $test){
-                foreach ($request->all() as $key => $value){
-                    if (!$value && $test->pivot->test_id == $key) {
-                        $visit->tests()->detach($key);
-                        $success = 'test deleted successfully';
-                        break;
-                    }
-                }
-            }
-
-        return Redirect::back()->with('success', $success);
-    }
-
-
-
     public function updateProfile(Patient $patient)
     {
             $patient->update(
@@ -126,5 +98,54 @@ class PhysicianController extends Controller
             );
         return Redirect::back()->with('success', 'Patient updated.');
     }
+
+    public function updateTests(UpdatePatientData $request, Visit $visit)
+    {
+            $success = '';
+            foreach($request->all() as $key => $value){
+                if($value && $key != '_method' && $key != 'visit_id' ){
+                    $visit->tests()->syncWithoutDetaching([$key  => ['value' =>  $value]]);
+                    $success = 'test inserted successfully';
+                }
+            }
+            foreach($visit->tests as $test){
+                foreach ($request->all() as $key => $value){
+                    if (!$value && $test->pivot->test_id == $key) {
+                        $visit->tests()->detach($key);
+                        $success = 'test deleted successfully';
+                        break;
+                    }
+                }
+            }
+
+        return Redirect::back()->with('success', $success);
+    }
+
+
+
+    public function updateVisitFormOne(Visit $visit)
+    {
+            $visit->update(
+                Request::validate([
+                    'systolic_bp'           => ['required',  'digits_between:2,3'],
+                    'diastolic_bp'          => ['required',  'digits_between:2,3'],
+                    'height'                => ['required',  'digits_between:2,3'],
+                    'weight'                => ['required',  'digits_between:2,3'],
+                ])
+            );
+        return Redirect::back()->with('success', 'visit updated.');
+    }
+
+
+    public function updateVisitFormTwo(Visit $visit)
+    {
+            $visit->update(
+                Request::validate([
+                    'notes'           => ['min:6'],
+                ])
+            );
+        return Redirect::back()->with('success', 'clinic notes updated.');
+    }
+
 
 }
