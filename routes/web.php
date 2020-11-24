@@ -45,12 +45,13 @@ Route::middleware(['auth:sanctum', 'verified'])->post('update_visit_form_one/{vi
 Route::middleware(['auth:sanctum', 'verified'])->post('update_visit_form_two/{visit}', [PhysicianController::class, 'updateVisitFormTwo'])->name('physician.updateVisitFormTwo');
 // Route::middleware(['auth:sanctum', 'verified'])->post('physician/{visit}', [PhysicianController::class, 'updateVisitFormThree'])->name('physician.updateVisitFormThree');
 
+Route::middleware(['auth:sanctum', 'verified'])->post('physician_destroy_visit/{visit}', [PhysicianController::class, 'destroyVisit'])->name('physician.destroyVisit');
 
 // Route::middleware(['auth:sanctum', 'verified'])->get('patients/create', [PhysicianController::class, 'create'])->name('patients.create');
 // Route::middleware(['auth:sanctum', 'verified'])->post('patients', [PhysicianController::class, 'store'])->name('patients.store');
 // Route::middleware(['auth:sanctum', 'verified'])->get('patients/{patient}/edit', [PhysicianController::class, 'edit'])->name('patients.edit');
 // Route::middleware(['auth:sanctum', 'verified'])->put('patients/{patient}', [PhysicianController::class, 'update'])->name('patients.update');
-// Route::middleware(['auth:sanctum', 'verified'])->post('patients/{patient}', [PhysicianController::class, 'destroy'])->name('patients.destroy');
+
 // Route::middleware(['auth:sanctum', 'verified'])->put('patients/{patient}/restore', [PhysicianController::class, 'restore'])->name('patients.restore');
 
 

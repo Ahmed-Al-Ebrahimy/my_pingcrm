@@ -5933,6 +5933,43 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -6075,9 +6112,14 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
     },
-    destroy: function destroy() {
+    newVisit: function newVisit() {
       if (confirm('Are you sure you want to delete this patient?')) {
         this.$inertia.post(this.route('patients.destroy', this.patient.id));
+      }
+    },
+    destroyVisit: function destroyVisit(visit_id) {
+      if (confirm('Are you sure you want to delete this Visit?')) {
+        this.$inertia.post(this.route('physician.destroyVisit', visit_id));
       }
     }
   }
@@ -7812,41 +7854,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -64725,6 +64732,34 @@ var render = function() {
             staticStyle: { width: "14%" }
           },
           [
+            _c(
+              "div",
+              { staticClass: "flex text-center bg-blue-600 shadow-lg  p-1" },
+              [
+                _c(
+                  "span",
+                  { staticClass: "flex w-1/3 lowercase text-gray-200" },
+                  [
+                    _vm._v(
+                      _vm._s(_vm.visitsIndex + 1) +
+                        " of " +
+                        _vm._s(_vm.patient.visits.length)
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c("span", { staticClass: "flex w-2/3 text-gray-200" }, [
+                  _vm._v(
+                    _vm._s(
+                      _vm
+                        .moment(_vm.patient.visits[_vm.visitsIndex].created_at)
+                        .format("YYYY-MM-DD")
+                    )
+                  )
+                ])
+              ]
+            ),
+            _vm._v(" "),
             _c("div", { staticClass: "flex p-0.5 justify-center" }, [
               _c(
                 "button",
@@ -64772,36 +64807,41 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass:
-                  "flex text-center bg-blue-600 shadow-lg m-0.5 rounded-lg px-1"
-              },
-              [
-                _c(
-                  "span",
-                  { staticClass: "flex w-1/3 lowercase text-gray-200" },
-                  [
-                    _vm._v(
-                      _vm._s(_vm.visitsIndex + 1) +
-                        " of " +
-                        _vm._s(_vm.patient.visits.length)
-                    )
-                  ]
-                ),
-                _vm._v(" "),
-                _c("span", { staticClass: "flex w-2/3 text-gray-200" }, [
+            _c("div", { staticClass: "flex p-0.5 justify-center" }, [
+              _c(
+                "button",
+                {
+                  staticClass:
+                    "flex mr-1 items-center justify-center px-4 py-1 bg-blue-600 border border-transparent rounded-lg font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-600 transition ease-in-out duration-150",
+                  on: { click: _vm.newVisit }
+                },
+                [
                   _vm._v(
-                    _vm._s(
-                      _vm
-                        .moment(_vm.patient.visits[_vm.visitsIndex].created_at)
-                        .format("YYYY-MM-DD")
-                    )
+                    "\n                                new\n                            "
                   )
-                ])
-              ]
-            ),
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass:
+                    "flex items-center justify-center px-4 py-1 bg-red-600 border border-transparent rounded-lg font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150",
+                  on: {
+                    click: function($event) {
+                      return _vm.destroyVisit(
+                        _vm.patient.visits[_vm.visitsIndex].id
+                      )
+                    }
+                  }
+                },
+                [
+                  _vm._v(
+                    "\n                                delete\n                            "
+                  )
+                ]
+              )
+            ]),
             _vm._v(" "),
             _c(
               "form",
@@ -64918,6 +64958,94 @@ var render = function() {
         _c(
           "div",
           {
+            staticClass: "flex bg-blue-300 border flex-wrap  border-red-700",
+            staticStyle: { width: "23%" }
+          },
+          [
+            _c(
+              "div",
+              {
+                staticClass: "flex justify-center bg-red-400 p-0.5 min-w-full",
+                staticStyle: { height: "11%" }
+              },
+              [
+                _c(
+                  "span",
+                  {
+                    staticClass: "flex w-1/5  justify-center bg-red-400 p-0.5"
+                  },
+                  [_vm._v("Rx")]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "flex w-w-3/5  justify-center bg-gray-200 p-0.5",
+                  attrs: { type: "text" }
+                }),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "flex w-1/5  justify-center bg-red-400 p-0.5"
+                  },
+                  [
+                    _c("icon", {
+                      staticClass: "block w-6 h-6 fill-blue-500",
+                      attrs: { name: "printer" }
+                    })
+                  ],
+                  1
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "flex p-0.5 h-8 w-full" }, [
+              _c(
+                "span",
+                {
+                  staticClass: "flex shadow-lg  bg-blue-500 p-px py-0.5",
+                  staticStyle: { width: "76%" }
+                },
+                [
+                  _vm._v(
+                    "\n                                1-paracetamol tap 500mg\n                            "
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  staticClass: "flex shadow-lg  bg-gray-200 p-px py-0.5",
+                  staticStyle: { width: "16%" }
+                },
+                [
+                  _c("option", { attrs: { value: "1" } }, [_vm._v("BD")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "2" } }, [_vm._v("OD")])
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "flex justify-center bg-blue-500 p-px py-0.5",
+                  staticStyle: { width: "8%" }
+                },
+                [
+                  _c("icon", {
+                    staticClass: "block w-6 h-6 fill-red-600",
+                    attrs: { name: "x-circle" }
+                  })
+                ],
+                1
+              )
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
             staticClass: "flex bg-yellow-400 border border-red-700",
             staticStyle: { width: "23%" }
           },
@@ -64936,11 +65064,26 @@ var render = function() {
                 }
               },
               [
-                _c("div", { staticClass: "flex min-w-full min-h-full" }, [
-                  _c("div", { staticClass: "flex min-w-full min-h-full" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass: "flex justify-center bg-red-400 p-0.5",
+                    staticStyle: { height: "11%" }
+                  },
+                  [
+                    _c("span", { staticClass: "text-center" }, [
+                      _vm._v("  clinial notes")
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "bg-black", staticStyle: { height: "89%" } },
+                  [
                     _c("textarea", {
-                      staticClass: "w-full min-h-full p-1 bg-gray-200",
-                      attrs: { cols: "40", name: "notes" },
+                      staticClass: "w-full h-full px-1 bg-gray-200",
+                      attrs: { rows: "10", cols: "38", name: "notes" },
                       domProps: {
                         value: _vm.patient.visits[_vm.visitsIndex].notes
                       },
@@ -64952,20 +65095,11 @@ var render = function() {
                         }
                       }
                     })
-                  ])
-                ])
+                  ]
+                )
               ]
             )
           ]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "flex bg-blue-900 border border-red-700 ",
-            staticStyle: { width: "23%" }
-          },
-          [_vm._v("\n                        3333\n                    ")]
         )
       ])
     ])
@@ -69836,6 +69970,50 @@ var render = function() {
           ])
         ]
       )
+    : _vm.name === "x"
+    ? _c(
+        "svg",
+        {
+          staticClass: "w-6 h-6",
+          attrs: {
+            fill: "currentColor",
+            viewBox: "0 0 20 20",
+            xmlns: "http://www.w3.org/2000/svg"
+          }
+        },
+        [
+          _c("path", {
+            attrs: {
+              "fill-rule": "evenodd",
+              d:
+                "M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z",
+              "clip-rule": "evenodd"
+            }
+          })
+        ]
+      )
+    : _vm.name === "x-circle"
+    ? _c(
+        "svg",
+        {
+          staticClass: "w-6 h-6",
+          attrs: {
+            fill: "currentColor",
+            viewBox: "0 0 20 20",
+            xmlns: "http://www.w3.org/2000/svg"
+          }
+        },
+        [
+          _c("path", {
+            attrs: {
+              "fill-rule": "evenodd",
+              d:
+                "M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z",
+              "clip-rule": "evenodd"
+            }
+          })
+        ]
+      )
     : _vm.name === "sorry"
     ? _c(
         "svg",
@@ -69919,72 +70097,6 @@ var render = function() {
               }
             })
           ])
-        ]
-      )
-    : _vm.name === "left_arrow"
-    ? _c(
-        "svg",
-        {
-          staticStyle: { "enable-background": "new 0 0 414.496 414.496" },
-          attrs: {
-            version: "1.1",
-            id: "Layer_1",
-            xmlns: "http://www.w3.org/2000/svg",
-            "xmlns:xlink": "http://www.w3.org/1999/xlink",
-            x: "0px",
-            y: "0px",
-            viewBox: "0 0 414.496 414.496",
-            "xml:space": "preserve"
-          }
-        },
-        [
-          _c("g", [
-            _c("polygon", {
-              staticStyle: { fill: "#2488FF" },
-              attrs: {
-                points:
-                  "275.283,28.238 246.953,0 40.379,207.248 246.953,414.496 275.283,386.258 96.856,207.248\n\t\t"
-              }
-            }),
-            _vm._v(" "),
-            _c("polygon", {
-              staticStyle: { fill: "#2488FF" },
-              attrs: {
-                points:
-                  "374.117,28.238 345.787,0 139.213,207.248 345.787,414.496 374.117,386.258 195.69,207.248\n\t\t\t"
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("g"),
-          _vm._v(" "),
-          _c("g"),
-          _vm._v(" "),
-          _c("g"),
-          _vm._v(" "),
-          _c("g"),
-          _vm._v(" "),
-          _c("g"),
-          _vm._v(" "),
-          _c("g"),
-          _vm._v(" "),
-          _c("g"),
-          _vm._v(" "),
-          _c("g"),
-          _vm._v(" "),
-          _c("g"),
-          _vm._v(" "),
-          _c("g"),
-          _vm._v(" "),
-          _c("g"),
-          _vm._v(" "),
-          _c("g"),
-          _vm._v(" "),
-          _c("g"),
-          _vm._v(" "),
-          _c("g"),
-          _vm._v(" "),
-          _c("g")
         ]
       )
     : _vm._e()

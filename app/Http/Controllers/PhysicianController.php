@@ -147,5 +147,11 @@ class PhysicianController extends Controller
         return Redirect::back()->with('success', 'clinic notes updated.');
     }
 
+    public function destroyVisit(Visit $visit)
+    {
+        $visit->delete();
+        return Redirect::back()->with('success', 'visit deleted.');
+    }
+
 
 }

@@ -141,7 +141,10 @@
 
 
                         <div class="bg-green-700 border border-red-700" style="width: 14%">
-
+                            <div class="flex text-center bg-blue-600 shadow-lg  p-1">
+                                <span class="flex w-1/3 lowercase text-gray-200">{{visitsIndex+1}} of {{patient.visits.length}}</span>
+                                <span class="flex w-2/3 text-gray-200">{{moment(patient.visits[visitsIndex].created_at).format('YYYY-MM-DD')}}</span>
+                            </div>
                             <div class="flex p-0.5 justify-center">
                                 <button class="flex rounded-full mr-1 bg-blue-600 shadow-lg" @click="increaseIndex">
                                     <icon name="leftArrow" class="block w-10 h-10 fill-gray-100" />
@@ -156,10 +159,20 @@
                                 </button>
                             </div>
 
-                            <div class="flex text-center bg-blue-600 shadow-lg m-0.5 rounded-lg px-1">
-                                <span class="flex w-1/3 lowercase text-gray-200">{{visitsIndex+1}} of {{patient.visits.length}}</span>
-                                <span class="flex w-2/3 text-gray-200">{{moment(patient.visits[visitsIndex].created_at).format('YYYY-MM-DD')}}</span>
+
+
+                            <div class="flex p-0.5 justify-center">
+                                <button class="flex mr-1 items-center justify-center px-4 py-1 bg-blue-600 border border-transparent rounded-lg font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-600 transition ease-in-out duration-150" @click="newVisit">
+                                    new
+                                </button>
+
+                                <button class="flex items-center justify-center px-4 py-1 bg-red-600 border border-transparent rounded-lg font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150" @click="destroyVisit(patient.visits[visitsIndex].id)">
+                                    delete
+                                </button>
                             </div>
+
+
+
 
                             <form  id="visitFormOne" @submit.prevent="submitVisitFormOne(patient.visits[visitsIndex].id)">
                             <div class="grid grid-cols-1">
@@ -195,24 +208,48 @@
                              </form>
                         </div>
 
-                        <div class="flex bg-yellow-400 border border-red-700" style="width: 23%">
-                            <form  id="visitFormTwo" @submit.prevent="submitVisitFormTwo(patient.visits[visitsIndex].id)">
-                            <div class="flex min-w-full min-h-full">
-                                <div class="flex min-w-full min-h-full">
-                                    <textarea  cols="40" class="w-full min-h-full p-1 bg-gray-200"
-                                    name="notes" :value="(patient.visits[visitsIndex].notes)"
-                                    @change="submitVisitFormTwo(patient.visits[visitsIndex].id)"
-                                    ></textarea>
+                        <div class="flex bg-blue-300 border flex-wrap  border-red-700" style="width: 23%">
 
-
-                                </div>
+                            <div class="flex justify-center bg-red-400 p-0.5 min-w-full" style="height:11%">
+                                <span  class="flex w-1/5  justify-center bg-red-400 p-0.5">Rx</span>
+                                <input class="flex w-w-3/5  justify-center bg-gray-200 p-0.5" type="text">
+                                <button  class="flex w-1/5  justify-center bg-red-400 p-0.5">
+                                    <icon name="printer" class="block w-6 h-6 fill-blue-500" />
+                                </button>
                             </div>
-                            </form>
+
+                            <div class="flex p-0.5 h-8 w-full">
+
+                                <span  class="flex shadow-lg  bg-blue-500 p-px py-0.5" style="width:76%">
+                                    1-paracetamol tap 500mg
+                                </span>
+
+                                <select class="flex shadow-lg  bg-gray-200 p-px py-0.5" style="width:16%">
+                                    <option value="1">BD</option>
+                                    <option value="2">OD</option>
+                                </select>
+
+                                <button  class="flex justify-center bg-blue-500 p-px py-0.5" style="width:8%">
+                                    <icon name="x-circle" class="block w-6 h-6 fill-red-600" />
+                                </button>
+
+                            </div>
+
                         </div>
 
 
-                        <div class="flex bg-blue-900 border border-red-700 " style="width:23%">
-                            3333
+                        <div class="flex bg-yellow-400 border border-red-700" style="width: 23%">
+                            <form  id="visitFormTwo" @submit.prevent="submitVisitFormTwo(patient.visits[visitsIndex].id)">
+                            <div class="flex justify-center bg-red-400 p-0.5" style="height:11%">
+                              <span class="text-center">  clinial notes</span>
+                            </div>
+                            <div class="bg-black" style="height: 89%">
+                                <textarea rows="10" cols="38" class="w-full h-full px-1 bg-gray-200"
+                                name="notes" :value="(patient.visits[visitsIndex].notes)"
+                                @change="submitVisitFormTwo(patient.visits[visitsIndex].id)"
+                                ></textarea>
+                                </div>
+                            </form>
                         </div>
 
 
@@ -353,9 +390,15 @@ export default {
          })
     },
 
-    destroy() {
+    newVisit() {
       if (confirm('Are you sure you want to delete this patient?')) {
         this.$inertia.post(this.route('patients.destroy', this.patient.id))
+      }
+    },
+
+    destroyVisit(visit_id) {
+      if (confirm('Are you sure you want to delete this Visit?')) {
+        this.$inertia.post(this.route('physician.destroyVisit', visit_id))
       }
     },
   },
